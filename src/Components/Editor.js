@@ -3,6 +3,7 @@ import Logo from "../assets/Logo-individual transparent.png";
 import ProfileImg from "../assets/profile.jpg";
 import Image from "next/image";
 import TextField from "./TextField";
+import NewThreadButton from "./NewThreadButton";
 
 // export default function App() {
 //   const editorRef = useRef(null);
@@ -69,17 +70,18 @@ import TextField from "./TextField";
 // }
 
 function Editor() {
+  const addThread = () => {};
   return (
-    <div className="h-auto min-h-screen w-100% bg-black text-white p-5 flex justify-between">
+    <div className="h-auto min-h-screen w-100% bg-[#0a1128] text-white p-5 flex justify-between">
       <div className=" border-r-2 pr-5 border-[#6F6F6F] ">
         <Image src={Logo} width={30} height={30} />
       </div>
       {/* Editor */}
-      <div className="flex-1 flex border-r-2">
-        <div className="rounded-full overflow-hidden w-12 h-12">
+      <div className="flex-1 flex justify-evenly border-r-2 p-5">
+        <div className="flex items-center justify-center rounded-full overflow-hidden w-12 h-12">
           <Image src={ProfileImg} className="object-cover" />
         </div>
-        <TextField />
+        <TextField addThread={addThread} />
       </div>
       {/* Preview */}
       <div className=" block flex-1"></div>

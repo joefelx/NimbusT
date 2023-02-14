@@ -1,5 +1,6 @@
 import Image from "next/image";
 import ThreadBox from "../assets/ThreadBox.png";
+import Link from "next/link";
 
 function Hero() {
   return (
@@ -15,9 +16,11 @@ function Hero() {
           Make the best thread ever <br />
           with Nimbus
         </p>
-        <button className="bg-white text-black px-4 py-1 mt-6 rounded-xl text-[14px] border-2 border-[#CECECE]">
-          Make Thread
-        </button>
+        <Link href="/thread">
+          <button className="bg-white text-black px-4 py-1 mt-6 rounded-xl text-[14px] border-2 border-[#CECECE]">
+            Make Thread
+          </button>
+        </Link>
       </div>
       <div className=" pointer-events-none">
         <Image src={ThreadBox} width={230} height={75} />

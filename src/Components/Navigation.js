@@ -1,5 +1,6 @@
 import Image from "next/image";
 import Logo from "../assets/Logo-individual transparent.png";
+import Link from "next/link";
 
 function Navigation() {
   return (
@@ -9,7 +10,9 @@ function Navigation() {
       </div>
 
       <div className=" w-[25%] flex-2 flex justify-between">
-        <span className=" text-[14px] cursor-pointer">Thread</span>
+        <span className=" text-[14px] cursor-pointer">
+          <Link href="/thread">Thread</Link>
+        </span>
         <span className=" text-[14px] cursor-pointer">Product</span>
         <span className=" text-[14px] cursor-pointer">Pricing</span>
         <span className=" text-[14px] cursor-pointer">About</span>
