@@ -1,11 +1,23 @@
 import { useState, useEffect } from "react";
 import "../styles/Home.module.css";
-import { RxFontBold, RxFontItalic } from "react-icons/rx";
-import { BsImageFill, BsEmojiSmile } from "react-icons/bs";
 import NewThreadButton from "./NewThreadButton";
 
-function TextField({ addThread }) {
-  const [input, setInput] = useState("");
+const TextBox = ({ input, setInput }) => {
+  return (
+    <div>
+      <textarea
+        placeholder="Write the thread that makes fires"
+        className="w-[30vw] min-h-screen h-auto p-2 text-white bg-[#0a1128] border-b-2 border-slate-600 focus:outline-none placeholder:text-gray-600 resize-none"
+        onChange={(e) => {
+          setInput([e.target.value]);
+        }}
+      ></textarea>
+    </div>
+  );
+};
+
+function TextField() {
+  const [input, setInput] = useState([]);
 
   const handleResize = () => {
     const textarea = document.querySelector("textarea");
@@ -16,42 +28,31 @@ function TextField({ addThread }) {
     });
   };
 
+  function addThread() {
+    const inputBox = document.querySelector(".input-box");
+    const textfield = document.createElement("textarea");
+    textfield.maxLength = 280;
+    textfield.placeholder = "Write the thread that makes fires";
+    textfield.classList =
+      "w-[30vw] h-auto p-2 text-white bg-[#0a1128] border-b-2 border-slate-600 overflow-hidden focus:outline-none placeholder:text-gray-600 resize-none";
+
+    textfield.onChange = (e) => {
+      setInput([...input, e.target.value]);
+    };
+    inputBox.appendChild(textfield);
+  }
+
   useEffect(() => {
     handleResize();
+    console.log(input);
   }, [input]);
 
   return (
     <div>
-      <div>
-        <div>
-          <textarea
-            maxLength={280}
-            placeholder="Write the thread that makes fires"
-            className="w-[30vw] h-auto p-2 text-white bg-[#0a1128] border-b-2 border-slate-600 overflow-hidden focus:outline-none placeholder:text-gray-600 resize-none"
-            onChange={(e) => {
-              setInput(e.target.value);
-            }}
-          ></textarea>
-        </div>
-        {/* Tools */}
-        <div>
-          <ul className="flex text-2xl items-center justify-between mt-3">
-            <li>
-              <BsEmojiSmile />
-            </li>
-            <li>
-              <RxFontBold />
-            </li>
-            <li>
-              <RxFontItalic />
-            </li>
-            <li>
-              <BsImageFill />
-            </li>
-          </ul>
-        </div>
+      <div className="input-box">
+        <TextBox input={input} setInput={setInput} />
       </div>
-      <NewThreadButton addThread={addThread} />
+      {/* <NewThreadButton addThread={addThread} /> */}
     </div>
   );
 }
