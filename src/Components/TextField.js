@@ -4,20 +4,19 @@ import NewThreadButton from "./NewThreadButton";
 
 const TextBox = ({ input, setInput }) => {
   return (
-    <div>
-      <textarea
-        placeholder="Write the thread that makes fires"
-        className="w-[30vw] min-h-screen h-auto p-2 text-white bg-[#0a1128] border-b-2 border-slate-600 focus:outline-none placeholder:text-gray-600 resize-none"
-        onChange={(e) => {
-          setInput([e.target.value]);
-        }}
-      ></textarea>
-    </div>
+    <textarea
+      placeholder="Write the thread that makes fires"
+      className="w-full min-h-screen h-auto p-5 text-white bg-[#0a1128] border-b-2 border-slate-600 focus:outline-none placeholder:text-gray-600 resize-none"
+      onChange={(e) => {
+        setInput(e.target.value);
+      }}
+    ></textarea>
   );
 };
 
 function TextField() {
-  const [input, setInput] = useState([]);
+  const [input, setInput] = useState("");
+  const [thread, setThread] = useState([]);
 
   const handleResize = () => {
     const textarea = document.querySelector("textarea");
@@ -42,17 +41,19 @@ function TextField() {
     inputBox.appendChild(textfield);
   }
 
+  function splitText(thread) {
+    let word = thread.split("/");
+    setThread(word);
+  }
+
   useEffect(() => {
     handleResize();
-    console.log(input);
+    splitText(input);
   }, [input]);
 
   return (
-    <div>
-      <div className="input-box">
-        <TextBox input={input} setInput={setInput} />
-      </div>
-      {/* <NewThreadButton addThread={addThread} /> */}
+    <div className="input-box w-full">
+      <TextBox input={input} setInput={setInput} />
     </div>
   );
 }
