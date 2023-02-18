@@ -9,8 +9,8 @@ const TextBox = () => {
   const { setInput } = useContext(FunctionContext);
   return (
     <textarea
-      placeholder="Write the thread that makes fires"
-      className="w-full min-h-screen h-auto p-5 text-white bg-[#0a1128] border-b-2 border-slate-600 focus:outline-none placeholder:text-gray-600 resize-none"
+      placeholder="Make a new thread by typing ^ to make heading"
+      className="w-full min-h-screen h-full p-5 text-white bg-[#0a1128] focus:outline-none placeholder:text-gray-600 resize-none whitespace-pre-wrap"
       onChange={(e) => {
         setInput(e.target.value);
       }}
@@ -19,8 +19,8 @@ const TextBox = () => {
 };
 
 function TextField() {
-  const { input } = useContext(FunctionContext);
-  const [thread, setThread] = useState([]);
+  const { input, thread, setThread } = useContext(FunctionContext);
+  // const [thread, setThread] = useState([]);
 
   useEffect(() => {
     setThread(splitText(input));

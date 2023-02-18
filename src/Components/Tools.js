@@ -1,10 +1,13 @@
 import { RxFontBold, RxFontItalic } from "react-icons/rx";
 import { BsImageFill, BsEmojiSmile } from "react-icons/bs";
+import { useContext } from "react";
+import { FunctionContext } from "../context/FunctionContext";
 
 function Tools() {
+  const { PostThread } = useContext(FunctionContext);
   return (
-    <div className="absolute bottom-[50px] left-0 right-0 w-[20rem] ml-auto mr-auto">
-      <ul className=" cursor-pointer border-2 border-slate-600 rounded-xl bg-black flex text-2xl items-center justify-between mt-3 p-3">
+    <div className="fixed bottom-0 w-full bg-black border-t-2 border-slate-600 flex items-center justify-between px-10 py-2">
+      <ul className="w-[50%] cursor-pointer flex text-2xl items-center justify-between p-3">
         <li className="text-xl ">
           <BsEmojiSmile />
         </li>
@@ -18,6 +21,14 @@ function Tools() {
           <BsImageFill />
         </li>
       </ul>
+      <div>
+        <button
+          className="bg-[#1DA1F2] px-5 py-1 rounded-xl text-[14px] shadow-2xl"
+          onClick={PostThread}
+        >
+          Tweet All
+        </button>
+      </div>
     </div>
   );
 }

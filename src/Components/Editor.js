@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useRef, useState, useContext } from "react";
 import Logo from "../assets/Logo-individual transparent.png";
 import ProfileImg from "../assets/profile.jpg";
 import Image from "next/image";
@@ -6,12 +6,20 @@ import TextField from "./TextField";
 import NewThreadButton from "./NewThreadButton";
 import Tools from "./Tools";
 import ThreadBox from "./ThreadBox";
+import { FunctionContext } from "../context/FunctionContext";
+import Loading from "./Loading";
+import Tick from "./Tick";
 
 function Editor() {
+  const { input, thread, setThread, loading, complete } =
+    useContext(FunctionContext);
+
   return (
     <div className="h-auto min-h-screen w-100% bg-[#0a1128] text-white flex justify-between">
+      {loading && <Loading />}
+      {complete && <Tick />}
       {/* Editor */}
-      <div className="flex-1 flex justify-evenly border-r-2 py-5">
+      <div className="flex-1 flex justify-evenly py-5">
         <TextField />
       </div>
       {/* Tool */}
@@ -31,26 +39,9 @@ function Editor() {
             </span>
           </div>
           {/* thread detail */}
-          <ThreadBox
-            thread="1/ Performance review: Early in May, we made the most important
-              parts of your docs now load in priority order. The result? Large
-              doc are loading up to 60% faster 🏎️ 💨"
-          />
-          <ThreadBox
-            thread="2/ Performance review: Early in May, we made the most important
-              parts of your docs now load in priority order. The result? Large
-              doc are loading up to 60% faster 🏎️ 💨"
-          />
-          <ThreadBox
-            thread="3/ Performance review: Early in May, we made the most important
-              parts of your docs now load in priority order. The result? Large
-              doc are loading up to 60% faster 🏎️ 💨"
-          />
-          <ThreadBox
-            thread="4/ Performance review: Early in May, we made the most important
-              parts of your docs now load in priority order. The result? Large
-              doc are loading up to 60% faster 🏎️ 💨"
-          />
+          {thread.map((t) => (
+            <ThreadBox thread={t} imageURL="" />
+          ))}
         </div>
       </div>
     </div>
