@@ -1,7 +1,7 @@
-import Hero from "@/Components/Hero";
-import Navigation from "@/Components/Navigation";
-import Gradient from "@/Components/Gradient";
-import Loading from "@/Components/Loading";
+import Hero from "@/components/Hero";
+import Navigation from "@/components/Navigation";
+import Gradient from "@/components/Gradient";
+import Loading from "@/components/Loading";
 import { useContext, useEffect, useState } from "react";
 import { FunctionContext } from "@/context/FunctionContext";
 
