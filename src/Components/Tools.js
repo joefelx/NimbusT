@@ -1,7 +1,8 @@
-import { RxFontBold, RxFontItalic } from "react-icons/rx";
-import { BsImageFill, BsEmojiSmile } from "react-icons/bs";
 import { useContext } from "react";
 import { FunctionContext } from "../context/FunctionContext";
+
+import { RxFontBold, RxFontItalic } from "react-icons/rx";
+import { BsImageFill, BsEmojiSmile } from "react-icons/bs";
 
 function Tools() {
   const { PostThread } = useContext(FunctionContext);

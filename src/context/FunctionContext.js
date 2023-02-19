@@ -4,6 +4,7 @@ import axios from "axios";
 export const FunctionContext = createContext();
 
 export const FunctionContextProvider = ({ children }) => {
+  const [user, setUser] = useState({});
   const [input, setInput] = useState("");
   const [thread, setThread] = useState([]);
   const [loading, setLoading] = useState(false);
@@ -37,6 +38,8 @@ export const FunctionContextProvider = ({ children }) => {
         PostThread,
         loading,
         complete,
+        user,
+        setUser,
       }}
     >
       {children}

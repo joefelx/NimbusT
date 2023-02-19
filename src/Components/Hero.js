@@ -1,6 +1,7 @@
 import Image from "next/image";
-import ThreadBox from "../assets/ThreadBox.png";
 import Link from "next/link";
+
+import ThreadBox from "../assets/ThreadBox.png";
 
 function Hero() {
   return (

@@ -1,6 +1,7 @@
 import Image from "next/image";
-import Logo from "../assets/Logo-individual transparent.png";
 import Link from "next/link";
+
+import Logo from "../assets/Logo-individual transparent.png";
 
 function Navigation() {
   return (

@@ -1,18 +1,14 @@
-import React, { useEffect, useRef, useState, useContext } from "react";
+import { useContext } from "react";
+import Image from "next/image";
+import { FunctionContext } from "../context/FunctionContext";
+import { TextField, Tools, ThreadBox } from "./Components";
+import { Loading, Tick } from "./Graphics.js";
+
 import Logo from "../assets/Logo-individual transparent.png";
 import ProfileImg from "../assets/profile.jpg";
-import Image from "next/image";
-import TextField from "./TextField";
-import NewThreadButton from "./NewThreadButton";
-import Tools from "./Tools";
-import ThreadBox from "./ThreadBox";
-import { FunctionContext } from "../context/FunctionContext";
-import Loading from "./Loading";
-import Tick from "./Tick";
 
 function Editor() {
-  const { input, thread, setThread, loading, complete } =
-    useContext(FunctionContext);
+  const { thread, loading, complete } = useContext(FunctionContext);
 
   return (
     <div className="h-auto min-h-screen w-100% bg-[#0a1128] text-white flex justify-between">
@@ -25,7 +21,7 @@ function Editor() {
       {/* Tool */}
       <Tools />
       {/* Preview */}
-      <div className=" flex-1 ">
+      <div className="flex-1">
         {/* box */}
         <div className="flex items-center flex-col">
           {/* profile image and name */}
