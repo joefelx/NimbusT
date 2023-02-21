@@ -2,12 +2,15 @@ import Image from "next/image";
 import Link from "next/link";
 
 import Logo from "../assets/Logo-individual transparent.png";
+import { useContext } from "react";
+import { FunctionContext } from "@/context/FunctionContext";
 
 function Navigation() {
+  const { setShow } = useContext(FunctionContext);
   return (
     <div className=" h-[7rem] flex justify-between items-center">
       <div className="flex-1">
-        <Image src={Logo} width={30} height={30} />
+        <Image src={Logo} width={30} height={30} alt="Logo" />
       </div>
 
       <div className=" w-[25%] flex-2 flex justify-between">
@@ -20,7 +23,10 @@ function Navigation() {
       </div>
 
       <div className="flex-1 flex justify-end">
-        <button className="bg-[#6F6F6F] px-4 py-1 rounded-xl text-[14px] border-2 border-[#CECECE]">
+        <button
+          className="bg-[#6F6F6F] px-4 py-1 rounded-xl text-[14px] border-2 border-[#CECECE]"
+          onClick={() => setShow(true)}
+        >
           Login
         </button>
       </div>

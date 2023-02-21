@@ -24,7 +24,12 @@ function Hero() {
         </Link>
       </div>
       <div className=" pointer-events-none">
-        <Image src={ThreadBox} width={230} height={75} />
+        <Image
+          src={ThreadBox}
+          width={230}
+          height={75}
+          alt="thread preview box"
+        />
       </div>
     </div>
   );

@@ -25,15 +25,19 @@ function Editor() {
         {/* box */}
         <div className="flex items-center flex-col">
           {/* profile image and name */}
-          <div className="flex  items-center bg-white text-black w-2/3 p-5">
+          {/* <div className="flex  items-center bg-white text-black w-2/3 p-5">
             <div className="w-[50px] aspect-square rounded-full overflow-hidden">
-              <Image src={ProfileImg} className=" object-cover" />
+              <Image
+                src={ProfileImg}
+                className=" object-cover"
+                alt="ProfileImage"
+              />
             </div>
             <span className="ml-3">
               <p className="text-[15px] font-semibold">Joe Felix</p>
               <p className=" text-[12px] text-slate-500">@joefelx</p>
             </span>
-          </div>
+          </div> */}
           {/* thread detail */}
           {thread.map((t) => (
             <ThreadBox thread={t} imageURL="" />

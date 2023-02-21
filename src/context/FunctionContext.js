@@ -9,6 +9,7 @@ export const FunctionContextProvider = ({ children }) => {
   const [thread, setThread] = useState([]);
   const [loading, setLoading] = useState(false);
   const [complete, setComplete] = useState(false);
+  const [show, setShow] = useState(true);
 
   const PostThread = async () => {
     setLoading(true);
@@ -40,6 +41,8 @@ export const FunctionContextProvider = ({ children }) => {
         complete,
         user,
         setUser,
+        show,
+        setShow,
       }}
     >
       {children}

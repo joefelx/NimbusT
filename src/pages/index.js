@@ -5,17 +5,20 @@ import { FunctionContext } from "@/context/FunctionContext";
 import { AuthContext } from "@/context/AuthContext";
 
 export default function Home() {
-  const { loading } = useContext(FunctionContext);
+  const { loading, show, setShow } = useContext(FunctionContext);
   const { user } = useContext(AuthContext);
 
   useEffect(() => {
     // Check for the user logged or not and call a function CheckUser
+    if (user) {
+      setShow(false);
+    }
   }, []);
 
   return (
     <div>
       {loading && <Loading />}
-      {!user && <LoginCard />}
+      {show && <LoginCard />}
       <div className=" h-auto min-h-screen w-full bg-black text-white px-[3rem] overflow-hidden">
         <Navigation />
         <Hero />

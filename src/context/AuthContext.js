@@ -14,6 +14,7 @@ export const AuthContextProvider = ({ children }) => {
     // const res = await axios.get("https://github.com");
     console.log("auth");
   }
+
   return (
     <AuthContext.Provider value={{ user, setUser, handleAuth }}>
       {children}
