@@ -1,7 +1,7 @@
 import { useContext } from "react";
 import Image from "next/image";
 import { FunctionContext } from "../context/FunctionContext";
-import { TextField, Tools, ThreadBox } from "./Components";
+import { TextField, Tools, ThreadBox, SideBar } from "./Components";
 import { Loading, Tick } from "./Graphics.js";
 
 import Logo from "../assets/Logo-individual transparent.png";
@@ -11,37 +11,29 @@ function Editor() {
   const { thread, loading, complete } = useContext(FunctionContext);
 
   return (
-    <div className="h-auto min-h-screen w-100% bg-[#0a1128] text-white flex justify-between">
+    <div className="h-auto min-h-screen w-full bg-[#0a1128] text-white flex justify-between">
       {loading && <Loading />}
       {complete && <Tick />}
+      <SideBar />
       {/* Editor */}
-      <div className="flex-1 flex justify-evenly py-5">
+      <div className="flex-1 ">
         <TextField />
       </div>
       {/* Tool */}
-      <Tools />
+      {/* <Tools /> */}
       {/* Preview */}
       <div className="flex-1">
         {/* box */}
         <div className="flex items-center flex-col">
-          {/* profile image and name */}
-          {/* <div className="flex  items-center bg-white text-black w-2/3 p-5">
-            <div className="w-[50px] aspect-square rounded-full overflow-hidden">
-              <Image
-                src={ProfileImg}
-                className=" object-cover"
-                alt="ProfileImage"
-              />
-            </div>
-            <span className="ml-3">
-              <p className="text-[15px] font-semibold">Joe Felix</p>
-              <p className=" text-[12px] text-slate-500">@joefelx</p>
-            </span>
-          </div> */}
           {/* thread detail */}
-          {thread.map((t) => (
-            <ThreadBox thread={t} imageURL="" />
-          ))}
+          {thread.map((t) => {
+            {
+              if (t == "") {
+                return "";
+              }
+              return <ThreadBox thread={t} imageURL="" />;
+            }
+          })}
         </div>
       </div>
     </div>

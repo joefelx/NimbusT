@@ -1,3 +1,7 @@
+import Image from "next/image";
+import logoimage from "../assets/Logo-individual transparent.png";
+import Link from "next/link";
+
 export function Gradient() {
   return (
     <div>
@@ -39,9 +43,9 @@ export function Gradient() {
             width="1783.68"
             height="1152.27"
             filterUnits="userSpaceOnUse"
-            color-interpolation-filters="sRGB"
+            colorInterpolationFilters="sRGB"
           >
-            <feFlood flood-opacity="0" result="BackgroundImageFix" />
+            <feFlood floodOpacity="0" result="BackgroundImageFix" />
             <feBlend
               mode="normal"
               in="SourceGraphic"
@@ -104,5 +108,11 @@ export function Tick() {
         />
       </svg>
     </div>
+  );
+}
+
+export function Logo() {
+  return (
+    <Image src={logoimage} className="w-[30px] cursor-pointer" alt="Logo" />
   );
 }
