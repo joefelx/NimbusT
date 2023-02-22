@@ -1,6 +1,5 @@
 import Image from "next/image";
 import logoimage from "../assets/Logo-individual transparent.png";
-import Link from "next/link";
 
 export function Gradient() {
   return (

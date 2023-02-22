@@ -18,7 +18,7 @@ function Hero() {
           with Nimbus
         </p>
         <Link href="/thread">
-          <button className="bg-white text-black px-4 py-1 mt-6 rounded-xl text-[14px] border-2 border-[#CECECE]">
+          <button className="bg-white text-black px-4 py-1 mt-6 rounded-xl text-[14px] border-2 border-[#CECECE] hover:bg-slate-200">
             Make Thread
           </button>
         </Link>

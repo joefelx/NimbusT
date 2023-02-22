@@ -3,6 +3,7 @@ import Logo from "../assets/Logo-individual transparent.png";
 import { useContext } from "react";
 import { AuthContext } from "@/context/AuthContext";
 import { FunctionContext } from "@/context/FunctionContext";
+import { BsTwitter } from "react-icons/bs";
 
 const LoginCard = () => {
   const { handleAuth } = useContext(AuthContext);
@@ -27,10 +28,11 @@ const LoginCard = () => {
         </div>
 
         <button
-          className="bg-[#1DA1F2] px-4 py-2 rounded-xl shadow-xl mt-12"
+          className="bg-[#1DA1F2] w-[20rem] py-2 rounded-xl shadow-xl mt-12 text-xl font-bold flex items-center justify-evenly"
           onClick={handleAuth}
         >
           Connect with Twitter
+          <BsTwitter />
         </button>
       </div>
     </div>

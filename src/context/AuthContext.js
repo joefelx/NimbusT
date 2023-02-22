@@ -8,10 +8,12 @@ import axios from "axios";
 export const AuthContext = createContext();
 
 export const AuthContextProvider = ({ children }) => {
-  const [user, setUser] = useState(null);
+  const [user, setUser] = useState();
 
   async function handleAuth() {
     // const res = await axios.get("https://github.com");
+
+    setUser({ name: "Joe Feli" });
     console.log("auth");
   }
 
