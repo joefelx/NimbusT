@@ -1,13 +1,18 @@
 import Image from "next/image";
 import Logo from "../assets/Logo-individual transparent.png";
-import { useContext } from "react";
+import { useContext, useEffect } from "react";
 import { AuthContext } from "@/context/AuthContext";
 import { FunctionContext } from "@/context/FunctionContext";
 import { BsTwitter } from "react-icons/bs";
 
 const LoginCard = () => {
-  const { handleAuth } = useContext(AuthContext);
+  const { user, handleAuth } = useContext(AuthContext);
   const { setShow } = useContext(FunctionContext);
+  const LOGIN_URL = "http://localhost:5000/auth/twitter";
+
+  useEffect(() => {
+    user ? setShow(false) : setShow(true);
+  }, [user]);
 
   return (
     <div
@@ -26,14 +31,12 @@ const LoginCard = () => {
             Join Nimbus Tweet and Write effective Tweets and Threads
           </span>
         </div>
-
-        <button
-          className="bg-[#1DA1F2] w-[20rem] py-2 rounded-xl shadow-xl mt-12 text-xl font-bold flex items-center justify-evenly"
-          onClick={handleAuth}
-        >
-          Connect with Twitter
-          <BsTwitter />
-        </button>
+        <a href={LOGIN_URL}>
+          <button className="bg-[#1DA1F2] w-[20rem] py-2 rounded-xl shadow-xl mt-12 text-xl font-bold flex items-center justify-evenly">
+            Connect with Twitter
+            <BsTwitter />
+          </button>
+        </a>
       </div>
     </div>
   );
