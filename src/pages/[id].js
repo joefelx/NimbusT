@@ -17,7 +17,7 @@ const User = () => {
   useEffect(() => {
     auth();
     router.push("/");
-  }, []);
+  }, [id]);
 };
 
 export default User;

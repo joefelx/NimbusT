@@ -7,20 +7,13 @@ import { AuthContext } from "@/context/AuthContext";
 
 export default function Home() {
   const { loading, show, setShow } = useContext(FunctionContext);
-  const { user, setUser, handleAuth, checkUser } = useContext(AuthContext);
-  const router = useRouter();
+  const { checkUser } = useContext(AuthContext);
 
   useEffect(() => {
     // Check for the user logged or not and call a function CheckUser
-    const run = async () => {
-      const data = await checkUser();
-      setUser(data);
-    };
-
-    run();
-    if (user) {
-      setShow(false);
-    }
+    setShow(true);
+    checkUser();
+    setShow(false);
   }, []);
 
   return (

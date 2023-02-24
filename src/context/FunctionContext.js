@@ -9,7 +9,7 @@ export const FunctionContextProvider = ({ children }) => {
   const [thread, setThread] = useState([]);
   const [loading, setLoading] = useState(false);
   const [complete, setComplete] = useState(false);
-  const [show, setShow] = useState(true);
+  const [show, setShow] = useState(false);
   const [expand, setExpand] = useState(false);
 
   const PostThread = async () => {
@@ -20,6 +20,7 @@ export const FunctionContextProvider = ({ children }) => {
       scheduled: false,
       date: "1677718800000",
     });
+    console.log(thread);
     setLoading(false);
     setComplete(true);
     const comp = setInterval(() => {

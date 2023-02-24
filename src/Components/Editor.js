@@ -16,6 +16,8 @@ import {
   HiOutlineSave,
   HiOutlinePhotograph,
 } from "react-icons/hi";
+import Tools from "./Tools";
+import { AuthContext } from "@/context/AuthContext";
 
 function SideBar() {
   const { expand, setExpand } = useContext(FunctionContext);
@@ -23,7 +25,7 @@ function SideBar() {
     <div
       className={` ${
         expand && "w-[15rem] rounded-r-lg border-r border-slate-500"
-      } fixed z-50 h-screen bg-black p-5 flex flex-col items-center justify-between shadow-2xl `}
+      } fixed z-50 h-screen bg-black p-5 flex flex-col items-center justify-between shadow-2xl`}
       onClick={() => setExpand(!expand)}
     >
       <div className="flex-1 flex items-center justify-evenly w-full">
@@ -114,6 +116,7 @@ function TextField() {
 
   useEffect(() => {
     setThread(splitText(input));
+    document.querySelector("textarea").innerHTML.italics();
   }, [input]);
 
   return (
@@ -130,7 +133,9 @@ function TextField() {
 }
 
 function ThreadBox({ thread, imageURL }) {
+  const { user, getUser } = useContext(AuthContext);
   const [file, setFile] = useState();
+  // console.log(user);
 
   const THREAD_LIMIT = 280;
 
@@ -138,7 +143,8 @@ function ThreadBox({ thread, imageURL }) {
     if (thread.length > THREAD_LIMIT) {
       // alert("More than 280, Try to write in new line");
     }
-  }, [thread]);
+    getUser();
+  }, []);
 
   return (
     <>
@@ -151,8 +157,8 @@ function ThreadBox({ thread, imageURL }) {
           />
         </div>
         <span className="ml-3">
-          <p className="text-[15px] font-semibold">Joe Felix</p>
-          <p className=" text-[12px] text-slate-500">@joefelx</p>
+          <p className="text-[15px] font-semibold">{user.name}</p>
+          <p className=" text-[12px] text-slate-500">@{user.username}</p>
         </span>
       </div>
       <div className=" bg-white text-black w-3/4 p-5" id="threadBox">
@@ -202,7 +208,7 @@ function Editor() {
       >
         <TextField />
       </div>
-
+      <Tools />
       <div className={`${expand && "blur-sm"} flex-1 `}>
         {/* box */}
         <div className=" flex flex-col bg-white items-center">
