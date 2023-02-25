@@ -1,13 +1,28 @@
-import Hero from "@/Components/Hero";
-import Navigation from "@/Components/Navigation";
-import Gradient from "@/Components/Gradient";
+import { useContext, useEffect } from "react";
+import { useRouter } from "next/router";
+import { Hero, Navigation, LoginCard } from "@/components/Components";
+import { Gradient, Loading } from "@/components/Graphics";
+import { FunctionContext } from "@/context/FunctionContext";
+import { AuthContext } from "@/context/AuthContext";
 
 export default function Home() {
+  const { show, setShow } = useContext(FunctionContext);
+  const { checkUser } = useContext(AuthContext);
+
+  useEffect(() => {
+    // Check for the user logged or not and call a function CheckUser
+    checkUser();
+  }, []);
+
   return (
-    <div className=" h-auto min-h-screen w-full bg-black text-white px-[3rem] overflow-hidden">
-      <Navigation />
-      <Hero />
-      <Gradient />
+    <div>
+      {/* {loading && <Loading />} */}
+      {show && <LoginCard />}
+      <div className=" h-auto min-h-screen w-full bg-black text-white px-[3rem] overflow-hidden">
+        <Navigation />
+        <Hero />
+        <Gradient />
+      </div>
     </div>
   );
 }

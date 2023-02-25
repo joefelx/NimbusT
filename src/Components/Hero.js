@@ -1,7 +1,11 @@
 import Image from "next/image";
+import Link from "next/link";
+import { useRouter } from "next/router";
+
 import ThreadBox from "../assets/ThreadBox.png";
 
 function Hero() {
+  const router = useRouter();
   return (
     <div className=" h-[15rem] flex justify-between items-center">
       <div>
@@ -15,12 +19,20 @@ function Hero() {
           Make the best thread ever <br />
           with Nimbus
         </p>
-        <button className="bg-white text-black px-4 py-1 mt-6 rounded-xl text-[14px] border-2 border-[#CECECE]">
+        {/* <Link href="/thread"> */}
+
+        <button
+          className="bg-white text-black px-4 py-1 mt-6 rounded-xl text-[14px] border-2 border-[#CECECE] hover:bg-slate-200"
+          onClick={() => {
+            router.push("/thread");
+          }}
+        >
           Make Thread
         </button>
+        {/* </Link> */}
       </div>
       <div className=" pointer-events-none">
-        <Image src={ThreadBox} width={230} height={75} />
+        <Image src={ThreadBox} className="w-[230px]" alt="thread preview box" />
       </div>
     </div>
   );

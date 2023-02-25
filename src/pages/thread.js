@@ -1,4 +1,4 @@
-import Editor from "../Components/Editor";
+import { Editor } from "../components/Components";
 function editor() {
   return (
     <div>
