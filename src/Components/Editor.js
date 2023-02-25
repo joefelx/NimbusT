@@ -1,8 +1,12 @@
 import { useContext, useEffect, useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
-import { FunctionContext } from "../context/FunctionContext";
 
+import { FunctionContext } from "../context/FunctionContext";
+import { AuthContext } from "@/context/AuthContext";
+
+import Tools from "./Tools";
+import { LoginCard } from "../components/Components";
 import { Loading, Tick, Logo } from "./Graphics.js";
 import { splitText } from "../utils/utils";
 
@@ -16,17 +20,15 @@ import {
   HiOutlineSave,
   HiOutlinePhotograph,
 } from "react-icons/hi";
-import Tools from "./Tools";
-import { AuthContext } from "@/context/AuthContext";
 
 function SideBar() {
-  const { expand, setExpand } = useContext(FunctionContext);
+  const { expand, dispatch } = useContext(FunctionContext);
   return (
     <div
       className={` ${
         expand && "w-[15rem] rounded-r-lg border-r border-slate-500"
-      } fixed z-50 h-screen bg-black p-5 flex flex-col items-center justify-between shadow-2xl`}
-      onClick={() => setExpand(!expand)}
+      } fixed z-[40] h-screen bg-black p-5 flex flex-col items-center justify-between shadow-2xl`}
+      onClick={() => dispatch({ type: "SET_EXPAND", payload: !expand })}
     >
       <div className="flex-1 flex items-center justify-evenly w-full">
         <div>
@@ -112,28 +114,23 @@ function SideBar() {
 }
 
 function TextField() {
-  const { input, setInput, setThread } = useContext(FunctionContext);
+  const { input, dispatch } = useContext(FunctionContext);
 
   useEffect(() => {
-    setThread(splitText(input));
-    document.querySelector("textarea").innerHTML.italics();
+    dispatch({ type: "SET_THREAD", payload: splitText(input) });
   }, [input]);
 
   return (
-    // <div className="input-box w-full h-auto">
     <textarea
       placeholder="Make a new thread by typing ^ to make heading"
       className=" w-full min-h-screen p-5 text-white bg-[#0a1128] focus:outline-none placeholder:text-gray-600 resize-none whitespace-pre-wrap"
-      onChange={(e) => {
-        setInput(e.target.value);
-      }}
+      onChange={(e) => dispatch({ type: "SET_INPUT", payload: e.target.value })}
     ></textarea>
-    // </div>
   );
 }
 
 function ThreadBox({ thread, imageURL }) {
-  const { user, getUser } = useContext(AuthContext);
+  const { user } = useContext(AuthContext);
   const [file, setFile] = useState();
   // console.log(user);
 
@@ -143,7 +140,6 @@ function ThreadBox({ thread, imageURL }) {
     if (thread.length > THREAD_LIMIT) {
       // alert("More than 280, Try to write in new line");
     }
-    getUser();
   }, []);
 
   return (
@@ -157,8 +153,12 @@ function ThreadBox({ thread, imageURL }) {
           />
         </div>
         <span className="ml-3">
-          <p className="text-[15px] font-semibold">{user.name}</p>
-          <p className=" text-[12px] text-slate-500">@{user.username}</p>
+          <p className="text-[15px] font-semibold">
+            {user ? user.name : "Harry"}
+          </p>
+          <p className=" text-[12px] text-slate-500">
+            @{user ? user.username : "harry"}
+          </p>
         </span>
       </div>
       <div className=" bg-white text-black w-3/4 p-5" id="threadBox">
@@ -193,18 +193,26 @@ function ThreadBox({ thread, imageURL }) {
 }
 
 function Editor() {
-  const { thread, loading, complete, expand, setExpand } =
+  const { thread, loading, show, complete, expand, dispatch } =
     useContext(FunctionContext);
+  const { user, checkUser } = useContext(AuthContext);
+
+  useEffect(() => {
+    if (!user) {
+      checkUser();
+    }
+  }, []);
 
   return (
     <div className="min-h-screen w-full bg-[#0a1128] text-white flex justify-between">
       {loading && <Loading />}
       {complete && <Tick />}
+      {show && <LoginCard />}
       <SideBar />
       {/* Editor */}
       <div
         className={`${expand && "blur-sm"} flex-[1.5] ml-[5rem] `}
-        onClick={() => setExpand(false)}
+        onClick={() => dispatch({ type: "SET_EXPAND", payload: false })}
       >
         <TextField />
       </div>

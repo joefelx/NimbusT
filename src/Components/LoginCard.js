@@ -4,21 +4,17 @@ import { useContext, useEffect } from "react";
 import { AuthContext } from "@/context/AuthContext";
 import { FunctionContext } from "@/context/FunctionContext";
 import { BsTwitter } from "react-icons/bs";
+import { LOGIN_URL } from "../constant";
 
 const LoginCard = () => {
   const { user, logout } = useContext(AuthContext);
-  const { setShow } = useContext(FunctionContext);
-  const LOGIN_URL = "http://localhost:5000/auth/twitter";
-
-  // useEffect(() => {
-  //   !user && setShow(true);
-  // }, [user]);
+  const { dispatch } = useContext(FunctionContext);
 
   return (
     <div
-      className="w-full h-full flex items-center justify-center text-white bg-transparent backdrop-blur-md fixed "
+      className="w-full h-full flex items-center justify-center text-white bg-transparent backdrop-blur-md fixed z-50"
       onClick={() => {
-        setShow(false);
+        dispatch({ type: "SET_SHOW", payload: false });
       }}
     >
       <div className="w-[30rem] p-10 flex flex-col items-center justify-center bg-black border-2 border-slate-700 rounded-2xl">

@@ -1,40 +1,51 @@
-import { createContext, useContext, useState } from "react";
+import { createContext, useContext, useReducer, useState } from "react";
 import axios from "axios";
 import { FunctionContext } from "./FunctionContext";
+import AuthReducer from "./reducer/AuthReducer";
 
-// const initial_state = {
-//   user: null,
-// };
+const INITIAL_STATE = {
+  user: null,
+  error: false,
+};
 
-export const AuthContext = createContext();
+export const AuthContext = createContext(INITIAL_STATE);
 
 export const AuthContextProvider = ({ children }) => {
-  const [user, setUser] = useState({});
+  const [state, dispatch] = useReducer(AuthReducer, INITIAL_STATE);
   const { setShow } = useContext(FunctionContext);
 
   async function checkUser() {
+    const storedUser = window.localStorage.getItem("USER_ACCOUNT");
+
     try {
-      if (!user) {
-        const data = window.localStorage.getItem("USER_ACCOUNT");
-        data ? setUser(JSON.parse(data).data) : setShow(true);
-      }
+      storedUser
+        ? dispatch({
+            type: "AUTH_LOGGEDIN",
+            payload: JSON.parse(storedUser).data,
+          })
+        : setShow(true);
     } catch (error) {
-      console.log(error);
+      dispatch({ type: "AUTH_FAILURE" });
     }
   }
 
-  function getUser() {
-    const data = window.localStorage.getItem("USER_ACCOUNT");
-    setUser(JSON.parse(data).data);
-  }
-
   function logout() {
-    window.localStorage.removeItem("USER_ACCOUNT");
-    console.log("Logged out");
+    try {
+      window.localStorage.removeItem("USER_ACCOUNT");
+      dispatch({ type: "AUTH_LOGGEDOUT" });
+    } catch (error) {
+      dispatch({ type: "AUTH_FAILURE" });
+    }
   }
 
   return (
-    <AuthContext.Provider value={{ user, setUser, checkUser, getUser, logout }}>
+    <AuthContext.Provider
+      value={{
+        user: state.user,
+        checkUser,
+        logout,
+      }}
+    >
       {children}
     </AuthContext.Provider>
   );

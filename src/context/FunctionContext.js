@@ -1,52 +1,49 @@
-import { createContext, useState } from "react";
+import { createContext, useReducer, useState } from "react";
+import FunctionReducer from "./reducer/FunctionReducer";
 import axios from "axios";
+
+const INITIAL_STATE = {
+  input: "",
+  threads: [],
+  loading: false,
+  complete: false,
+  show: false,
+  expand: false,
+};
 
 export const FunctionContext = createContext();
 
 export const FunctionContextProvider = ({ children }) => {
-  const [user, setUser] = useState({});
-  const [input, setInput] = useState("");
-  const [thread, setThread] = useState([]);
-  const [loading, setLoading] = useState(false);
-  const [complete, setComplete] = useState(false);
-  const [show, setShow] = useState(false);
-  const [expand, setExpand] = useState(false);
+  const [state, dispatch] = useReducer(FunctionReducer, INITIAL_STATE);
 
   const PostThread = async () => {
-    setLoading(true);
+    dispatch({ type: "SET_LOADING" });
+
     const res = await axios.post("http://localhost:5000/thread", {
       username: "testfelix2",
-      threadsList: thread,
+      threadsList: state.threads,
       scheduled: false,
       date: "1677718800000",
     });
-    console.log(thread);
-    setLoading(false);
-    setComplete(true);
+
+    dispatch({ type: "SET_COMPLETE" });
     const comp = setInterval(() => {
-      setComplete(false);
+      dispatch({ type: "REMOVE_COMPLETE" });
       clearInterval(comp);
     }, 1500);
-    // clearTimeout(comp);
-    console.log(res);
   };
 
   return (
     <FunctionContext.Provider
       value={{
-        input,
-        setInput,
-        thread,
-        setThread,
+        input: state.input,
+        thread: state.threads,
+        loading: state.loading,
+        complete: state.complete,
+        show: state.show,
+        expand: state.expand,
         PostThread,
-        loading,
-        complete,
-        user,
-        setUser,
-        show,
-        setShow,
-        expand,
-        setExpand,
+        dispatch,
       }}
     >
       {children}

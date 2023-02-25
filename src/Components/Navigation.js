@@ -10,7 +10,7 @@ import ProfileImg from "../assets/profile.jpg";
 import { useRouter } from "next/router";
 
 function Navigation() {
-  const { show, setShow } = useContext(FunctionContext);
+  const { dispatch } = useContext(FunctionContext);
   const { user } = useContext(AuthContext);
   const router = useRouter();
 
@@ -41,13 +41,13 @@ function Navigation() {
               src={ProfileImg}
               className="object-cover"
               alt="profile"
-              onClick={() => setShow(true)}
+              onClick={() => dispatch({ type: "SET_SHOW", payload: true })}
             />
           </div>
         ) : (
           <button
             className="bg-[#6F6F6F] px-4 py-1 rounded-xl text-[14px] border-2 border-[#CECECE] cursor-pointer"
-            onClick={() => setShow(true)}
+            onClick={() => dispatch({ type: "SET_SHOW", payload: true })}
           >
             Login
           </button>
