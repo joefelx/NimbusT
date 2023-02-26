@@ -5,10 +5,9 @@ import Image from "next/image";
 import { FunctionContext } from "../context/FunctionContext";
 import { AuthContext } from "@/context/AuthContext";
 
-import Tools from "./Tools";
-import { LoginCard } from "../components/Components";
+import { LoginCard, Button } from "./Components";
 import { Loading, Tick, Logo } from "./Graphics.js";
-import { splitText } from "../utils/utils";
+import { handleResize, splitText } from "../utils/utils";
 
 import ProfileImg from "../assets/profile.jpg";
 
@@ -20,6 +19,38 @@ import {
   HiOutlineSave,
   HiOutlinePhotograph,
 } from "react-icons/hi";
+
+function Tools() {
+  const { PostThread } = useContext(FunctionContext);
+  return (
+    <div className="fixed top-0 w-full bg-black flex items-center justify-between px-10 py-3">
+      <div className="w-full flex items-center justify-end">
+        <Button
+          className="float-right mx-4"
+          buttonName="Tweet"
+          clickFun={PostThread}
+          width={5}
+          height={1}
+          textColor="black"
+          background="white" //#1DA1F2
+          borderColor="[#CECECE]"
+          hoverColor="[#CECECE]"
+        />
+        <Button
+          className="float-right"
+          buttonName="Schedule"
+          clickFun={PostThread}
+          width={5}
+          height={1}
+          textColor="black"
+          background="white"
+          borderColor="[#CECECE]"
+          hoverColor="red-500"
+        />
+      </div>
+    </div>
+  );
+}
 
 function SideBar() {
   const { expand, dispatch } = useContext(FunctionContext);
@@ -118,12 +149,14 @@ function TextField() {
 
   useEffect(() => {
     dispatch({ type: "SET_THREAD", payload: splitText(input) });
+    handleResize("textarea");
   }, [input]);
 
   return (
     <textarea
       placeholder="Make a new thread by typing ^ to make heading"
       className=" w-full min-h-screen p-5 text-white bg-[#0a1128] focus:outline-none placeholder:text-gray-600 resize-none whitespace-pre-wrap"
+      value={input}
       onChange={(e) => dispatch({ type: "SET_INPUT", payload: e.target.value })}
     ></textarea>
   );
@@ -208,16 +241,16 @@ function Editor() {
       {loading && <Loading />}
       {complete && <Tick />}
       {show && <LoginCard />}
+      <Tools />
       <SideBar />
       {/* Editor */}
       <div
-        className={`${expand && "blur-sm"} flex-[1.5] ml-[5rem] `}
+        className={`${expand && "blur-sm"} flex-[1.5] ml-[5rem] mt-[3rem] `}
         onClick={() => dispatch({ type: "SET_EXPAND", payload: false })}
       >
         <TextField />
       </div>
-      <Tools />
-      <div className={`${expand && "blur-sm"} flex-1 `}>
+      <div className={`${expand && "blur-sm"} flex-1 mt-[3rem] `}>
         {/* box */}
         <div className=" flex flex-col bg-white items-center">
           {/* thread detail */}
