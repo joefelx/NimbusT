@@ -3,12 +3,10 @@ export function splitText(paragraph) {
   return word;
 }
 
-// export function handleResize(inputName) {
-//   const inputName = document
-//     .querySelector(inputName)
-//     .addEventListener("keyup", (e) => {
-//       inputName.style.height = "63px";
-//       let scHeight = e.target.scrollHeight;
-//       inputName.style.height = `${scHeight}px`;
-//     });
-// }
+export function handleResize(input) {
+  const inputName = document.querySelector(input);
+  inputName.addEventListener("keyup", (e) => {
+    let scHeight = e.target.scrollHeight;
+    inputName.style.height = `${scHeight}px`;
+  });
+}
