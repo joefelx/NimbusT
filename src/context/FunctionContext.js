@@ -1,6 +1,7 @@
 import { createContext, useReducer, useState } from "react";
 import FunctionReducer from "./reducer/FunctionReducer";
 import axios from "axios";
+import threadtemplate1 from "../assets/threadtemplate1.png";
 
 const INITIAL_STATE = {
   input: "",
@@ -9,6 +10,34 @@ const INITIAL_STATE = {
   complete: false,
   show: false,
   expand: false,
+  openTemplate: false,
+  templates: [
+    {
+      id: 0,
+      img: threadtemplate1,
+      text: "8 Things that are so useful but you're probably not aware of (all free):\n\n^1. Tool1\n\nSome paragraph.\n\nSuper helpful for:\n\n• Bullet1\n• Bullet1\n• Bullet1\n\n^2. Tool2\n\nSome Paragraph.\n\n•Bullet1.\n\n^3. Tool3\n\nSome Paragraph.\n\n• Bullet1\n\n^4. Tool4\n\nSome Paragraph.\n\n• Bullet1\n\n^5. Tool5\n\nSome Paragraph.\n\n• Bullet1\n\n^Thanks for checking out this thread! Add more excellent Chrome extensions below. Follow \n@user\n for more.",
+    },
+    {
+      id: 1,
+      img: threadtemplate1,
+    },
+    {
+      id: 2,
+      img: threadtemplate1,
+    },
+    {
+      id: 3,
+      img: threadtemplate1,
+    },
+    {
+      id: 4,
+      img: threadtemplate1,
+    },
+    {
+      id: 5,
+      img: threadtemplate1,
+    },
+  ],
 };
 
 export const FunctionContext = createContext();
@@ -42,6 +71,8 @@ export const FunctionContextProvider = ({ children }) => {
         complete: state.complete,
         show: state.show,
         expand: state.expand,
+        openTemplate: state.openTemplate,
+        templates: state.templates,
         PostThread,
         dispatch,
       }}

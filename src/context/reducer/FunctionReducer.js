@@ -4,6 +4,8 @@ const FunctionReducer = (state, action) => {
       return {
         ...state,
         input: action.payload,
+        openTemplate: false,
+        expand: false,
       };
     case "SET_THREAD":
       return {
@@ -35,6 +37,16 @@ const FunctionReducer = (state, action) => {
       return {
         ...state,
         expand: action.payload,
+      };
+    case "OPEN_TEMPLATE":
+      return {
+        ...state,
+        openTemplate: action.payload,
+      };
+    case "SET_TEMPLATES_LIST":
+      return {
+        ...state,
+        templates: action.payload,
       };
 
     default:

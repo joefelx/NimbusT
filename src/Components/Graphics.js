@@ -1,5 +1,6 @@
 import Image from "next/image";
 import logoimage from "../assets/Logo-individual transparent.png";
+import Profile from "../assets/profile.jpg";
 
 export function Gradient() {
   return (
@@ -115,3 +116,5 @@ export function Logo() {
     <Image src={logoimage} className="w-[30px] cursor-pointer" alt="Logo" />
   );
 }
+
+export default Profile;

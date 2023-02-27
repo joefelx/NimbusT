@@ -5,7 +5,7 @@ import Image from "next/image";
 import { FunctionContext } from "../context/FunctionContext";
 import { AuthContext } from "@/context/AuthContext";
 
-import { LoginCard, Button } from "./Components";
+import { LoginCard, Button, Templates } from "./Components";
 import { Loading, Tick, Logo } from "./Graphics.js";
 import { handleResize, splitText } from "../utils/utils";
 
@@ -37,7 +37,7 @@ function Tools() {
           hoverColor="[#CECECE]"
         />
         <Button
-          className="float-right"
+          className="float-right cursor-not-allowed"
           buttonName="Schedule"
           clickFun={PostThread}
           width={5}
@@ -46,6 +46,7 @@ function Tools() {
           background="white"
           borderColor="[#CECECE]"
           hoverColor="red-500"
+          disabled={true}
         />
       </div>
     </div>
@@ -94,6 +95,9 @@ function SideBar() {
             className={`flex items-center justify-evenly w-full  cursor-pointer ${
               !expand && "hover:text-white"
             } `}
+            onClick={() => {
+              dispatch({ type: "OPEN_TEMPLATE", payload: true });
+            }}
           >
             <HiOutlineTemplate />
           </li>
@@ -123,7 +127,12 @@ function SideBar() {
           <li className=" cursor-pointer hover:text-white">
             {expand && <p>Calendar</p>}
           </li>
-          <li className=" cursor-pointer hover:text-white">
+          <li
+            className=" cursor-pointer hover:text-white"
+            onClick={() => {
+              dispatch({ type: "OPEN_TEMPLATE", payload: true });
+            }}
+          >
             {" "}
             {expand && <p>Templates</p>}
           </li>
@@ -148,7 +157,9 @@ function TextField() {
   const { input, dispatch } = useContext(FunctionContext);
 
   useEffect(() => {
-    dispatch({ type: "SET_THREAD", payload: splitText(input) });
+    if (input != "") {
+      dispatch({ type: "SET_THREAD", payload: splitText(input) });
+    }
     handleResize("textarea");
   }, [input]);
 
@@ -226,7 +237,7 @@ function ThreadBox({ thread, imageURL }) {
 }
 
 function Editor() {
-  const { thread, loading, show, complete, expand, dispatch } =
+  const { thread, loading, show, complete, expand, dispatch, openTemplate } =
     useContext(FunctionContext);
   const { user, checkUser } = useContext(AuthContext);
 
@@ -241,6 +252,7 @@ function Editor() {
       {loading && <Loading />}
       {complete && <Tick />}
       {show && <LoginCard />}
+      {openTemplate && <Templates />}
       <Tools />
       <SideBar />
       {/* Editor */}
