@@ -7,7 +7,7 @@ import ThreadBox from "../assets/ThreadBox.png";
 function Hero() {
   const router = useRouter();
   return (
-    <div className=" h-[15rem] flex justify-between items-center">
+    <div className="relative z-5 h-[15rem] flex justify-between items-center z-20">
       <div>
         <h1 className=" text-6xl font-semibold  m-0 p-0">
           Create the Thread <br />

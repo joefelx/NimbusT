@@ -24,7 +24,7 @@ function Templates() {
   const menuBtnStyling = "cursor-pointer text-xl";
 
   return (
-    <div className="absolute w-full h-full flex items-center justify-center backdrop-blur-sm z-50">
+    <div className="fixed w-full h-full flex items-center justify-center backdrop-blur-sm z-50">
       <div className="w-[80vw] h-[90vh] bg-black border-2 border-slate-600 rounded-xl p-5 overflow-y-scroll">
         {/* box menu */}
         <ul className="flex justify-between">

@@ -42,6 +42,7 @@ const FunctionReducer = (state, action) => {
       return {
         ...state,
         openTemplate: action.payload,
+        expand: false,
       };
     case "SET_TEMPLATES_LIST":
       return {

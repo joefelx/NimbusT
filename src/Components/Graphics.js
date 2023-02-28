@@ -4,10 +4,8 @@ import Profile from "../assets/profile.jpg";
 
 export function Gradient() {
   return (
-    <div>
+    <div className="absolute">
       {/* <Image /> */}
-
-      <hr className=" mt-10" />
 
       {/* <Image src={Gradient1} /> */}
       <svg

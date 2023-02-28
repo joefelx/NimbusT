@@ -21,12 +21,16 @@ import {
 } from "react-icons/hi";
 
 function Tools() {
-  const { PostThread } = useContext(FunctionContext);
+  const { PostThread, expand } = useContext(FunctionContext);
   return (
-    <div className="fixed top-0 w-full bg-black flex items-center justify-between px-10 py-3">
+    <div
+      className={`fixed top-0 w-full bg-black flex items-center justify-between px-10 py-3 ${
+        expand && "blur-sm"
+      }`}
+    >
       <div className="w-full flex items-center justify-end">
         <Button
-          className="float-right mx-4"
+          className="font-semibold float-right mx-4 hover:bg-[#1DA1F2] hover:border-[#1DA1F2] hover:text-white hover:font-semibold"
           buttonName="Tweet"
           clickFun={PostThread}
           width={5}
@@ -34,10 +38,9 @@ function Tools() {
           textColor="black"
           background="white" //#1DA1F2
           borderColor="[#CECECE]"
-          hoverColor="[#CECECE]"
         />
         <Button
-          className="float-right cursor-not-allowed"
+          className="font-semibold float-right cursor-not-allowed"
           buttonName="Schedule"
           clickFun={PostThread}
           width={5}
@@ -45,7 +48,6 @@ function Tools() {
           textColor="black"
           background="white"
           borderColor="[#CECECE]"
-          hoverColor="red-500"
           disabled={true}
         />
       </div>
@@ -59,7 +61,7 @@ function SideBar() {
     <div
       className={` ${
         expand && "w-[15rem] rounded-r-lg border-r border-slate-500"
-      } fixed z-[40] h-screen bg-black p-5 flex flex-col items-center justify-between shadow-2xl`}
+      } fixed z-[45] h-screen bg-black p-5 flex flex-col items-center justify-between shadow-2xl`}
       onClick={() => dispatch({ type: "SET_EXPAND", payload: !expand })}
     >
       <div className="flex-1 flex items-center justify-evenly w-full">
@@ -160,15 +162,19 @@ function TextField() {
     if (input != "") {
       dispatch({ type: "SET_THREAD", payload: splitText(input) });
     }
-    handleResize("textarea");
+    handleResize("#textField");
   }, [input]);
 
   return (
     <textarea
       placeholder="Make a new thread by typing ^ to make heading"
+      id="textField"
       className=" w-full min-h-screen p-5 text-white bg-[#0a1128] focus:outline-none placeholder:text-gray-600 resize-none whitespace-pre-wrap"
       value={input}
-      onChange={(e) => dispatch({ type: "SET_INPUT", payload: e.target.value })}
+      onChange={(e) => {
+        handleResize("#textField");
+        dispatch({ type: "SET_INPUT", payload: e.target.value });
+      }}
     ></textarea>
   );
 }

@@ -12,13 +12,12 @@ const Button = ({
   textColor,
   background,
   borderColor,
-  hoverColor,
   className,
   disabled,
 }) => {
   return (
     <button
-      className={`bg-${background} px-${width} py-${height} rounded-xl text-[14px] text-${textColor} shadow-2xl border-2 border-${borderColor} hover:bg-${hoverColor} ${className}`}
+      className={`z-1 bg-${background} px-${width} py-${height} rounded-xl text-[14px] text-${textColor} shadow-2xl border-2 border-${borderColor} ${className}`}
       onClick={clickFun}
       disabled={disabled}
     >
