@@ -1,21 +1,22 @@
 import Link from "next/link";
 import Image from "next/image";
+import { useRouter } from "next/router";
+import { useContext, useEffect } from "react";
 
-import { Logo } from "./Graphics";
-import { useContext } from "react";
+import { CornerGradient, Logo } from "./Graphics";
 import { FunctionContext } from "@/context/FunctionContext";
 import { AuthContext } from "@/context/AuthContext";
 
+import { FiSun, FiMoon } from "react-icons/fi";
 import ProfileImg from "../assets/profile.jpg";
-import { useRouter } from "next/router";
 
 function Navigation() {
-  const { dispatch } = useContext(FunctionContext);
+  const { theme, dispatch } = useContext(FunctionContext);
   const { user } = useContext(AuthContext);
   const router = useRouter();
 
   return (
-    <div className=" h-[7rem] flex justify-between items-center">
+    <div className="relative h-[7rem] flex justify-between items-center px-[3rem] bg-transparent">
       <div className="flex-1">
         <Logo />
       </div>
@@ -34,7 +35,25 @@ function Navigation() {
         <span className=" text-[14px] cursor-pointer">About</span>
       </div>
 
-      <div className="flex-1 flex justify-end">
+      <div className="flex-1 flex items-center justify-end">
+        <div className="mr-5 text-xl cursor-pointer">
+          {theme == "light" ? (
+            <FiMoon
+              onClick={() => {
+                window.localStorage.setItem("THEME", "DARK");
+                dispatch({ type: "SET_THEME", payload: "dark" });
+              }}
+            />
+          ) : (
+            <FiSun
+              onClick={() => {
+                window.localStorage.setItem("THEME", "LIGHT");
+                dispatch({ type: "SET_THEME", payload: "light" });
+              }}
+            />
+          )}
+        </div>
+
         {user ? (
           <div className="w-[40px] h-[40px] rounded-full overflow-hidden border-2 border-[#CECECE] cursor-pointer">
             <Image

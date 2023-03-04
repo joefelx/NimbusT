@@ -21,10 +21,12 @@ import {
 } from "react-icons/hi";
 
 function Tools() {
-  const { PostThread, expand } = useContext(FunctionContext);
+  const { PostThread, theme, expand } = useContext(FunctionContext);
   return (
     <div
-      className={`fixed top-0 w-full bg-black flex items-center justify-between px-10 py-3 ${
+      className={`${
+        theme == "light" ? "bg-white text-black" : "bg-black text-white"
+      } fixed top-0 w-full flex items-center justify-between px-10 py-3 ${
         expand && "blur-sm"
       }`}
     >
@@ -56,12 +58,14 @@ function Tools() {
 }
 
 function SideBar() {
-  const { expand, dispatch } = useContext(FunctionContext);
+  const { expand, theme, dispatch } = useContext(FunctionContext);
   return (
     <div
       className={` ${
         expand && "w-[15rem] rounded-r-lg border-r border-slate-500"
-      } fixed z-[45] h-screen bg-black p-5 flex flex-col items-center justify-between shadow-2xl`}
+      } ${
+        theme == "light" ? "bg-white text-black" : "bg-black text-white"
+      } fixed z-[45] h-screen p-5 flex flex-col items-center justify-between border-r border-white `}
       onClick={() => dispatch({ type: "SET_EXPAND", payload: !expand })}
     >
       <div className="flex-1 flex items-center justify-evenly w-full">
@@ -156,7 +160,7 @@ function SideBar() {
 }
 
 function TextField() {
-  const { input, dispatch } = useContext(FunctionContext);
+  const { input, theme, dispatch } = useContext(FunctionContext);
 
   useEffect(() => {
     if (input != "") {
@@ -169,7 +173,9 @@ function TextField() {
     <textarea
       placeholder="Make a new thread by typing ^ to make heading"
       id="textField"
-      className=" w-full min-h-screen p-5 text-white bg-[#0a1128] focus:outline-none placeholder:text-gray-600 resize-none whitespace-pre-wrap"
+      className={`${
+        theme == "light" ? "bg-white text-black" : "bg-black text-white"
+      } w-full min-h-screen p-5 focus:outline-none placeholder:text-gray-600 resize-none whitespace-pre-wrap`}
       value={input}
       onChange={(e) => {
         handleResize("#textField");
@@ -243,18 +249,37 @@ function ThreadBox({ thread, imageURL }) {
 }
 
 function Editor() {
-  const { thread, loading, show, complete, expand, dispatch, openTemplate } =
-    useContext(FunctionContext);
+  const {
+    thread,
+    loading,
+    show,
+    complete,
+    expand,
+    dispatch,
+    openTemplate,
+    theme,
+  } = useContext(FunctionContext);
   const { user, checkUser } = useContext(AuthContext);
 
   useEffect(() => {
+    const storedTheme = window.localStorage.getItem("THEME");
+    if (storedTheme === "LIGHT") {
+      dispatch({ type: "SET_THEME", payload: "light" });
+    } else {
+      dispatch({ type: "SET_THEME", payload: "dark" });
+    }
+
     if (!user) {
       checkUser();
     }
   }, []);
 
   return (
-    <div className="min-h-screen w-full bg-[#0a1128] text-white flex justify-between">
+    <div
+      className={`${
+        theme == "light" ? "bg-white text-black" : "bg-black text-white"
+      } min-h-screen w-full  flex justify-between`}
+    >
       {loading && <Loading />}
       {complete && <Tick />}
       {show && <LoginCard />}

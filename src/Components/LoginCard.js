@@ -8,16 +8,20 @@ import { LOGIN_URL } from "../constant";
 
 const LoginCard = () => {
   const { user, logout } = useContext(AuthContext);
-  const { dispatch } = useContext(FunctionContext);
+  const { theme, dispatch } = useContext(FunctionContext);
 
   return (
     <div
-      className="w-full h-full flex items-center justify-center text-white bg-transparent backdrop-blur-md fixed z-50"
+      className="w-full h-full flex items-center justify-center bg-transparent backdrop-blur-md fixed z-50"
       onClick={() => {
         dispatch({ type: "SET_SHOW", payload: false });
       }}
     >
-      <div className="w-[30rem] p-10 flex flex-col items-center justify-center bg-black border-2 border-slate-700 rounded-2xl">
+      <div
+        className={` ${
+          theme == "light" ? "bg-white text-black" : "bg-black text-white"
+        } w-[30rem] p-10 flex flex-col items-center justify-center border-2 border-slate-700 rounded-2xl`}
+      >
         <div className="px-5 ">
           <div className="flex items-center justify-between ">
             <Image src={Logo} className="w-[60px] " alt="Logo" />

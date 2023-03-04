@@ -1,6 +1,10 @@
 import Image from "next/image";
 import logoimage from "../assets/Logo-individual transparent.png";
 import Profile from "../assets/profile.jpg";
+import GradientPng from "../assets/Group1.png";
+import { useEffect } from "react";
+import { useContext, useState } from "react";
+import { FunctionContext } from "@/context/FunctionContext";
 
 export function Gradient() {
   return (
@@ -61,6 +65,63 @@ export function Gradient() {
   );
 }
 
+export function CornerGradient({ className }) {
+  // return (
+  //   <svg
+  //     className={className}
+  //     width="1406"
+  //     height="1269"
+  //     viewBox="0 0 1406 1269"
+  //     fill="none"
+  //     xmlns="http://www.w3.org/2000/svg"
+  //   >
+  //     <g filter="url(#filter0_f_14_30)">
+  //       <path
+  //         d="M522.925 362.945C515.854 362.945 478.987 375.534 388.091 425.89L384.855 446.4L419.732 502.98L472.947 571.582L541.263 461.252H689.759L820.278 502.98L1005.09 461.252L1079.52 476.104L1105.05 362.945L998.978 300L880.684 362.945H751.963L667.107 333.241L604.904 362.945H522.925Z"
+  //         fill="#FA00A5"
+  //       />
+  //       <path
+  //         d="M386.653 667.061L336.315 532.684L324.45 551.072V577.948L300 708.788L597.353 795.072L409.305 882.063L468.272 926.62L669.984 882.063L808.053 777.391L695.872 667.061L485.172 681.913L386.653 667.061Z"
+  //         fill="#8F00FF"
+  //       />
+  //       <path
+  //         d="M741.632 448.65C741.632 557.237 752.006 664.232 657.682 664.232C563.358 664.232 472.237 1058.67 472.237 950.088C472.237 841.5 453.785 619.097 548.109 619.097C642.434 619.097 741.632 340.063 741.632 448.65Z"
+  //         fill="#FFF500"
+  //       />
+  //       <path
+  //         d="M753.401 753.345L803.379 664.232L903.133 497.322L914.123 413.867L968.775 478.933V598.458L1056.87 783.756L865.582 753.345H753.401Z"
+  //         fill="#00A3FF"
+  //       />
+  //     </g>
+  //     <defs>
+  //       <filter
+  //         id="filter0_f_14_30"
+  //         x="0"
+  //         y="0"
+  //         width="1405.05"
+  //         height="1269"
+  //         filterUnits="userSpaceOnUse"
+  //         color-interpolation-filters="sRGB"
+  //       >
+  //         <feFlood flood-opacity="0" result="BackgroundImageFix" />
+  //         <feBlend
+  //           mode="normal"
+  //           in="SourceGraphic"
+  //           in2="BackgroundImageFix"
+  //           result="shape"
+  //         />
+  //         <feGaussianBlur
+  //           stdDeviation="150"
+  //           result="effect1_foregroundBlur_14_30"
+  //         />
+  //       </filter>
+  //     </defs>
+  //   </svg>
+  // );
+
+  return <Image src={GradientPng} className={className} />;
+}
+
 export function Loading() {
   return (
     <div className="absolute w-full h-full backdrop-blur-sm">
@@ -110,8 +171,36 @@ export function Tick() {
 }
 
 export function Logo() {
+  const { theme, dispatch } = useContext(FunctionContext);
+  useEffect(() => {
+    const storedTheme = window.localStorage.getItem("THEME");
+    if (storedTheme === "LIGHT") {
+      dispatch({ type: "SET_THEME", payload: "light" });
+    } else {
+      dispatch({ type: "SET_THEME", payload: "dark" });
+    }
+  }, [theme]);
+
   return (
-    <Image src={logoimage} className="w-[30px] cursor-pointer" alt="Logo" />
+    // <Image src={logoimage} className="w-[30px] cursor-pointer" alt="Logo" />
+    <svg
+      width="40"
+      height="40"
+      viewBox="0 0 677 691"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <path
+        d="M0 108.885C0 108.885 169.979 14.7718 338.266 108.885C506.554 202.997 676.533 108.885 676.533 108.885V654.466C676.533 654.466 469.345 736.303 338.266 654.466C207.188 572.629 0 654.466 0 654.466V108.885Z"
+        fill={`${theme == "light" ? "black" : "white"}`}
+        fillOpacity="0.5"
+      />
+      <path
+        d="M0 41.8279C0 41.8279 169.979 -52.2849 338.266 41.8279C506.554 135.941 676.533 41.8279 676.533 41.8279V587.41C676.533 587.41 469.345 669.247 338.266 587.41C207.188 505.573 0 587.41 0 587.41V41.8279Z"
+        fill={`${theme == "light" ? "black" : "white"}`}
+        fillOpacity="0.5"
+      />
+    </svg>
   );
 }
 

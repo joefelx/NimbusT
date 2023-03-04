@@ -11,8 +11,21 @@ module.exports = {
   theme: {
     extend: {
       colors: {
-        black: "#0a1128",
+        // black: "#15191e",
+        // black: "#050505",
+        // black: "#000000",
+        // black: "hsl(231, 100%, 3%)",
+        // black: "#0f172a",
+        // black: "#1a1c22",
+        black: "#0e1218",
         white: "#ffffff",
+        // lightGrey: "#1a1c22",
+
+        frostedWhite: "#f1f2f4",
+        // frostedBlack: "#0b0c0d",
+        // frostedBlack: "#212121",
+        // frostedBlack: "#222831",
+        frostedBlack: "#000000",
       },
     },
   },

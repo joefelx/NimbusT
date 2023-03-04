@@ -4,6 +4,7 @@ import axios from "axios";
 import threadtemplate1 from "../assets/threadtemplate1.png";
 
 const INITIAL_STATE = {
+  theme: "",
   input: "",
   threads: [],
   loading: false,
@@ -73,6 +74,7 @@ export const FunctionContextProvider = ({ children }) => {
         expand: state.expand,
         openTemplate: state.openTemplate,
         templates: state.templates,
+        theme: state.theme,
         PostThread,
         dispatch,
       }}

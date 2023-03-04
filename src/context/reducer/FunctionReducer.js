@@ -1,5 +1,11 @@
 const FunctionReducer = (state, action) => {
   switch (action.type) {
+    case "SET_THEME":
+      return {
+        ...state,
+        theme: action.payload,
+      };
+
     case "SET_INPUT":
       return {
         ...state,
