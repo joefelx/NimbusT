@@ -49,14 +49,37 @@ export default function Home() {
             src={EditorPreview}
             className="w-[70vw] z-40 rounded-lg shadow-xl"
           />
-          {/* <Gradient /> */}
+          <Gradient />
         </div>
         {/* Features list */}
-        <div className="bg-black text-white py-5">
+        <div className=" bg-black text-white py-5">
           <FeatureBox text="Make Threads" />
           <FeatureBox text="Professional Templates" />
           <FeatureBox text="Schedule it" />
         </div>
+        {/* Footer */}
+        <footer className="h-[50vh] flex flex-col justify-between">
+          <section className="flex justify-around">
+            <ul>
+              <li>Home</li>
+              <li>Editor</li>
+              <li>Templates</li>
+            </ul>
+            <ul>
+              <li>Home</li>
+              <li>Editor</li>
+              <li>Templates</li>
+            </ul>
+            <ul>
+              <li>Home</li>
+              <li>Editor</li>
+              <li>Templates</li>
+            </ul>
+          </section>
+          <section className="flex justify-center">
+            <span>Developed by Felix</span>
+          </section>
+        </footer>
       </div>
     </div>
   );

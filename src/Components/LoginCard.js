@@ -33,14 +33,14 @@ const LoginCard = () => {
         </div>
         {!user ? (
           <a href={LOGIN_URL}>
-            <button className="bg-[#1DA1F2] w-[20rem] py-2 rounded-xl shadow-xl mt-12 text-xl font-bold flex items-center justify-evenly">
+            <button className="bg-[#1DA1F2] text-white w-[20rem] py-2 rounded-xl shadow-xl mt-12 text-xl font-bold flex items-center justify-evenly">
               Connect with Twitter
               <BsTwitter />
             </button>
           </a>
         ) : (
           <button
-            className="bg-[#1DA1F2] w-[20rem] py-2 rounded-xl shadow-xl mt-12 text-xl font-bold flex items-center justify-evenly"
+            className="bg-[#1DA1F2] text-white w-[20rem] py-2 rounded-xl shadow-xl mt-12 text-xl font-bold flex items-center justify-evenly"
             onClick={logout}
           >
             Logout

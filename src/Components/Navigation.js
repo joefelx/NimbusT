@@ -28,7 +28,7 @@ function Navigation() {
             router.push("/thread");
           }}
         >
-          Thread
+          Editor
         </span>
         <span className=" text-[14px] cursor-pointer">Product</span>
         <span className=" text-[14px] cursor-pointer">Pricing</span>

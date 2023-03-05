@@ -64,8 +64,10 @@ function SideBar() {
       className={` ${
         expand && "w-[15rem] rounded-r-lg border-r border-slate-500"
       } ${
-        theme == "light" ? "bg-white text-black" : "bg-black text-white"
-      } fixed z-[45] h-screen p-5 flex flex-col items-center justify-between border-r border-white `}
+        theme == "light"
+          ? "bg-white text-black shadow-2xl"
+          : "bg-black text-white shadow-2xl"
+      } fixed z-[45] h-screen p-5 flex flex-col items-center justify-between`}
       onClick={() => dispatch({ type: "SET_EXPAND", payload: !expand })}
     >
       <div className="flex-1 flex items-center justify-evenly w-full">

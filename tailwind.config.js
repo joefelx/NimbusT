@@ -11,13 +11,9 @@ module.exports = {
   theme: {
     extend: {
       colors: {
-        // black: "#15191e",
-        // black: "#050505",
-        // black: "#000000",
-        // black: "hsl(231, 100%, 3%)",
         // black: "#0f172a",
-        // black: "#1a1c22",
-        black: "#0e1218",
+        black: "#091128",
+        // black: "#0e1218",
         white: "#ffffff",
         // lightGrey: "#1a1c22",
 
