@@ -6,6 +6,7 @@ import { FunctionContext } from "@/context/FunctionContext";
 import { AuthContext } from "@/context/AuthContext";
 import Image from "next/image";
 import EditorPreview from "../assets/Nimbus-ScreenShot.png";
+import Footer from "@/components/Footer";
 
 const FeatureBox = ({ text }) => {
   return (
@@ -58,28 +59,7 @@ export default function Home() {
           <FeatureBox text="Schedule it" />
         </div>
         {/* Footer */}
-        <footer className="h-[50vh] flex flex-col justify-between">
-          <section className="flex justify-around">
-            <ul>
-              <li>Home</li>
-              <li>Editor</li>
-              <li>Templates</li>
-            </ul>
-            <ul>
-              <li>Home</li>
-              <li>Editor</li>
-              <li>Templates</li>
-            </ul>
-            <ul>
-              <li>Home</li>
-              <li>Editor</li>
-              <li>Templates</li>
-            </ul>
-          </section>
-          <section className="flex justify-center">
-            <span>Developed by Felix</span>
-          </section>
-        </footer>
+        <Footer />
       </div>
     </div>
   );
