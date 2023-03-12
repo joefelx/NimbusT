@@ -33,7 +33,7 @@ function Hero() {
         <button
           className={`${
             theme == "light"
-              ? " bg-black text-white hover:bg-gray-700 "
+              ? " bg-black text-white hover:bg-gray-700"
               : "bg-white text-black hover:bg-gray-300"
           } flex items-center px-6 py-2 mt-7 rounded-2xl text-[1rem] font-semibold border-2 border-gray-400`}
           onClick={() => {

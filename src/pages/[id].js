@@ -10,7 +10,6 @@ const User = () => {
     const result = await axios.post("http://localhost:5000/user", {
       username: id,
     });
-    // console.log(result);
     window.localStorage.setItem("USER_ACCOUNT", JSON.stringify(result.data));
   };
 

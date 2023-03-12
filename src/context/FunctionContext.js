@@ -46,10 +46,13 @@ export const FunctionContext = createContext();
 export const FunctionContextProvider = ({ children }) => {
   const [state, dispatch] = useReducer(FunctionReducer, INITIAL_STATE);
 
+  const NEXT_PUBLIC_REQUEST_URL = process.env.NEXT_PUBLIC_REQUEST_URL;
   const PostThread = async () => {
     dispatch({ type: "SET_LOADING" });
 
-    const res = await axios.post("http://localhost:5000/thread", {
+    console.log(`${NEXT_PUBLIC_REQUEST_URL}/tweet/thread`);
+
+    const res = await axios.post(`${NEXT_PUBLIC_REQUEST_URL}/tweet/thread`, {
       username: "testfelix2",
       threadsList: state.threads,
       scheduled: false,

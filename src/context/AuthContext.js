@@ -16,12 +16,11 @@ export const AuthContextProvider = ({ children }) => {
 
   async function checkUser() {
     const storedUser = window.localStorage.getItem("USER_ACCOUNT");
-
     try {
       storedUser
         ? dispatch({
             type: "AUTH_LOGGEDIN",
-            payload: JSON.parse(storedUser).data,
+            payload: JSON.parse(storedUser),
           })
         : setShow(true);
     } catch (error) {

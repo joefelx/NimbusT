@@ -7,14 +7,7 @@ import { AuthContext } from "@/context/AuthContext";
 import Image from "next/image";
 import EditorPreview from "../assets/Nimbus-ScreenShot.png";
 import Footer from "@/components/Footer";
-
-const FeatureBox = ({ text }) => {
-  return (
-    <div className="flex-1 flex items-center bg-black border border-white rounded-3xl m-4 p-5">
-      <span className="text-white text-[4rem] font-bold">{text}</span>
-    </div>
-  );
-};
+import Features from "@/components/Features";
 
 export default function Home() {
   const { show, theme, dispatch } = useContext(FunctionContext);
@@ -53,11 +46,7 @@ export default function Home() {
           <Gradient />
         </div>
         {/* Features list */}
-        <div className=" bg-black text-white py-5">
-          <FeatureBox text="Make Threads" />
-          <FeatureBox text="Professional Templates" />
-          <FeatureBox text="Schedule it" />
-        </div>
+        <Features />
         {/* Footer */}
         <Footer />
       </div>
