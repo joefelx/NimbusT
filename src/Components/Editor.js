@@ -165,9 +165,7 @@ function TextField() {
   const { input, theme, dispatch } = useContext(FunctionContext);
 
   useEffect(() => {
-    if (input != "") {
-      dispatch({ type: "SET_THREAD", payload: splitText(input) });
-    }
+    dispatch({ type: "SET_THREAD", payload: splitText(input) });
     handleResize("#textField");
   }, [input]);
 
@@ -190,7 +188,6 @@ function TextField() {
 function ThreadBox({ thread, imageURL }) {
   const { user } = useContext(AuthContext);
   const [file, setFile] = useState();
-  // console.log(user);
 
   const THREAD_LIMIT = 280;
 
@@ -198,7 +195,7 @@ function ThreadBox({ thread, imageURL }) {
     if (thread.length > THREAD_LIMIT) {
       // alert("More than 280, Try to write in new line");
     }
-  }, []);
+  }, [thread]);
 
   return (
     <>
@@ -300,12 +297,10 @@ function Editor() {
         <div className=" flex flex-col bg-white items-center">
           {/* thread detail */}
           {thread.map((t) => {
-            {
-              if (t == "") {
-                return "";
-              }
-              return <ThreadBox thread={t} imageURL="" />;
+            if (t === "") {
+              return "";
             }
+            return <ThreadBox thread={t} imageURL="" />;
           })}
         </div>
       </div>

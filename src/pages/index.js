@@ -38,11 +38,14 @@ export default function Home() {
         {/* <Gradient /> */}
         <Navigation />
         <Hero />
-        <div className="mt-16 relative flex items-center justify-center h-screen px-[3rem]">
-          <Image
-            src={EditorPreview}
-            className="w-[70vw] z-40 rounded-lg shadow-xl"
-          />
+        <div className="mt-16 relative flex flex-col items-center justify-center h-screen px-[3rem]">
+          <div className=" z-50 w-[70vw]">
+            <Image src={EditorPreview} className=" z-40 rounded-lg shadow-xl" />
+            <div className="relative bg-gradient-to-t from-black to-transparent">
+              <h1>Exciting Templates</h1>
+              <p>Cool and new Templates which are professional</p>
+            </div>
+          </div>
           <Gradient />
         </div>
         {/* Features list */}
