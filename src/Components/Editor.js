@@ -3,7 +3,7 @@ import Link from "next/link";
 import Image from "next/image";
 
 import { FunctionContext } from "../context/FunctionContext";
-import { AuthContext } from "@/context/AuthContext";
+import { AuthContext } from "../context/AuthContext";
 
 import { LoginCard, Button, Templates } from "./Components";
 import { Loading, Tick, Logo } from "./Graphics.js";
