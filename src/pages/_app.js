@@ -6,10 +6,10 @@ import { useRouter } from "next/router";
 export default function App({ Component, pageProps }) {
   const router = useRouter();
   return (
-    <FunctionContextProvider>
-      <AuthContextProvider>
+    <AuthContextProvider>
+      <FunctionContextProvider>
         <Component key={router.asPath} {...pageProps} />
-      </AuthContextProvider>
-    </FunctionContextProvider>
+      </FunctionContextProvider>
+    </AuthContextProvider>
   );
 }

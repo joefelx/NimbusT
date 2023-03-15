@@ -7,9 +7,12 @@ const User = () => {
   const { id } = router.query;
 
   const auth = async () => {
-    const result = await axios.post("http://localhost:5000/user", {
-      username: id,
-    });
+    const result = await axios.post(
+      `${process.env.NEXT_PUBLIC_REQUEST_URL}/user`,
+      {
+        username: id,
+      }
+    );
     window.localStorage.setItem("USER_ACCOUNT", JSON.stringify(result.data));
   };
 
