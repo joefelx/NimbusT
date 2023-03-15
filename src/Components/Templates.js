@@ -49,6 +49,7 @@ function Templates() {
         <div className="grid grid-cols-3 gap-10">
           {templates.map((temp) => (
             <TemplateBox
+              key={temp.id}
               img={temp.img}
               onClick={() => {
                 dispatch({ type: "SET_INPUT", payload: temp.text });

@@ -40,7 +40,11 @@ export default function Home() {
         <Hero />
         <div className="mt-16 relative flex flex-col items-center justify-center h-screen px-[3rem]">
           <div className=" z-50 w-[70vw]">
-            <Image src={EditorPreview} className=" z-40 rounded-lg shadow-xl" />
+            <Image
+              src={EditorPreview}
+              alt="editorpreview"
+              className=" z-40 rounded-lg shadow-xl"
+            />
             <div className="relative bg-gradient-to-t from-black to-transparent">
               <h1>Exciting Templates</h1>
               <p>Cool and new Templates which are professional</p>
