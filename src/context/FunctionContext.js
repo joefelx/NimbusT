@@ -1,7 +1,8 @@
-import { createContext, useReducer, useState } from "react";
+import { createContext, useContext, useReducer, useState } from "react";
 import FunctionReducer from "./reducer/FunctionReducer";
 import axios from "axios";
 import threadtemplate1 from "../assets/threadtemplate1.png";
+import { AuthContext } from "./AuthContext";
 
 const INITIAL_STATE = {
   theme: "",
@@ -45,15 +46,14 @@ export const FunctionContext = createContext();
 
 export const FunctionContextProvider = ({ children }) => {
   const [state, dispatch] = useReducer(FunctionReducer, INITIAL_STATE);
+  const { user } = useContext(AuthContext);
 
   const NEXT_PUBLIC_REQUEST_URL = process.env.NEXT_PUBLIC_REQUEST_URL;
   const PostThread = async () => {
     dispatch({ type: "SET_LOADING" });
 
-    console.log(`${NEXT_PUBLIC_REQUEST_URL}/tweet/thread`);
-
     const res = await axios.post(`${NEXT_PUBLIC_REQUEST_URL}/tweet/thread`, {
-      username: "testfelix2",
+      username: user.username,
       threadsList: state.threads,
       scheduled: false,
       date: "1677718800000",

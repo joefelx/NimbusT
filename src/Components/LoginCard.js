@@ -4,7 +4,6 @@ import { useContext, useEffect } from "react";
 import { AuthContext } from "@/context/AuthContext";
 import { FunctionContext } from "@/context/FunctionContext";
 import { BsTwitter } from "react-icons/bs";
-import { LOGIN_URL } from "../constant";
 
 const LoginCard = () => {
   const { user, logout } = useContext(AuthContext);
@@ -32,7 +31,7 @@ const LoginCard = () => {
           </span>
         </div>
         {!user ? (
-          <a href={LOGIN_URL}>
+          <a href={`${process.env.NEXT_PUBLIC_REQUEST_URL}/auth/twitter`}>
             <button className="bg-[#1DA1F2] text-white w-[20rem] py-2 rounded-xl shadow-xl mt-12 text-xl font-bold flex items-center justify-evenly">
               Connect with Twitter
               <BsTwitter />
