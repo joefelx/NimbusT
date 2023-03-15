@@ -3,8 +3,8 @@ import logoimage from "../assets/Logo-individual transparent.png";
 import Profile from "../assets/profile.jpg";
 import GradientPng from "../assets/Group1.png";
 import { useEffect } from "react";
-import { useContext, useState } from "react";
-import { FunctionContext } from "@/context/FunctionContext";
+import { useContext } from "react";
+import { FunctionContext } from "../context/FunctionContext";
 
 export function Gradient() {
   return (

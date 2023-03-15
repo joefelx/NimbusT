@@ -1,10 +1,8 @@
 import { useRouter } from "next/router";
 import { HiOutlineArrowRight } from "react-icons/hi";
 
-import ThreadBox from "../assets/ThreadBox.png";
 import { useEffect, useContext } from "react";
-import { FunctionContext } from "@/context/FunctionContext";
-import { Gradient } from "./Graphics";
+import { FunctionContext } from "../context/FunctionContext";
 
 function Hero() {
   const router = useRouter();

@@ -1,8 +1,8 @@
 import Image from "next/image";
 import Logo from "../assets/Logo-individual transparent.png";
-import { useContext, useEffect } from "react";
-import { AuthContext } from "@/context/AuthContext";
-import { FunctionContext } from "@/context/FunctionContext";
+import { useContext } from "react";
+import { AuthContext } from "../context/AuthContext";
+import { FunctionContext } from "../context/FunctionContext";
 import { BsTwitter } from "react-icons/bs";
 
 const LoginCard = () => {

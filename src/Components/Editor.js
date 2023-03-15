@@ -5,8 +5,7 @@ import Image from "next/image";
 import { FunctionContext } from "../context/FunctionContext";
 import { AuthContext } from "../context/AuthContext";
 
-import { LoginCard, Button, Templates } from "./Components";
-import { Loading, Tick, Logo } from "./Graphics.js";
+import { LoginCard, Button, Templates, Loading, Tick, Logo } from "./Component";
 import { handleResize, splitText } from "../utils/utils";
 
 import ProfileImg from "../assets/profile.jpg";

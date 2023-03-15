@@ -1,8 +1,10 @@
-import { createContext, useContext, useReducer, useState } from "react";
-import FunctionReducer from "./reducer/FunctionReducer";
 import axios from "axios";
-import threadtemplate1 from "../assets/threadtemplate1.png";
+
+import { createContext, useContext, useReducer } from "react";
+import FunctionReducer from "./reducer/FunctionReducer";
 import { AuthContext } from "./AuthContext";
+
+import threadtemplate1 from "../assets/threadtemplate1.png";
 
 const INITIAL_STATE = {
   theme: "",

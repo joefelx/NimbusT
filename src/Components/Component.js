@@ -3,6 +3,7 @@ import Hero from "./Hero";
 import Navigation from "./Navigation";
 import LoginCard from "./LoginCard";
 import Templates from "./Templates";
+import { Gradient, CornerGradient, Loading, Tick, Logo } from "./Graphics";
 
 const Button = ({
   buttonName,
@@ -26,4 +27,16 @@ const Button = ({
   );
 };
 
-export { Editor, Hero, Navigation, LoginCard, Button, Templates };
+export {
+  Editor,
+  Hero,
+  Navigation,
+  LoginCard,
+  Button,
+  Templates,
+  Gradient,
+  CornerGradient,
+  Loading,
+  Tick,
+  Logo,
+};

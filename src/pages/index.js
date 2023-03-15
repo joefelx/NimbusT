@@ -1,13 +1,12 @@
 import { useContext, useEffect } from "react";
-import { useRouter } from "next/router";
-import { Hero, Navigation, LoginCard } from "@/components/Components";
-import { CornerGradient, Gradient, Loading } from "@/components/Graphics";
-import { FunctionContext } from "@/context/FunctionContext";
-import { AuthContext } from "@/context/AuthContext";
+import { Hero, Navigation, LoginCard, Gradient } from "../components/Component";
+
+import { FunctionContext } from "../context/FunctionContext";
+import { AuthContext } from "../context/AuthContext";
 import Image from "next/image";
 import EditorPreview from "../assets/Nimbus-ScreenShot.png";
-import Footer from "@/components/Footer";
-import Features from "@/components/Features";
+import Footer from "../components/Footer";
+import Features from "../components/Features";
 
 export default function Home() {
   const { show, theme, dispatch } = useContext(FunctionContext);

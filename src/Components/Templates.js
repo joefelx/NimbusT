@@ -1,4 +1,4 @@
-import { FunctionContext } from "@/context/FunctionContext";
+import { FunctionContext } from "../context/FunctionContext";
 import React, { useContext } from "react";
 import { HiOutlineX } from "react-icons/hi";
 import { BiExpandAlt } from "react-icons/bi";
