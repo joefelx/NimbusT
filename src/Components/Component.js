@@ -3,6 +3,7 @@ import Hero from "./Hero";
 import Navigation from "./Navigation";
 import LoginCard from "./LoginCard";
 import Templates from "./Templates";
+import Calender from "./Calender";
 import { Gradient, CornerGradient, Loading, Tick, Logo } from "./Graphics";
 
 const Button = ({
@@ -39,4 +40,5 @@ export {
   Loading,
   Tick,
   Logo,
+  Calender,
 };

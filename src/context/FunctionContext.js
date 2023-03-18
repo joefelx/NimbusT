@@ -15,6 +15,7 @@ const INITIAL_STATE = {
   show: false,
   expand: false,
   openTemplate: false,
+  openCalendar: false,
   templates: [
     {
       id: 0,
@@ -78,6 +79,7 @@ export const FunctionContextProvider = ({ children }) => {
         show: state.show,
         expand: state.expand,
         openTemplate: state.openTemplate,
+        openCalendar: state.openCalendar,
         templates: state.templates,
         theme: state.theme,
         PostThread,

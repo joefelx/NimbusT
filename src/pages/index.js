@@ -1,5 +1,11 @@
 import { useContext, useEffect } from "react";
-import { Hero, Navigation, LoginCard, Gradient } from "../components/Component";
+import {
+  Hero,
+  Navigation,
+  LoginCard,
+  Gradient,
+  Editor,
+} from "../components/Component";
 
 import { FunctionContext } from "../context/FunctionContext";
 import { AuthContext } from "../context/AuthContext";

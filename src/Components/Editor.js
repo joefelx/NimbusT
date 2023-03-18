@@ -5,7 +5,15 @@ import Image from "next/image";
 import { FunctionContext } from "../context/FunctionContext";
 import { AuthContext } from "../context/AuthContext";
 
-import { LoginCard, Button, Templates, Loading, Tick, Logo } from "./Component";
+import {
+  LoginCard,
+  Button,
+  Templates,
+  Loading,
+  Tick,
+  Logo,
+  Calender,
+} from "./Component";
 import { handleResize, splitText } from "../utils/utils";
 
 import ProfileImg from "../assets/profile.jpg";
@@ -20,7 +28,8 @@ import {
 } from "react-icons/hi";
 
 function Tools() {
-  const { PostThread, theme, expand } = useContext(FunctionContext);
+  const { PostThread, theme, expand, openCalendar, dispatch } =
+    useContext(FunctionContext);
   return (
     <div
       className={`${
@@ -41,15 +50,14 @@ function Tools() {
           borderColor="[#CECECE]"
         />
         <Button
-          className="font-semibold float-right cursor-not-allowed"
+          className="font-semibold float-right cursor-pointer"
           buttonName="Schedule"
-          clickFun={PostThread}
+          clickFun={() => dispatch({ type: "OPEN_CALENDAR", payload: true })}
           width={5}
           height={1}
           textColor="black"
           background="white"
           borderColor="[#CECECE]"
-          disabled={true}
         />
       </div>
     </div>
@@ -255,6 +263,7 @@ function Editor() {
     expand,
     dispatch,
     openTemplate,
+    openCalendar,
     theme,
   } = useContext(FunctionContext);
   const { user, checkUser } = useContext(AuthContext);
@@ -282,6 +291,7 @@ function Editor() {
       {complete && <Tick />}
       {show && <LoginCard />}
       {openTemplate && <Templates />}
+      {openCalendar && <Calender />}
       <Tools />
       <SideBar />
       {/* Editor */}
