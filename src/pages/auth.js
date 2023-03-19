@@ -1,4 +1,4 @@
-import { LoginCard } from "../components/Component";
+import { LoginCard } from "../component/Component";
 
 function auth() {
   return (
