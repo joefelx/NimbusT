@@ -1,4 +1,5 @@
 import { useContext, useEffect } from "react";
+import { useRouter } from "next/router";
 import { Hero, Navigation, LoginCard, Gradient } from "../component/Component";
 
 import { FunctionContext } from "../context/FunctionContext";
@@ -10,7 +11,8 @@ import Features from "../component/Features";
 
 export default function Home() {
   const { show, theme, dispatch } = useContext(FunctionContext);
-  const { checkUser } = useContext(AuthContext);
+  const { user, checkUser } = useContext(AuthContext);
+  const router = useRouter();
 
   useEffect(() => {
     // usetheme
@@ -21,10 +23,13 @@ export default function Home() {
       dispatch({ type: "SET_THEME", payload: "dark" });
     }
 
-    checkUser();
-
     // Check for the user logged or not and call a function CheckUser
+    checkUser();
   }, []);
+
+  useEffect(() => {
+    router.push("/");
+  }, [user]);
 
   return (
     <div>

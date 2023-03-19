@@ -10,9 +10,8 @@ export const AuthContext = createContext(INITIAL_STATE);
 
 export const AuthContextProvider = ({ children }) => {
   const [state, dispatch] = useReducer(AuthReducer, INITIAL_STATE);
-  // const { setShow } = useContext(FunctionContext);
 
-  async function checkUser() {
+  function checkUser() {
     const storedUser = window.localStorage.getItem("USER_ACCOUNT");
     try {
       storedUser &&
