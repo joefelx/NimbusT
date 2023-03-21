@@ -4,14 +4,16 @@ import { useContext } from "react";
 import { AuthContext } from "../context/AuthContext";
 import { FunctionContext } from "../context/FunctionContext";
 import { BsTwitter } from "react-icons/bs";
+import { useRouter } from "next/router";
 
 const LoginCard = () => {
   const { user, logout } = useContext(AuthContext);
   const { theme, dispatch } = useContext(FunctionContext);
+  const router = useRouter();
 
   return (
     <div
-      className="w-full h-full flex items-center justify-center bg-transparent backdrop-blur-md fixed z-50"
+      className="w-full h-full flex items-center justify-center bg-transparent backdrop-blur-md fixed z-[100]"
       onClick={() => {
         dispatch({ type: "SET_SHOW", payload: false });
       }}
@@ -38,12 +40,22 @@ const LoginCard = () => {
             </button>
           </a>
         ) : (
-          <button
-            className="bg-[#1DA1F2] text-white w-[20rem] py-2 rounded-xl shadow-xl mt-12 text-xl font-bold flex items-center justify-evenly"
-            onClick={logout}
-          >
-            Logout
-          </button>
+          <div className="mt-4">
+            <button
+              className="bg-[#1DA1F2] text-white w-[20rem] py-2 rounded-xl shadow-xl mt-8 text-xl font-bold flex items-center justify-evenly"
+              onClick={() => {
+                router.push(`/${user.username}`);
+              }}
+            >
+              Profile
+            </button>
+            <button
+              className="bg-[#1DA1F2] text-white w-[20rem] py-2 rounded-xl shadow-xl mt-8 text-xl font-bold flex items-center justify-evenly"
+              onClick={logout}
+            >
+              Logout
+            </button>
+          </div>
         )}
       </div>
     </div>

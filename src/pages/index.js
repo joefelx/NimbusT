@@ -49,10 +49,6 @@ export default function Home() {
               alt="editorpreview"
               className=" z-40 rounded-lg shadow-xl"
             />
-            <div className="relative bg-gradient-to-t from-black to-transparent">
-              <h1>Exciting Templates</h1>
-              <p>Cool and new Templates which are professional</p>
-            </div>
           </div>
           <Gradient />
         </div>
