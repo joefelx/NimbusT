@@ -35,26 +35,27 @@ export default function Home() {
     <div>
       {show && <LoginCard />}
       <div
-        className={` h-auto min-h-screen w-full ${
-          theme == "light" ? "bg-white text-black" : "bg-black text-white"
-        } overflow-hidden relative`}
+        className={` h-auto min-h-screen w-full bg-white
+        } overflow-hidden relative px-12`}
       >
         {/* <Gradient /> */}
         <Navigation />
-        <Hero />
-        <div className="mt-16 relative flex flex-col items-center justify-center h-screen px-[3rem]">
-          <div className=" z-50 w-[70vw]">
-            <Image
-              src={EditorPreview}
-              alt="editorpreview"
-              className=" z-40 rounded-lg shadow-xl"
-            />
+        <div className="bg-black text-white rounded-3xl border-2 border-slate-400 p-10 shadow-2xl shadow-slate-400">
+          <Hero />
+          <div className="mt-16 relative flex flex-col items-center justify-center h-screen">
+            <div className=" z-50 w-[70vw]">
+              <Image
+                src={EditorPreview}
+                alt="editorpreview"
+                className=" z-40 rounded-lg shadow-xl"
+              />
+            </div>
+            <Gradient />
           </div>
-          <Gradient />
+          {/* Features list */}
+          <Features />
+          {/* Footer */}
         </div>
-        {/* Features list */}
-        <Features />
-        {/* Footer */}
         <Footer />
       </div>
     </div>

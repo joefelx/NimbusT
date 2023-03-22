@@ -23,8 +23,9 @@ const User = () => {
   };
 
   const getTweets = async () => {
-    const result = await axios.get(
-      `${process.env.NEXT_PUBLIC_REQUEST_URL}/tweet?username=${id}`
+    const result = await axios.post(
+      `${process.env.NEXT_PUBLIC_REQUEST_URL}/tweet`,
+      { username: id }
     );
 
     setTweets(result.data);
@@ -41,9 +42,9 @@ const User = () => {
 
   useEffect(() => {
     const func = async () => {
-      await auth();
+      // await auth();
       await checkUser();
-      await getTweets();
+      // await getTweets();
     };
     func();
   }, [id]);

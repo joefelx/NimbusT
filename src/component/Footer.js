@@ -4,15 +4,13 @@ import Logo from "../assets/transparentlogo2.png";
 
 function Footer() {
   return (
-    <footer className="container lg:px-12 px-12 py-10">
+    <footer className=" container py-10">
       <div className="flex items-center space-x-6">
         <div>
           <Image src={Logo} className="w-10" />
         </div>
         <div>
-          <h1 className="text-xl font-bold text-black dark:text-gray-100">
-            Nimbus Tweet
-          </h1>
+          <h1 className="text-xl font-bold text-black ">Nimbus Tweet</h1>
         </div>
       </div>
       <div className="flex space-x-6 mt-8 text-2xl">
@@ -24,7 +22,7 @@ function Footer() {
         </span>
       </div>
       <div className="mt-8">
-        <ul className="flex flex-col space-y-4 md:space-y-0 md:flex-row md:space-x-6 lg:space-x-12 items-start md:items-center font-semibold text-base text-gray-700 dark:text-gray-100">
+        <ul className="flex flex-col space-y-4 md:space-y-0 md:flex-row md:space-x-6 lg:space-x-12 items-start md:items-center font-semibold text-base text-black ">
           <li>About us</li>
           <li>Company History</li>
           <li>Our Team</li>

@@ -15,7 +15,7 @@ function Navigation() {
   const router = useRouter();
 
   return (
-    <div className="relative h-[5rem] flex justify-between items-center px-12 bg-transparent">
+    <div className="relative h-[5rem] flex justify-between items-center  bg-transparent">
       <div className="flex-1">
         <Logo />
       </div>
