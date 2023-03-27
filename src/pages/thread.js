@@ -1,8 +1,13 @@
-import { Editor } from "../component/Component";
+import { Editor, Navigation } from "../component/Component";
+import Tool from "../component/Tool";
+import EditorBox from "../component/EditorBox";
 function editor() {
   return (
     <div>
-      <Editor />
+      {/* <Editor /> */}
+      <Navigation />
+      <Tool />
+      <EditorBox />
     </div>
   );
 }

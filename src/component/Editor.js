@@ -294,8 +294,6 @@ function Editor() {
       {show && <LoginCard />}
       {openTemplate && <Templates />}
       {openCalendar && <Calender />}
-      <Tools />
-      <SideBar />
       {/* Editor */}
       <div
         className={`${expand && "blur-sm"} flex-[1.5] ml-[5rem] mt-[3rem] `}
