@@ -23,11 +23,9 @@ function Footer() {
       </div>
       <div className="mt-8">
         <ul className="flex flex-col space-y-4 md:space-y-0 md:flex-row md:space-x-6 lg:space-x-12 items-start md:items-center font-semibold text-base text-black ">
-          <li>About us</li>
-          <li>Company History</li>
-          <li>Our Team</li>
-          <li>Our Vision</li>
-          <li>Press Release</li>
+          <li>About</li>
+          <li>Editor</li>
+          <li>Templates</li>
         </ul>
       </div>
       <p className="text-sm text-gray-500 dark:text-gray-400 mt-6">

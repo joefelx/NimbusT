@@ -34,20 +34,20 @@ export default function Home() {
   return (
     <div>
       {show && <LoginCard />}
+      <Navigation />
       <div
         className={` h-auto min-h-screen w-full bg-white
         } overflow-hidden relative px-12`}
       >
         {/* <Gradient /> */}
-        <Navigation />
         <div className="bg-black text-white rounded-3xl border-2 border-slate-400 p-10 shadow-2xl shadow-slate-400">
           <Hero />
-          <div className="mt-16 relative flex flex-col items-center justify-center h-screen">
-            <div className=" z-50 w-[70vw]">
+          <div className="mt-16 relative flex items-center justify-center h-screen">
+            <div className="z-50 w-[70vw]">
               <Image
                 src={EditorPreview}
                 alt="editorpreview"
-                className=" z-40 rounded-lg shadow-xl"
+                className="z-40 rounded-lg shadow-xl"
               />
             </div>
             <Gradient />

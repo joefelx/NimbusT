@@ -5,6 +5,7 @@ import LoginCard from "./LoginCard";
 import Templates from "./Templates";
 import Calender from "./Calender";
 import { Gradient, CornerGradient, Loading, Tick, Logo } from "./Graphics";
+import { CheckCircleIcon, XMarkIcon } from "react-icons/hi2";
 
 const Button = ({
   buttonName,

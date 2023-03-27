@@ -26,6 +26,7 @@ import {
   HiOutlineSave,
   HiOutlinePhotograph,
 } from "react-icons/hi";
+import Banner from "./Banner";
 
 function Tools() {
   const { PostThread, theme, expand, openCalendar, dispatch } =
@@ -288,7 +289,8 @@ function Editor() {
       } min-h-screen w-full  flex justify-between`}
     >
       {loading && <Loading />}
-      {complete && <Tick />}
+      {complete && <Banner />}
+
       {show && <LoginCard />}
       {openTemplate && <Templates />}
       {openCalendar && <Calender />}

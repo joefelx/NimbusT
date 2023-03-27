@@ -15,7 +15,7 @@ function Navigation() {
   const router = useRouter();
 
   return (
-    <div className="relative h-[5rem] flex justify-between items-center  bg-transparent">
+    <div className="relative h-[5rem] px-12 flex justify-between items-center bg-transparent">
       <div className="flex-1">
         <Logo />
       </div>
@@ -35,7 +35,7 @@ function Navigation() {
       </div>
 
       <div className="flex-1 flex items-center justify-end">
-        <div className="mr-5 text-xl cursor-pointer">
+        {/* <div className="mr-5 text-xl cursor-pointer">
           {theme == "light" ? (
             <FiMoon
               onClick={() => {
@@ -51,7 +51,7 @@ function Navigation() {
               }}
             />
           )}
-        </div>
+        </div> */}
 
         {user ? (
           <div className="w-[40px] h-[40px] rounded-full overflow-hidden border-2 border-[#CECECE] cursor-pointer">

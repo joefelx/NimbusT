@@ -18,7 +18,7 @@ function Hero() {
   }, []);
 
   return (
-    <div className="relative h-[15rem] flex flex-col text-center justify-between items-center  z-20">
+    <div className="relative h-[15rem] flex flex-col text-center justify-between items-center z-20">
       <div className="z-10">
         <h1 className="text-6xl font-black">
           Create the thread <br /> in <i>New</i> way
