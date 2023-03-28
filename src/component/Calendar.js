@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 
-function Calender() {
+function Calendar() {
   const [date, setDate] = useState();
   const [time, setTime] = useState();
   useEffect(() => {
@@ -18,4 +18,4 @@ function Calender() {
   );
 }
 
-export default Calender;
+export default Calendar;

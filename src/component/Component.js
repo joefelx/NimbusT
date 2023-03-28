@@ -3,7 +3,7 @@ import Hero from "./Hero";
 import Navigation from "./Navigation";
 import LoginCard from "./LoginCard";
 import Templates from "./Templates";
-import Calender from "./Calender";
+import Calender from "./Calendar";
 import { Gradient, CornerGradient, Loading, Tick, Logo } from "./Graphics";
 import { CheckCircleIcon, XMarkIcon } from "react-icons/hi2";
 
