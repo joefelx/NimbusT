@@ -27,43 +27,7 @@ import {
   HiOutlinePhotograph,
 } from "react-icons/hi";
 import Banner from "./Banner";
-
-function Tools() {
-  const { PostThread, theme, expand, openCalendar, dispatch } =
-    useContext(FunctionContext);
-  return (
-    <div
-      className={`${
-        theme == "light" ? "bg-white text-black" : "bg-black text-white"
-      } fixed top-0 w-full flex items-center justify-between px-10 py-3 ${
-        expand && "blur-sm"
-      }`}
-    >
-      <div className="w-full flex items-center justify-end">
-        <Button
-          className="font-semibold float-right mx-4 hover:bg-[#1DA1F2] hover:border-[#1DA1F2] hover:text-white hover:font-semibold"
-          buttonName="Tweet"
-          clickFun={PostThread}
-          width={5}
-          height={1}
-          textColor="black"
-          background="white" //#1DA1F2
-          borderColor="[#CECECE]"
-        />
-        <Button
-          className="font-semibold float-right cursor-pointer"
-          buttonName="Schedule"
-          clickFun={() => dispatch({ type: "OPEN_CALENDAR", payload: true })}
-          width={5}
-          height={1}
-          textColor="black"
-          background="white"
-          borderColor="[#CECECE]"
-        />
-      </div>
-    </div>
-  );
-}
+import Tools from "./Tools";
 
 function SideBar() {
   const { expand, theme, dispatch } = useContext(FunctionContext);
@@ -294,6 +258,8 @@ function Editor() {
       {show && <LoginCard />}
       {openTemplate && <Templates />}
       {openCalendar && <Calender />}
+      {/* <Tools /> */}
+      <SideBar />
       {/* Editor */}
       <div
         className={`${expand && "blur-sm"} flex-[1.5] ml-[5rem] mt-[3rem] `}
