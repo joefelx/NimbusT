@@ -26,23 +26,17 @@ function Hero() {
       </div>
       <div className="flex flex-col items-center z-10">
         <p className="text-[14px]">Make the best thread ever with Nimbus</p>
-        {/* <Link href="/thread"> */}
-
         <button
           className="bg-white text-black hover:bg-gray-300
            flex items-center px-6 py-2 mt-7 rounded-2xl text-[1rem] font-semibold border-2 border-gray-400"
           onClick={() => {
-            router.push("/thread");
+            router.push("/editor");
           }}
         >
           Make Thread
           <HiOutlineArrowRight className="ml-3" />
         </button>
-        {/* </Link> */}
       </div>
-      {/* <div className=" pointer-events-none">
-        <Image src={ThreadBox} className="w-[230px]" alt="thread preview box" />
-      </div> */}
     </div>
   );
 }

@@ -1,16 +1,22 @@
 import { useContext, useEffect } from "react";
 import { useRouter } from "next/router";
-import { Hero, Navigation, LoginCard, Gradient } from "../component/Component";
+import Image from "next/image";
+
+import {
+  Hero,
+  Navigation,
+  Gradient,
+  Footer,
+  Features,
+} from "../component/Component";
 
 import { FunctionContext } from "../context/FunctionContext";
 import { AuthContext } from "../context/AuthContext";
-import Image from "next/image";
+
 import EditorPreview from "../assets/Nimbus-ScreenShot.png";
-import Footer from "../component/Footer";
-import Features from "../component/Features";
 
 export default function Home() {
-  const { show, theme, dispatch } = useContext(FunctionContext);
+  const { dispatch } = useContext(FunctionContext);
   const { user, checkUser } = useContext(AuthContext);
   const router = useRouter();
 
@@ -32,13 +38,9 @@ export default function Home() {
   }, [user]);
 
   return (
-    <div>
-      {show && <LoginCard />}
+    <>
       <Navigation />
-      <div
-        className={` h-auto min-h-screen w-full bg-white
-        } overflow-hidden relative px-12`}
-      >
+      <div className=" h-auto min-h-screen w-full bg-white overflow-hidden relative px-12">
         {/* <Gradient /> */}
         <div className="bg-black text-white rounded-3xl border-2 border-slate-400 p-10 shadow-2xl shadow-slate-400">
           <Hero />
@@ -58,6 +60,6 @@ export default function Home() {
         </div>
         <Footer />
       </div>
-    </div>
+    </>
   );
 }

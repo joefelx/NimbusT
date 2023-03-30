@@ -3,7 +3,14 @@ import Hero from "./Hero";
 import Navigation from "./Navigation";
 import LoginCard from "./LoginCard";
 import Templates from "./Templates";
-import Calender from "./Calendar";
+import Calendar from "./Calendar";
+import Banner from "./Banner";
+import Draft from "./Draft";
+import EditorBox from "./EditorBox";
+import Features from "./Features";
+import Footer from "./Footer";
+import Tools from "./Tools";
+
 import { Gradient, CornerGradient, Loading, Tick, Logo } from "./Graphics";
 import { CheckCircleIcon, XMarkIcon } from "react-icons/hi2";
 
@@ -41,5 +48,11 @@ export {
   Loading,
   Tick,
   Logo,
-  Calender,
+  Calendar,
+  Banner,
+  Draft,
+  EditorBox,
+  Features,
+  Footer,
+  Tools,
 };

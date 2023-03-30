@@ -1,63 +1,70 @@
 import { FunctionContext } from "../context/FunctionContext";
 import React, { useContext } from "react";
-import { HiOutlineX } from "react-icons/hi";
-import { BiExpandAlt } from "react-icons/bi";
-import { useRouter } from "next/router";
 import Image from "next/image";
 
-const TemplateBox = ({ img, onClick }) => {
+const TemplateBox = ({ item, onClick }) => {
   return (
-    <div className="w-[20vw] h-[20vw] bg-black border-2 border-slate-600 rounded-xl m-2 overflow-hidden">
+    <div
+      key={item.id}
+      className="overflow-hidden shadow-lg text-white border-2 border-slate-700 rounded-2xl cursor-pointer"
+    >
       <Image
-        src={img}
-        className="h-[20vw] object-cover cursor-pointer"
-        alt="image"
+        className="w-full"
+        src={item.image}
+        alt="Mountain"
         onClick={onClick}
       />
+      <div className="px-6 py-4">
+        <div className="font-bold text-xl mb-2">{item.title}</div>
+      </div>
+      <div className="px-6 pt-4 pb-2">
+        {item.tags.map((tag) => (
+          <span
+            key={tag}
+            className="inline-block bg-gray-200 dark:bg-gray-800 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 dark:text-gray-200 mr-2 mb-2"
+          >
+            {tag}
+          </span>
+        ))}
+      </div>
     </div>
   );
 };
 
-function Templates() {
+function Templates2() {
   const { templates, dispatch } = useContext(FunctionContext);
-  const router = useRouter();
-  const menuBtnStyling = "cursor-pointer text-xl";
 
   return (
-    <div className="fixed w-full h-full flex items-center justify-center backdrop-blur-sm z-50">
-      <div className="w-[80vw] h-[90vh] bg-black border-2 border-slate-600 rounded-xl p-5 overflow-y-scroll">
-        {/* box menu */}
-        <ul className="flex justify-between">
-          <li
-            className={menuBtnStyling}
+    <div className="flex w-full justify-center">
+      {/* templates */}
+      <div className="grid grid-cols-3 gap-10">
+        {templates.map((temp) => (
+          <TemplateBox
+            key={temp.id}
+            img={temp.img}
             onClick={() => {
-              router.push("/templates");
+              dispatch({ type: "SET_INPUT", payload: temp.text });
             }}
-          >
-            <BiExpandAlt />
-          </li>
-          <li
-            className={menuBtnStyling}
-            onClick={() => {
-              dispatch({ type: "OPEN_TEMPLATE", payload: false });
-            }}
-          >
-            <HiOutlineX />
-          </li>
-        </ul>
-        {/* templates */}
-        <div className="grid grid-cols-3 gap-10">
-          {templates.map((temp) => (
-            <TemplateBox
-              key={temp.id}
-              img={temp.img}
-              onClick={() => {
-                dispatch({ type: "SET_INPUT", payload: temp.text });
-              }}
-            />
-          ))}
-        </div>
+          />
+        ))}
       </div>
+    </div>
+  );
+}
+
+function Templates() {
+  const { templates, dispatch } = useContext(FunctionContext);
+
+  return (
+    <div className="p-10 grid grid-cols-1 sm:grid-cols-1 md:grid-cols-3 lg:grid-cols-3 xl:grid-cols-3 gap-5">
+      {templates.map((temp) => (
+        <TemplateBox
+          item={temp}
+          onClick={() => {
+            dispatch({ type: "SET_INPUT", payload: temp.template });
+          }}
+        />
+      ))}
     </div>
   );
 }
