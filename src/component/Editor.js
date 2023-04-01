@@ -79,7 +79,7 @@ function Editor() {
   return (
     <>
       <TextField />
-      <div className="flex flex-col flex-1 items-center bg-slate-900">
+      <div className="flex flex-col flex-1 items-end bg-slate-900 px-5">
         {/* thread detail */}
         {thread.map((t) => {
           if (t === "") {

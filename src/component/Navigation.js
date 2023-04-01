@@ -8,7 +8,7 @@ import { AuthContext } from "../context/AuthContext";
 
 import ProfileImg from "../assets/profile.jpg";
 
-function Navigation({ theme }) {
+function Navigation() {
   const { show, dispatch } = useContext(FunctionContext);
   const { user } = useContext(AuthContext);
   const router = useRouter();
@@ -16,11 +16,7 @@ function Navigation({ theme }) {
   return (
     <>
       {show && <LoginCard />}
-      <div
-        className={`relative h-[5rem] px-12 flex justify-between items-center bg-transparent ${
-          theme == "black" ? "text-white" : "text-black"
-        }`}
-      >
+      <div className="relative h-[5rem] px-12 flex justify-between items-center bg-black text-white ">
         <div className="flex-1">
           <Logo onClick={() => router.push("/")} />
         </div>

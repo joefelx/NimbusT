@@ -92,6 +92,12 @@ export const FunctionContextProvider = ({ children }) => {
     }, 1500);
   };
 
+  const GetThread = async () => {
+    const res = await axios.post(`${NEXT_PUBLIC_REQUEST_URL}/tweet`, {
+      username: user.username,
+    });
+  };
+
   return (
     <FunctionContext.Provider
       value={{

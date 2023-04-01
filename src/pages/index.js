@@ -40,9 +40,9 @@ export default function Home() {
   return (
     <>
       <Navigation />
-      <div className=" h-auto min-h-screen w-full bg-white overflow-hidden relative px-12">
+      <div className=" h-auto min-h-screen w-full bg-black overflow-hidden relative px-12">
         {/* <Gradient /> */}
-        <div className="bg-black text-white rounded-3xl border-2 border-slate-400 p-10 shadow-2xl shadow-slate-400">
+        <div className="bg-slate-900 text-white rounded-3xl border-2 border-slate-700 p-10">
           <Hero />
           <div className="mt-16 relative flex items-center justify-center h-screen">
             <div className="z-50 w-[70vw]">

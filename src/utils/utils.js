@@ -3,6 +3,8 @@ export function splitText(paragraph) {
   return word;
 }
 
+export function mergeText(textList) {}
+
 export function handleResize(input) {
   const inputName = document.querySelector(input);
   inputName.addEventListener("input" || "click", (e) => {

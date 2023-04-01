@@ -7,7 +7,7 @@ function EditorBox() {
   const { editor, templates, calendar, draft } = useContext(ToolContext);
 
   return (
-    <div className="flex bg-slate-900 rounded-2xl border-2 border-slate-700 min-h-[90vh] h-auto overflow-y-hidden overflow-x-hidden p-3 my-5">
+    <div className="flex bg-slate-900 rounded-2xl border-2 border-slate-700 min-h-[90vh] h-auto overflow-hidden p-3 my-5">
       {editor && <Editor />}
       {templates && <Templates />}
       {calendar && <Calendar />}
