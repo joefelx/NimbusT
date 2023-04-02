@@ -1,10 +1,12 @@
-import Image from "next/image";
-import Logo from "../assets/Logo-individual transparent.png";
 import { useContext } from "react";
+import { useRouter } from "next/router";
+import Image from "next/image";
+
 import { AuthContext } from "../context/AuthContext";
 import { FunctionContext } from "../context/FunctionContext";
+
 import { BsTwitter } from "react-icons/bs";
-import { useRouter } from "next/router";
+import Logo from "../assets/Logo-individual transparent.png";
 
 const LoginCard = () => {
   const { user, logout } = useContext(AuthContext);

@@ -1,8 +1,9 @@
-import { useRouter } from "next/router";
-import { HiOutlineArrowRight } from "react-icons/hi";
-
 import { useEffect, useContext } from "react";
+import { useRouter } from "next/router";
+
 import { FunctionContext } from "../context/FunctionContext";
+
+import { HiOutlineArrowRight } from "react-icons/hi";
 
 function Hero() {
   const router = useRouter();

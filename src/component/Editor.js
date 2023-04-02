@@ -52,8 +52,8 @@ function ThreadBox({ thread, imageURL }) {
   );
 }
 
-function TextField() {
-  const { input, theme, dispatch } = useContext(FunctionContext);
+function TextField({ className }) {
+  const { input, dispatch } = useContext(FunctionContext);
 
   useEffect(() => {
     dispatch({ type: "SET_THREAD", payload: splitText(input) });
@@ -64,7 +64,7 @@ function TextField() {
     <textarea
       placeholder="Make a new thread by typing ^ to make heading"
       id="textField"
-      className="flex-1 text-white bg-slate-900 min-h-screen p-5 focus:outline-none placeholder:text-gray-600 resize-none whitespace-pre-wrap"
+      className={`flex-1 text-white bg-slate-900 min-h-screen p-5 focus:outline-none placeholder:text-gray-600 resize-none whitespace-pre-wrap ${className}`}
       value={input}
       onChange={(e) => {
         handleResize("#textField");
@@ -75,13 +75,14 @@ function TextField() {
 }
 
 function Editor() {
-  const { thread } = useContext(FunctionContext);
+  const { threads } = useContext(FunctionContext);
+
   return (
     <>
       <TextField />
       <div className="flex flex-col flex-1 items-end bg-slate-900 px-5">
         {/* thread detail */}
-        {thread.map((t) => {
+        {threads.map((t) => {
           if (t === "") {
             return "";
           }
@@ -93,3 +94,4 @@ function Editor() {
 }
 
 export default Editor;
+export { TextField };

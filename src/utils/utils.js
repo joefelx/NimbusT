@@ -3,7 +3,14 @@ export function splitText(paragraph) {
   return word;
 }
 
-export function mergeText(textList) {}
+export function mergeText(textList) {
+  let thread = "";
+  textList.forEach((text) => {
+    thread += `^${text}\n`;
+  });
+
+  return thread;
+}
 
 export function handleResize(input) {
   const inputName = document.querySelector(input);

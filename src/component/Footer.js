@@ -1,5 +1,5 @@
 import Image from "next/image";
-import { BsFacebook, BsTwitter, BsGithub } from "react-icons/bs";
+import { BsTwitter, BsGithub } from "react-icons/bs";
 import Logo from "../assets/transparentlogo2.png";
 
 function Footer() {

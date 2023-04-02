@@ -18,6 +18,17 @@ const FunctionReducer = (state, action) => {
         ...state,
         threads: action.payload,
       };
+    case "SET_CURRENT_THREAD":
+      return {
+        ...state,
+        currentThread: action.payload,
+      };
+    case "SET_DRAFT_THREAD":
+      return {
+        ...state,
+        draftThreads: action.payload,
+      };
+
     case "SET_LOADING":
       return {
         ...state,

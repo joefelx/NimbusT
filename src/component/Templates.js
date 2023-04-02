@@ -1,6 +1,8 @@
-import { FunctionContext } from "../context/FunctionContext";
 import React, { useContext } from "react";
 import Image from "next/image";
+
+import { FunctionContext } from "../context/FunctionContext";
+import { ToolContext } from "../context/ToolContext";
 
 const TemplateBox = ({ item, onClick }) => {
   return (
@@ -31,29 +33,9 @@ const TemplateBox = ({ item, onClick }) => {
   );
 };
 
-function Templates2() {
-  const { templates, dispatch } = useContext(FunctionContext);
-
-  return (
-    <div className="flex w-full justify-center">
-      {/* templates */}
-      <div className="grid grid-cols-3 gap-10">
-        {templates.map((temp) => (
-          <TemplateBox
-            key={temp.id}
-            img={temp.img}
-            onClick={() => {
-              dispatch({ type: "SET_INPUT", payload: temp.text });
-            }}
-          />
-        ))}
-      </div>
-    </div>
-  );
-}
-
 function Templates() {
   const { templates, dispatch } = useContext(FunctionContext);
+  const { dispatchTool } = useContext(ToolContext);
 
   return (
     <div className="p-10 grid grid-cols-1 sm:grid-cols-1 md:grid-cols-3 lg:grid-cols-3 xl:grid-cols-3 gap-5">
@@ -62,6 +44,7 @@ function Templates() {
           item={temp}
           onClick={() => {
             dispatch({ type: "SET_INPUT", payload: temp.template });
+            dispatchTool({ type: "OPEN_EDITOR" });
           }}
         />
       ))}

@@ -20,7 +20,7 @@ export const ToolContextProvider = ({ children }) => {
         templates: state.templatesOpen,
         calendar: state.calendarOpen,
         draft: state.draftOpen,
-        dispatch,
+        dispatchTool: dispatch,
       }}
     >
       {children}

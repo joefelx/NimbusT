@@ -10,12 +10,12 @@ const INITIAL_STATE = {
   theme: "",
   input: "",
   threads: [],
+  draftThreads: [],
+  currentThread: {},
   loading: false,
   complete: false,
   show: false,
   expand: false,
-  openTemplate: false,
-  openCalendar: false,
   templates: [
     {
       id: 0,
@@ -30,7 +30,7 @@ const INITIAL_STATE = {
       title: "Professional",
       image: threadtemplate1,
       template:
-        "8 Things that are so useful but you're probably not aware of (all free):\n\n^1. Tool1\n\nSome paragraph.\n\nSuper helpful for:\n\n• Bullet1\n• Bullet1\n• Bullet1\n\n^2. Tool2\n\nSome Paragraph.\n\n•Bullet1.\n\n^3. Tool3\n\nSome Paragraph.\n\n• Bullet1\n\n^4. Tool4\n\nSome Paragraph.\n\n• Bullet1\n\n^5. Tool5\n\nSome Paragraph.\n\n• Bullet1\n\n^6. Tool6\n\nSome Paragraph.\n\n• Bullet1\n\n^7. Tool7\n\nSome Paragraph.\n\n• Bullet1\n\n^8. Tool8\n\nSome Paragraph.\n\n• Bullet1\n\n^Thanks for checking out this thread! Add more excellent Chrome extensions below. Follow \n@user\n for more.",
+        "^5. Tool5\n\nSome Paragraph.\n\n• Bullet1\n\n^6. Tool6\n\nSome Paragraph.\n\n• Bullet1\n\n^7. Tool7\n\nSome Paragraph.\n\n• Bullet1\n\n^8. Tool8\n\nSome Paragraph.\n\n• Bullet1\n\n^Thanks for checking out this thread! Add more excellent Chrome extensions below. Follow \n@user\n for more.",
       tags: ["photography", "travel", "winter"],
     },
     {
@@ -75,6 +75,7 @@ export const FunctionContextProvider = ({ children }) => {
   const { user } = useContext(AuthContext);
 
   const NEXT_PUBLIC_REQUEST_URL = process.env.NEXT_PUBLIC_REQUEST_URL;
+
   const PostThread = async () => {
     dispatch({ type: "SET_LOADING" });
 
@@ -93,25 +94,44 @@ export const FunctionContextProvider = ({ children }) => {
   };
 
   const GetThread = async () => {
-    const res = await axios.post(`${NEXT_PUBLIC_REQUEST_URL}/tweet`, {
-      username: user.username,
-    });
+    const receivedThreads = await axios.post(
+      `${NEXT_PUBLIC_REQUEST_URL}/tweet`,
+      {
+        username: user.username,
+      }
+    );
+    dispatch({ type: "SET_DRAFT_THREAD", payload: receivedThreads.data });
+  };
+
+  const UpdateThread = async () => {
+    const receivedThreads = await axios.put(
+      `${NEXT_PUBLIC_REQUEST_URL}/tweet/edit`,
+      {
+        threadId: state.currentThread._id,
+        title: state.currentThread.title,
+        threads: state.threads,
+        scheduled: state.currentThread.scheduled,
+        time: state.currentThread.time,
+      }
+    );
   };
 
   return (
     <FunctionContext.Provider
       value={{
         input: state.input,
-        thread: state.threads,
+        threads: state.threads,
+        draftThreads: state.draftThreads,
+        currentThread: state.currentThread,
         loading: state.loading,
         complete: state.complete,
         show: state.show,
         expand: state.expand,
-        openTemplate: state.openTemplate,
-        openCalendar: state.openCalendar,
         templates: state.templates,
         theme: state.theme,
         PostThread,
+        GetThread,
+        UpdateThread,
         dispatch,
       }}
     >

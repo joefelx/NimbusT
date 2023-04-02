@@ -10,9 +10,9 @@ import EditorBox from "./EditorBox";
 import Features from "./Features";
 import Footer from "./Footer";
 import Tools from "./Tools";
+import { TextField } from "./Editor";
 
 import { Gradient, CornerGradient, Loading, Tick, Logo } from "./Graphics";
-import { CheckCircleIcon, XMarkIcon } from "react-icons/hi2";
 
 const Button = ({
   buttonName,
@@ -38,6 +38,7 @@ const Button = ({
 
 export {
   Editor,
+  TextField,
   Hero,
   Navigation,
   LoginCard,

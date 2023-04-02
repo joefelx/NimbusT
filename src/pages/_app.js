@@ -1,7 +1,8 @@
 import "../styles/globals.css";
+import { useRouter } from "next/router";
+
 import { FunctionContextProvider } from "../context/FunctionContext";
 import { AuthContextProvider } from "../context/AuthContext";
-import { useRouter } from "next/router";
 import { ToolContextProvider } from "../context/ToolContext";
 
 export default function App({ Component, pageProps }) {
