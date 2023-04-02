@@ -42,7 +42,7 @@ const User = () => {
 
   useEffect(() => {
     const func = async () => {
-      // await auth();
+      await auth();
       await checkUser();
       // await getTweets();
     };

@@ -73,6 +73,7 @@ export const FunctionContext = createContext();
 export const FunctionContextProvider = ({ children }) => {
   const [state, dispatch] = useReducer(FunctionReducer, INITIAL_STATE);
   const { user } = useContext(AuthContext);
+  console.log(user);
 
   const NEXT_PUBLIC_REQUEST_URL = process.env.NEXT_PUBLIC_REQUEST_URL;
 
