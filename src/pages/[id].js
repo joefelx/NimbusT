@@ -16,10 +16,15 @@ const User = () => {
   const [tweets, setTweets] = useState([]);
 
   const auth = async () => {
-    const result = await axios.get(
-      `${process.env.NEXT_PUBLIC_REQUEST_URL}/user?username=${id}`
-    );
-    window.localStorage.setItem("USER_ACCOUNT", JSON.stringify(result.data));
+    try {
+      const result = await axios.get(
+        `${process.env.NEXT_PUBLIC_REQUEST_URL}/user?username=${id}`
+      );
+      window.localStorage.setItem("USER_ACCOUNT", JSON.stringify(result.data));
+    } catch (error) {
+      console.log(error);
+    }
+    checkUser();
   };
 
   const getTweets = async () => {
@@ -32,29 +37,15 @@ const User = () => {
   };
 
   useEffect(() => {
-    const storedTheme = window.localStorage.getItem("THEME");
-    if (storedTheme === "LIGHT") {
-      dispatch({ type: "SET_THEME", payload: "light" });
-    } else {
-      dispatch({ type: "SET_THEME", payload: "dark" });
-    }
-  }, []);
-
-  useEffect(() => {
-    const func = async () => {
-      await auth();
-      await checkUser();
+    const func = () => {
+      auth();
       // await getTweets();
     };
     func();
   }, [id]);
 
   return (
-    <div
-      className={`${
-        theme == "light" ? "bg-white text-black" : "bg-black text-white"
-      } min-h-screen h-full w-full`}
-    >
+    <div className="bg-black text-white min-h-screen h-full w-full">
       <Navigation />
       <section className="h-[40vh] border-b-2 border-slate-600 ">
         <div className="h-full flex items-center justify-center">
@@ -85,30 +76,7 @@ const User = () => {
                 Threads
               </button>
             </li>
-            <li className="py-2 ">
-              <button
-                role="tab"
-                className="py-2.5 px-4 rounded-lg duration-150 hover:text-indigo-500 hover:bg-white active:bg-white/50 font-medium text-gray-500 dark:text-gray-300 dark:hover:text-indigo-800"
-              >
-                Integration
-              </button>
-            </li>
-            <li className="py-2">
-              <button
-                role="tab"
-                className="py-2.5 px-4 rounded-lg duration-150 hover:text-indigo-500 hover:bg-white active:bg-white/50 font-medium text-gray-500 dark:text-gray-300 dark:hover:text-indigo-800"
-              >
-                Billing
-              </button>
-            </li>
-            <li className="py-2">
-              <button
-                role="tab"
-                className="py-2.5 px-4 rounded-lg duration-150 hover:text-indigo-500 hover:bg-white active:bg-white/50 font-medium text-gray-500 dark:text-gray-300 dark:hover:text-indigo-800"
-              >
-                Transactions
-              </button>
-            </li>
+
             <li className="py-2">
               <button
                 role="tab"

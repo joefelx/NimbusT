@@ -13,7 +13,7 @@ import {
 import { FunctionContext } from "../context/FunctionContext";
 import { AuthContext } from "../context/AuthContext";
 
-import EditorPreview from "../assets/Nimbus-ScreenShot.png";
+import EditorPreview from "../assets/Editor.jpg";
 
 export default function Home() {
   const { dispatch } = useContext(FunctionContext);
@@ -21,14 +21,6 @@ export default function Home() {
   const router = useRouter();
 
   useEffect(() => {
-    // usetheme
-    const storedTheme = window.localStorage.getItem("THEME");
-    if (storedTheme === "LIGHT") {
-      dispatch({ type: "SET_THEME", payload: "light" });
-    } else {
-      dispatch({ type: "SET_THEME", payload: "dark" });
-    }
-
     // Check for the user logged or not and call a function CheckUser
     checkUser();
   }, []);
@@ -49,7 +41,7 @@ export default function Home() {
               <Image
                 src={EditorPreview}
                 alt="editorpreview"
-                className="z-40 rounded-lg shadow-xl"
+                className="z-40 rounded-xl shadow-xl"
               />
             </div>
             <Gradient />

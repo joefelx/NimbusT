@@ -46,22 +46,22 @@ function Tools() {
         >
           Draft
         </button>
+      </div>
+      {/* Publish */}
+      <div className=" flex-1 flex justify-end">
         {draft && (
           <button
             className={`cursor-pointer  border-b-2 border-slate-500 rounded-xl w-24 h-10 ${
               draft && buttonStyle
             }`}
-            onClick={() => UpdateThread()}
+            onClick={UpdateThread}
           >
             Save
           </button>
         )}
-      </div>
-      {/* Publish */}
-      <div className=" flex-1 flex justify-end">
         <button
-          className="bg-[#000] border-2 border-slate-500 rounded-xl w-24 h-10"
-          onClick={() => PostThread()}
+          className="bg-[#000] border-2 border-slate-500 rounded-xl w-24 h-10 ml-5"
+          onClick={PostThread}
         >
           Publish
         </button>
