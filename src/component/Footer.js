@@ -18,18 +18,27 @@ function Footer() {
           <BsTwitter />
         </span>
         <span className="cursor-pointer">
-          <BsGithub />
+          <a href="https://github.com/joefelx/NimbusT" target="_blank">
+            <BsGithub />
+          </a>
         </span>
       </div>
       <div className="mt-8">
         <ul className="flex flex-col space-y-4 md:space-y-0 md:flex-row md:space-x-6 lg:space-x-12 items-start md:items-center font-semibold text-base text-white ">
-          <li>About</li>
-          <li>Editor</li>
-          <li>Templates</li>
+          <li className=" cursor-pointer">
+            <a href="https://github.com/joefelx/NimbusT" target="_blank">
+              Contribute
+            </a>
+          </li>
+          <li className=" cursor-pointer">Editor</li>
+          <li className=" cursor-pointer">Templates</li>
         </ul>
       </div>
       <p className="text-sm text-gray-500 dark:text-gray-400 mt-6">
-        Nimbus Tweet By Joe Felix
+        Nimbus Tweet By{" "}
+        <a href="https://github.com/joefelx" target="_blank">
+          Joe Felix
+        </a>
       </p>
     </footer>
   );
