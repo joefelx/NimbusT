@@ -8,6 +8,7 @@ import {
   Gradient,
   Footer,
   Features,
+  LoginCard,
 } from "../component/Component";
 
 import { FunctionContext } from "../context/FunctionContext";
@@ -36,7 +37,7 @@ export default function Home() {
         {/* <Gradient /> */}
         <div className="bg-slate-900 text-white rounded-3xl border-2 border-slate-700 p-10">
           <Hero />
-          <div className="mt-16 relative flex items-center justify-center h-screen">
+          <div className="mt-20 relative flex items-center justify-center h-screen">
             <div className="z-50 w-[70vw]">
               <Image
                 src={EditorPreview}

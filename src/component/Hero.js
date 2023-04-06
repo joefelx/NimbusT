@@ -10,10 +10,10 @@ function Hero() {
   const { dispatch } = useContext(FunctionContext);
 
   return (
-    <div className="relative h-[15rem] flex flex-col text-center justify-between items-center z-20">
+    <div className="relative h-[15rem] flex flex-col text-center justify-between items-center z-20 my-5">
       <div className="z-10 mb-5">
         <h1 className="text-8xl font-bold relative">
-          Create the thread <br /> in <i className="font-[Amphora] ">New</i> way
+          Create the thread <br /> in <i className="font-[Amphora]">New</i> way
         </h1>
       </div>
       <div className="flex flex-col items-center z-10">

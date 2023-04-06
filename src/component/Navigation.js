@@ -36,24 +36,6 @@ function Navigation() {
         </div>
 
         <div className="flex-1 flex items-center justify-end">
-          {/* <div className="mr-5 text-xl cursor-pointer">
-          {theme == "light" ? (
-            <FiMoon
-            onClick={() => {
-              window.localStorage.setItem("THEME", "DARK");
-              dispatch({ type: "SET_THEME", payload: "dark" });
-            }}
-            />
-            ) : (
-              <FiSun
-              onClick={() => {
-                window.localStorage.setItem("THEME", "LIGHT");
-                dispatch({ type: "SET_THEME", payload: "light" });
-              }}
-              />
-              )}
-            </div> */}
-
           {user ? (
             <div className="w-[40px] h-[40px] rounded-full overflow-hidden border-2 border-[#CECECE] cursor-pointer">
               <Image
@@ -65,7 +47,7 @@ function Navigation() {
             </div>
           ) : (
             <button
-              className="bg-[#6F6F6F] px-4 py-1 rounded-xl text-[14px] border-2 border-[#CECECE] cursor-pointer"
+              className="bg-white px-4 py-1 rounded-xl text-black text-[14px] border-2 border-[#CECECE] cursor-pointer"
               onClick={() => dispatch({ type: "SET_SHOW", payload: true })}
             >
               Login

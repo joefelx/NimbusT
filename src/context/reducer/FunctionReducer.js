@@ -66,6 +66,11 @@ const FunctionReducer = (state, action) => {
         ...state,
         openCalendar: action.payload,
       };
+    case "USE_BANNER":
+      return {
+        ...state,
+        useBanner: action.payload,
+      };
     case "SET_TEMPLATES_LIST":
       return {
         ...state,

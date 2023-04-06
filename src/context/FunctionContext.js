@@ -16,6 +16,10 @@ const INITIAL_STATE = {
   complete: false,
   show: false,
   expand: false,
+  useBanner: {
+    show: false,
+    message: "",
+  },
   templates: [
     {
       id: 0,
@@ -77,18 +81,18 @@ export const FunctionContextProvider = ({ children }) => {
   const NEXT_PUBLIC_REQUEST_URL = process.env.NEXT_PUBLIC_REQUEST_URL;
 
   const PostThread = async () => {
-    dispatch({ type: "SET_LOADING" });
-
     const res = await axios.post(`${NEXT_PUBLIC_REQUEST_URL}/tweet/thread`, {
       username: user.username,
       threadsList: state.threads.filter(Boolean),
     });
 
-    dispatch({ type: "SET_COMPLETE" });
-    const comp = setInterval(() => {
-      dispatch({ type: "REMOVE_COMPLETE" });
-      clearInterval(comp);
-    }, 1500);
+    dispatch({
+      type: "USE_BANNER",
+      payload: {
+        show: true,
+        message: "success",
+      },
+    });
   };
 
   const GetThread = async () => {
@@ -127,6 +131,7 @@ export const FunctionContextProvider = ({ children }) => {
         expand: state.expand,
         templates: state.templates,
         theme: state.theme,
+        useBanner: state.useBanner,
         PostThread,
         GetThread,
         UpdateThread,

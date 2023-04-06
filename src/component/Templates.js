@@ -34,7 +34,7 @@ const TemplateBox = ({ item, onClick }) => {
 };
 
 function Templates() {
-  const { templates, dispatch } = useContext(FunctionContext);
+  const { templates, useBanner, dispatch } = useContext(FunctionContext);
   const { dispatchTool } = useContext(ToolContext);
 
   return (
@@ -45,6 +45,13 @@ function Templates() {
           onClick={() => {
             dispatch({ type: "SET_INPUT", payload: temp.template });
             dispatchTool({ type: "OPEN_EDITOR" });
+            dispatch({
+              type: "USE_BANNER",
+              payload: {
+                show: true,
+                message: "information",
+              },
+            });
           }}
         />
       ))}

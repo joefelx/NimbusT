@@ -1,39 +1,76 @@
-import { useEffect } from "react";
-import { HiOutlineCheckCircle, HiOutlineX } from "react-icons/hi";
+import { FunctionContext } from "../context/FunctionContext";
+import { useContext, useEffect, useState } from "react";
+import {
+  HiOutlineCheckCircle,
+  HiOutlineInformationCircle,
+  HiOutlineX,
+} from "react-icons/hi";
+
+import { MdSmsFailed } from "react-icons/md";
 
 function Banner({ sign }) {
-  const theme = {
+  const themeTemplate = {
     success: {
-      icon: "HiOutlineCheckCircle",
+      icon: "success",
       description: "Your Tweet has been posted",
     },
     failed: {
-      icon: "HiOutlineCheckCircle",
-      description: "Your Tweet has been posted",
+      icon: "failed",
+      description: "Your Tweet was not posted due to internal errors",
     },
     information: {
-      icon: "HiOutlineCheckCircle",
-      description: "Your Tweet has been posted",
+      icon: "information",
+      description: "Template has been loaded",
     },
   };
 
-  useEffect(() => {}, [sign]);
+  const [theme, setTheme] = useState({
+    icon: "",
+    description: "",
+  });
+
+  const { dispatch } = useContext(FunctionContext);
+
+  setTimeout(() => {
+    dispatch({
+      type: "USE_BANNER",
+      payload: {
+        show: false,
+        message: "information",
+      },
+    });
+    clearTimeout();
+  }, 10000);
+
+  useEffect(() => {
+    setTheme({
+      icon: themeTemplate[sign].icon,
+      description: themeTemplate[sign].description,
+    });
+  }, [sign]);
 
   return (
     <>
-      <div className="absolute top-2 right-0 z-[500] border-l-4 border-green-500 p-4 rounded-md bg-green-100">
+      <div className="absolute top-2 right-0 z-[500] border-l-4 bg-black border-slate-700 text-white p-4 rounded-md ">
         <div className="flex items-center space-x-4">
           <div className="">
-            <HiOutlineCheckCircle className="h-6 w-6 text-green-600" />
+            {theme.icon === "success" && (
+              <HiOutlineCheckCircle className="h-6 w-6 text-green-600" />
+            )}
+            {theme.icon === "information" && (
+              <HiOutlineInformationCircle className="h-6 w-6 text-indigo-600" />
+            )}
+            {theme.icon === "failed" && (
+              <MdSmsFailed className="h-6 w-6 text-red-600" />
+            )}
           </div>
           <div className="">
-            <p className="text-sm font-medium text-green-600">
-              This is some informational text that you can use to show some
-              success content
+            <p className="text-sm font-medium text-white">
+              {theme.description}
             </p>
           </div>
           <div>
-            <HiOutlineX className="h-6 w-6 text-green-600 cursor-pointer" />
+            <HiOutlineX className="h-6 w-6 text-white cursor-pointer" />
           </div>
         </div>
       </div>
