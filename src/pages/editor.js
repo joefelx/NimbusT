@@ -19,7 +19,7 @@ function editor() {
 
   return (
     <div className="bg-black text-white">
-      {/* {!user && <LoginCard />} */}
+      {!user && <LoginCard />}
       {useBanner.show && (
         <Banner sign={useBanner.message} description={useBanner.description} />
       )}
