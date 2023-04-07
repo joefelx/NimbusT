@@ -11,13 +11,11 @@ import {
   LoginCard,
 } from "../component/Component";
 
-import { FunctionContext } from "../context/FunctionContext";
 import { AuthContext } from "../context/AuthContext";
 
 import EditorPreview from "../assets/Editor2.png";
 
 export default function Home() {
-  const { dispatch } = useContext(FunctionContext);
   const { user, checkUser } = useContext(AuthContext);
   const router = useRouter();
 

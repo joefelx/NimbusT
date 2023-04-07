@@ -14,11 +14,15 @@ export const AuthContextProvider = ({ children }) => {
   function checkUser() {
     const storedUser = window.localStorage.getItem("USER_ACCOUNT");
     try {
-      storedUser &&
-        dispatch({
-          type: "AUTH_LOGGEDIN",
-          payload: JSON.parse(storedUser),
-        });
+      storedUser
+        ? dispatch({
+            type: "AUTH_LOGGEDIN",
+            payload: JSON.parse(storedUser),
+          })
+        : dispatch({
+            type: "AUTH_LOGGEDIN",
+            payload: null,
+          });
     } catch (error) {
       dispatch({ type: "AUTH_FAILURE" });
     }
@@ -28,6 +32,7 @@ export const AuthContextProvider = ({ children }) => {
     try {
       window.localStorage.removeItem("USER_ACCOUNT");
       dispatch({ type: "AUTH_LOGGEDOUT" });
+      checkUser();
     } catch (error) {
       dispatch({ type: "AUTH_FAILURE" });
     }
