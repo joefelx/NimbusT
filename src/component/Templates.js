@@ -50,6 +50,7 @@ function Templates() {
               payload: {
                 show: true,
                 message: "information",
+                description: "Template has been loaded",
               },
             });
           }}

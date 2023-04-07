@@ -1,8 +1,16 @@
 import Image from "next/image";
+import { useRouter } from "next/router";
+import { useContext } from "react";
+
+import { ToolContext } from "../context/ToolContext";
+
 import { BsTwitter, BsGithub } from "react-icons/bs";
 import Logo from "../assets/transparentlogo2.png";
 
 function Footer() {
+  const { dispatchTool } = useContext(ToolContext);
+  const router = useRouter();
+
   return (
     <footer className=" container py-10">
       <div className="flex items-center space-x-6">
@@ -30,8 +38,24 @@ function Footer() {
               Contribute
             </a>
           </li>
-          <li className=" cursor-pointer">Editor</li>
-          <li className=" cursor-pointer">Templates</li>
+          <li
+            className=" cursor-pointer"
+            onClick={() => {
+              dispatchTool({ type: "OPEN_EDITOR" });
+              router.push("/editor");
+            }}
+          >
+            Editor
+          </li>
+          <li
+            className=" cursor-pointer"
+            onClick={() => {
+              dispatchTool({ type: "OPEN_TEMPLATES" });
+              router.push("/editor");
+            }}
+          >
+            Templates
+          </li>
         </ul>
       </div>
       <p className="text-sm text-gray-500 dark:text-gray-400 mt-6">

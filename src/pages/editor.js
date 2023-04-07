@@ -20,8 +20,9 @@ function editor() {
   return (
     <div className="bg-black text-white">
       {/* {!user && <LoginCard />} */}
-      {useBanner.show && <Banner sign={useBanner.message} />}
-      {/* <Banner sign="information" /> */}
+      {useBanner.show && (
+        <Banner sign={useBanner.message} description={useBanner.description} />
+      )}
       <Navigation />
       <div className="px-12">
         <div className="h-auto py-10 text-center">

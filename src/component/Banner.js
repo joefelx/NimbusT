@@ -8,7 +8,7 @@ import {
 
 import { MdSmsFailed } from "react-icons/md";
 
-function Banner({ sign }) {
+function Banner({ sign, description }) {
   const themeTemplate = {
     success: {
       icon: "success",
@@ -37,6 +37,7 @@ function Banner({ sign }) {
       payload: {
         show: false,
         message: "information",
+        description: "Off",
       },
     });
     clearTimeout();
@@ -45,14 +46,14 @@ function Banner({ sign }) {
   useEffect(() => {
     setTheme({
       icon: themeTemplate[sign].icon,
-      description: themeTemplate[sign].description,
+      description: description,
     });
   }, [sign]);
 
   return (
     <>
-      <div className="absolute top-2 right-0 z-[500] border-l-4 bg-black border-slate-700 text-white p-4 rounded-md ">
-        <div className="flex items-center space-x-4">
+      <div className="fixed top-5 left-0 right-0 flex justify-center items-center bg-transparent z-[500] rounded-md ">
+        <div className="flex items-center space-x-4 border-2 bg-white border-slate-400 rounded-xl text-black p-4">
           <div className="">
             {theme.icon === "success" && (
               <HiOutlineCheckCircle className="h-6 w-6 text-green-600" />
@@ -65,12 +66,22 @@ function Banner({ sign }) {
             )}
           </div>
           <div className="">
-            <p className="text-sm font-medium text-white">
-              {theme.description}
-            </p>
+            <p className="text-sm font-medium">{theme.description}</p>
           </div>
           <div>
-            <HiOutlineX className="h-6 w-6 text-white cursor-pointer" />
+            <HiOutlineX
+              className="h-6 w-6 cursor-pointer"
+              onClick={() =>
+                dispatch({
+                  type: "USE_BANNER",
+                  payload: {
+                    show: false,
+                    message: "information",
+                    description: "Off",
+                  },
+                })
+              }
+            />
           </div>
         </div>
       </div>

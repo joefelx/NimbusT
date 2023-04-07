@@ -19,6 +19,7 @@ const INITIAL_STATE = {
   useBanner: {
     show: false,
     message: "",
+    description: "",
   },
   templates: [
     {
@@ -91,6 +92,7 @@ export const FunctionContextProvider = ({ children }) => {
       payload: {
         show: true,
         message: "success",
+        description: "Tweeted! Go and check the Twitter.",
       },
     });
   };

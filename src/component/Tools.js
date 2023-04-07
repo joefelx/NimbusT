@@ -13,9 +13,9 @@ function Tools() {
 
   return (
     <div className="px-5 py-3 bg-slate-900 border-2 border-slate-700 text-white flex justify-between rounded-2xl">
-      <div className="flex-[1] flex justify-between">
+      <div className="flex-[1] flex">
         <button
-          className={`cursor-pointer  border-b-2 border-slate-500 rounded-xl w-24 h-10 ${
+          className={`cursor-pointer mr-5 border-b-2 border-slate-500 rounded-xl w-24 h-10 ${
             editor && buttonStyle
           }`}
           onClick={() => dispatchTool({ type: "OPEN_EDITOR" })}
@@ -23,14 +23,14 @@ function Tools() {
           Editor
         </button>
         <button
-          className={`cursor-pointer  border-b-2 border-slate-500 rounded-xl w-24 h-10 ${
+          className={`cursor-pointer ml-5 border-b-2 border-slate-500 rounded-xl w-24 h-10 ${
             templates && buttonStyle
           }`}
           onClick={() => dispatchTool({ type: "OPEN_TEMPLATES" })}
         >
           Templates
         </button>
-        <button
+        {/* <button
           className={`cursor-pointer  border-b-2 border-slate-500 rounded-xl w-24 h-10 ${
             calendar && buttonStyle
           }`}
@@ -45,7 +45,7 @@ function Tools() {
           onClick={() => dispatchTool({ type: "OPEN_DRAFT" })}
         >
           Draft
-        </button>
+        </button> */}
       </div>
       {/* Publish */}
       <div className=" flex-1 flex justify-end">

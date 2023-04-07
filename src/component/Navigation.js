@@ -5,12 +5,14 @@ import { useContext } from "react";
 import { LoginCard, Logo } from "./Component";
 import { FunctionContext } from "../context/FunctionContext";
 import { AuthContext } from "../context/AuthContext";
+import { ToolContext } from "../context/ToolContext";
 
 import ProfileImg from "../assets/profile.jpg";
 
 function Navigation() {
   const { show, dispatch } = useContext(FunctionContext);
   const { user } = useContext(AuthContext);
+  const { dispatchTool } = useContext(ToolContext);
   const router = useRouter();
 
   return (
@@ -21,18 +23,35 @@ function Navigation() {
           <Logo onClick={() => router.push("/")} />
         </div>
 
-        <div className=" w-[25%] flex-2 flex justify-between">
+        <div className="flex-[2] px-24 flex justify-between">
           <span
-            className=" text-[14px] cursor-pointer"
+            className="text-sm cursor-pointer hover:text-slate-300"
             onClick={() => {
+              dispatchTool({ type: "OPEN_EDITOR" });
               router.push("/editor");
             }}
           >
             Editor
           </span>
-          <span className=" text-[14px] cursor-pointer">Product</span>
-          <span className=" text-[14px] cursor-pointer">Pricing</span>
-          <span className=" text-[14px] cursor-pointer">About</span>
+          <span
+            className="text-sm cursor-pointer hover:text-slate-300"
+            onClick={() => {
+              dispatchTool({ type: "OPEN_TEMPLATES" });
+              router.push("/editor");
+            }}
+          >
+            Templates
+          </span>
+
+          <a
+            href="https://github.com/joefelx/NimbusT"
+            className="text-sm"
+            target="_blank"
+          >
+            <span className="text-sm cursor-pointer hover:text-slate-300">
+              Contribute
+            </span>
+          </a>
         </div>
 
         <div className="flex-1 flex items-center justify-end">
