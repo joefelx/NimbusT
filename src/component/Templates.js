@@ -13,7 +13,7 @@ const TemplateBox = ({ item, onClick }) => {
     >
       <img
         className="w-full h-4/5"
-        src={`${process.env.NEXT_PUBLIC_REQUEST_MAIN_URL}/` + item.image}
+        src={`${process.env.NEXT_PUBLIC_REQUEST_URL}/` + item.image}
         alt="Mountain"
         onClick={onClick}
       />
@@ -41,7 +41,7 @@ function Templates() {
   useEffect(() => {
     async function getTemplates() {
       const templates = await axios.get(
-        `${process.env.NEXT_PUBLIC_REQUEST_MAIN_URL}/template/all`
+        `${process.env.NEXT_PUBLIC_REQUEST_URL}/template/all`
       );
       dispatch({ type: "SET_TEMPLATES_LIST", payload: templates.data });
     }
