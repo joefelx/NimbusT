@@ -1,18 +1,19 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect } from "react";
 import Image from "next/image";
 
 import { FunctionContext } from "../context/FunctionContext";
 import { ToolContext } from "../context/ToolContext";
+import axios from "axios";
 
 const TemplateBox = ({ item, onClick }) => {
   return (
     <div
       key={item.id}
-      className="overflow-hidden shadow-lg text-white border-2 border-slate-700 rounded-2xl cursor-pointer"
+      className="h-4/5 overflow-hidden shadow-lg text-white border-2 border-slate-700 rounded-2xl cursor-pointer"
     >
-      <Image
-        className="w-full"
-        src={item.image}
+      <img
+        className="w-full h-4/5"
+        src={`${process.env.NEXT_PUBLIC_REQUEST_MAIN_URL}/` + item.image}
         alt="Mountain"
         onClick={onClick}
       />
@@ -36,6 +37,17 @@ const TemplateBox = ({ item, onClick }) => {
 function Templates() {
   const { templates, useBanner, dispatch } = useContext(FunctionContext);
   const { dispatchTool } = useContext(ToolContext);
+
+  useEffect(() => {
+    async function getTemplates() {
+      const templates = await axios.get(
+        `${process.env.NEXT_PUBLIC_REQUEST_MAIN_URL}/template/all`
+      );
+      dispatch({ type: "SET_TEMPLATES_LIST", payload: templates.data });
+    }
+
+    getTemplates();
+  }, []);
 
   return (
     <div className="p-10 grid grid-cols-1 sm:grid-cols-1 md:grid-cols-3 lg:grid-cols-3 xl:grid-cols-3 gap-5">
