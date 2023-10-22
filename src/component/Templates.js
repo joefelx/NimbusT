@@ -1,9 +1,8 @@
-import React, { useContext, useEffect } from "react";
-import Image from "next/image";
+import React, { useContext } from "react";
 
 import { FunctionContext } from "../context/FunctionContext";
 import { ToolContext } from "../context/ToolContext";
-import axios from "axios";
+import toast from "react-hot-toast";
 
 const TemplateBox = ({ item, onClick }) => {
   return (
@@ -35,19 +34,8 @@ const TemplateBox = ({ item, onClick }) => {
 };
 
 function Templates() {
-  const { templates, useBanner, dispatch } = useContext(FunctionContext);
+  const { templates, dispatch } = useContext(FunctionContext);
   const { dispatchTool } = useContext(ToolContext);
-
-  useEffect(() => {
-    async function getTemplates() {
-      const templates = await axios.get(
-        `${process.env.NEXT_PUBLIC_REQUEST_URL}/template/all`
-      );
-      dispatch({ type: "SET_TEMPLATES_LIST", payload: templates.data });
-    }
-
-    getTemplates();
-  }, []);
 
   return (
     <div className="p-10 grid grid-cols-1 sm:grid-cols-1 md:grid-cols-3 lg:grid-cols-3 xl:grid-cols-3 gap-5">
@@ -55,16 +43,9 @@ function Templates() {
         <TemplateBox
           item={temp}
           onClick={() => {
+            toast.success("Template Loaded");
             dispatch({ type: "SET_INPUT", payload: temp.template });
             dispatchTool({ type: "OPEN_EDITOR" });
-            dispatch({
-              type: "USE_BANNER",
-              payload: {
-                show: true,
-                message: "information",
-                description: "Template has been loaded",
-              },
-            });
           }}
         />
       ))}

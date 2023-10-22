@@ -4,7 +4,6 @@ import Navigation from "./Navigation";
 import LoginCard from "./LoginCard";
 import Templates from "./Templates";
 import Calendar from "./Calendar";
-import Banner from "./Banner";
 import Draft from "./Draft";
 import EditorBox from "./EditorBox";
 import Features from "./Features";
@@ -50,7 +49,6 @@ export {
   Tick,
   Logo,
   Calendar,
-  Banner,
   Draft,
   EditorBox,
   Features,

@@ -1,6 +1,7 @@
 import { useContext, useEffect } from "react";
 import { useRouter } from "next/router";
 import Image from "next/image";
+import { Open_Sans } from "@next/font/google";
 
 import {
   Hero,
@@ -14,6 +15,11 @@ import {
 import { AuthContext } from "../context/AuthContext";
 
 import EditorPreview from "../assets/Editor2.png";
+
+const openSans = Open_Sans({
+  subsets: ["latin"],
+  display: "swap",
+});
 
 export default function Home() {
   const { user, checkUser } = useContext(AuthContext);
@@ -29,9 +35,9 @@ export default function Home() {
   }, [user]);
 
   return (
-    <>
+    <div className={openSans.className}>
       <Navigation />
-      <div className=" h-auto min-h-screen w-full bg-black overflow-hidden relative px-12">
+      <div className="h-auto min-h-screen w-full bg-black overflow-hidden relative px-12">
         {/* <Gradient /> */}
         <div className="bg-slate-900 text-white rounded-3xl border-2 border-slate-700 p-10">
           <Hero />
@@ -45,12 +51,14 @@ export default function Home() {
             </div>
             <Gradient />
           </div>
-          {/* Features list */}
-          <Features />
+          <div className="">
+            {/* Features list */}
+            <Features />
+          </div>
           {/* Footer */}
         </div>
         <Footer />
       </div>
-    </>
+    </div>
   );
 }

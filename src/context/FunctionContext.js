@@ -5,6 +5,7 @@ import FunctionReducer from "./reducer/FunctionReducer";
 import { AuthContext } from "./AuthContext";
 
 import threadtemplate1 from "../assets/threadtemplate1.png";
+import toast from "react-hot-toast";
 
 const INITIAL_STATE = {
   theme: "",
@@ -16,11 +17,6 @@ const INITIAL_STATE = {
   complete: false,
   show: false,
   expand: false,
-  useBanner: {
-    show: false,
-    message: "",
-    description: "",
-  },
   templates: [
     {
       id: 0,
@@ -82,19 +78,15 @@ export const FunctionContextProvider = ({ children }) => {
   const NEXT_PUBLIC_REQUEST_URL = process.env.NEXT_PUBLIC_REQUEST_URL;
 
   const PostThread = async () => {
+    const loading = toast.loading("Tweeting...");
     const res = await axios.post(`${NEXT_PUBLIC_REQUEST_URL}/tweet/thread`, {
       username: user.username,
       threadsList: state.threads.filter(Boolean),
     });
-
-    dispatch({
-      type: "USE_BANNER",
-      payload: {
-        show: true,
-        message: "success",
-        description: "Tweeted! Go and check the Twitter.",
-      },
-    });
+    if (res) {
+      toast.dismiss(loading);
+      toast.success("Tweeted! Go and check the Twitter");
+    }
   };
 
   const GetThread = async () => {
@@ -133,7 +125,6 @@ export const FunctionContextProvider = ({ children }) => {
         expand: state.expand,
         templates: state.templates,
         theme: state.theme,
-        useBanner: state.useBanner,
         PostThread,
         GetThread,
         UpdateThread,

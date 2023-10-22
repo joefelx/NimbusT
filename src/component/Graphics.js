@@ -185,7 +185,7 @@ export function Logo({ onClick }) {
   return (
     <Image
       src={logoimage}
-      className="w-[35px] cursor-pointer"
+      className="w-[30px] cursor-pointer"
       alt="Logo"
       onClick={onClick}
     />

@@ -15,43 +15,45 @@ function Navigation() {
   const { dispatchTool } = useContext(ToolContext);
   const router = useRouter();
 
+  const linkStyling = "px-3 text-md cursor-pointer hover:text-slate-300";
+
   return (
     <>
       {show && <LoginCard />}
       <div className="relative h-[5rem] px-12 flex justify-between items-center bg-black text-white ">
-        <div className="flex-1">
-          <Logo onClick={() => router.push("/")} />
-        </div>
+        {/* left div */}
+        <div className="flex-1 flex items-center">
+          <div className="pr-5">
+            <Logo onClick={() => router.push("/")} />
+          </div>
 
-        <div className="flex-[2] px-24 flex justify-between">
-          <span
-            className="text-sm cursor-pointer hover:text-slate-300"
-            onClick={() => {
-              dispatchTool({ type: "OPEN_EDITOR" });
-              router.push("/editor");
-            }}
-          >
-            Editor
-          </span>
-          <span
-            className="text-sm cursor-pointer hover:text-slate-300"
-            onClick={() => {
-              dispatchTool({ type: "OPEN_TEMPLATES" });
-              router.push("/editor");
-            }}
-          >
-            Templates
-          </span>
-
-          <a
-            href="https://github.com/joefelx/NimbusT"
-            className="text-sm"
-            target="_blank"
-          >
-            <span className="text-sm cursor-pointer hover:text-slate-300">
-              Contribute
+          <div className=" flex justify-between ">
+            <span
+              className={linkStyling}
+              onClick={() => {
+                dispatchTool({ type: "OPEN_EDITOR" });
+                router.push("/editor");
+              }}
+            >
+              Editor
             </span>
-          </a>
+            <span
+              className={linkStyling}
+              onClick={() => {
+                dispatchTool({ type: "OPEN_TEMPLATES" });
+                router.push("/editor");
+              }}
+            >
+              Templates
+            </span>
+            <a
+              href="https://github.com/joefelx/NimbusT"
+              className="text-md"
+              target="_blank"
+            >
+              <span className={linkStyling}>Contribute</span>
+            </a>
+          </div>
         </div>
 
         <div className="flex-1 flex items-center justify-end">
