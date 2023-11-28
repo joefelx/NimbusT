@@ -2,7 +2,7 @@ import Image from "next/image";
 import { useRouter } from "next/router";
 import { useContext } from "react";
 
-import { LoginCard, Logo } from ".";
+import { LoginCard, Logo } from "./index";
 import { FunctionContext } from "../context/FunctionContext";
 import { AuthContext } from "../context/AuthContext";
 import { ToolContext } from "../context/ToolContext";
