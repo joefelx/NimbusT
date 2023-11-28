@@ -1,7 +1,7 @@
 import { useContext } from "react";
 import { ToolContext } from "../context/ToolContext";
 
-import { Editor, Templates, Calendar, Draft } from "./Component";
+import { Editor, Templates, Calendar, Draft } from ".";
 
 function EditorBox() {
   const { editor, templates, calendar, draft } = useContext(ToolContext);

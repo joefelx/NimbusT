@@ -15,15 +15,14 @@ const LoginCard = () => {
 
   return (
     <div
-      className="w-full h-full flex items-center justify-center bg-transparent backdrop-blur-md fixed z-[100]"
+      className="w-full h-full flex items-center justify-center bg-transparent backdrop-blur-md fixed z-[200]"
       onClick={() => {
         dispatch({ type: "SET_SHOW", payload: false });
       }}
     >
       <div
-        className={` ${
-          theme == "light" ? "bg-white text-black" : "bg-black text-white"
-        } w-[30rem] p-10 flex flex-col items-center justify-center border-2 border-slate-700 rounded-2xl`}
+        className={` ${theme == "light" ? "bg-white text-black" : "bg-black text-white"
+          } w-[30rem] p-10 flex flex-col items-center justify-center border-2 border-slate-700 rounded-2xl`}
       >
         <div className="px-5 ">
           <div className="flex items-center justify-between ">

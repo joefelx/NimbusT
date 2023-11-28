@@ -2,7 +2,7 @@ import { useContext, useEffect } from "react";
 
 import { FunctionContext } from "../context/FunctionContext";
 import { mergeText } from "../utils/utils";
-import { TextField } from "./Component";
+import { TextField } from ".";
 
 function Draft() {
   const { GetThread, draftThreads, dispatch } = useContext(FunctionContext);

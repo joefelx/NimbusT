@@ -6,7 +6,7 @@ import {
   EditorBox,
   Footer,
   LoginCard,
-} from "../component/Component";
+} from "../component";
 import { AuthContext } from "../context/AuthContext";
 
 function editor() {

@@ -170,24 +170,13 @@ export function Tick() {
   );
 }
 
-export function Logo({ onClick }) {
-  const { theme, dispatch } = useContext(FunctionContext);
-
-  useEffect(() => {
-    const storedTheme = window.localStorage.getItem("THEME");
-    if (storedTheme === "LIGHT") {
-      dispatch({ type: "SET_THEME", payload: "light" });
-    } else {
-      dispatch({ type: "SET_THEME", payload: "dark" });
-    }
-  }, [theme]);
+export function Logo() {
 
   return (
     <Image
       src={logoimage}
-      className="w-[30px] cursor-pointer"
+      className="w-[20px] cursor-pointer"
       alt="Logo"
-      onClick={onClick}
     />
   );
 }
