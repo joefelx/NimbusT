@@ -1,74 +1,75 @@
 require("dotenv").config();
+const { TwitterApi } = require("twitter-api-v2");
 const express = require("express");
-const passport = require("passport");
-const { Strategy } = require("@superfaceai/passport-twitter-oauth2");
-const { SuperfaceClient } = require("@superfaceai/one-sdk");
 const session = require("express-session");
+const mongoose = require("mongoose");
 const morgan = require("morgan");
+const cors = require("cors");
+const path = require("path");
+const fs = require("fs");
+const { checkMimeType } = require("./utils");
+const upload = require("./utils/Upload");
 
-// Environment Variables
-const CLIENT_ID = process.env.CLIENT_ID;
-const CLIENT_SECRET = process.env.CLIENT_SECRET;
-const BASE_URL = process.env.BASE_URL;
+const {
+  authRouter,
+  userRouter,
+  tweetRouter,
+  templateRouter,
+} = require("./router");
+const User = require("./model/User");
 
-// Setup Passport
-passport.serializeUser((user, done) => {
-  done(null, user);
-});
-passport.deserializeUser((obj, done) => {
-  done(null, obj);
-});
-
-passport.use(
-  new Strategy(
-    {
-      clientID: CLIENT_ID,
-      clientSecret: CLIENT_SECRET,
-      clientType: "confidential",
-      callbackURL: `${BASE_URL}/auth/twitter/callback`,
-    },
-    (accessToken, refreshToken, profile, done) => {
-      console.log("Success!", { accessToken, refreshToken });
-      return done(null, profile);
-    }
-  )
-);
-
+// Express server Initialised
 const app = express();
 
 // Middlewares
-app.use(passport.initialize());
 app.use(
-  session({ secret: "hello world", resave: false, saveUninitialized: true })
+  "/public/images",
+  express.static(path.join(__dirname, "public/images"))
 );
-
-app.get(
-  "/auth/twitter",
-  passport.authenticate("twitter", {
-    scope: ["tweet.read", "tweet.write", "users.read", "offline.access"],
+app.use(express.json());
+app.use(
+  session({
+    secret: "keyboard cat",
+    resave: false,
+    saveUninitialized: true,
   })
 );
+app.use(morgan("tiny"));
+app.use(cors());
 
-app.get(
-  "/auth/twitter/callback",
-  passport.authenticate("twitter"),
-  (req, res) => {
-    const userData = JSON.stringify(req.user, undefined, 2);
-    res.end(
-      `<h1>Authentication succeeded</h1> User data: <pre>${userData}</pre>`
-    );
+// Mongodb setup
+mongoose.connect(
+  process.env.MONGO_URL,
+  {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+  },
+  () => {
+    console.log("Mongodb is connected");
   }
 );
 
-app.post("/tweet", async (req, res) => {
-  // const sdk = new SuperfaceClient();
-  // try{
-  //   const provider = await sdk.getProvider("twitter")
-  //   const profile = await sdk.getProfile("social-media/publish-post")
-  //   const result = await with
-  // }
+// Routes
+app.get("/", (req, res) => {
+  res.status(200).json({
+    data: {
+      status: "success",
+    },
+  });
+});
+app.use("/auth", authRouter);
+app.use("/user", userRouter);
+app.use("/tweet", tweetRouter);
+app.use("/template", templateRouter);
+
+app.post("/media", upload.single("image"), async (req, res) => {
+  try {
+    res.status(201).json("File Saved!");
+  } catch (error) {
+    res.status(500).json(error);
+  }
 });
 
-app.listen("3000", () => {
-  console.log("Server started at port 3000");
+app.listen(5000, () => {
+  console.log("Server started at PORT:5000");
 });
