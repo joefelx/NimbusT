@@ -1,11 +1,14 @@
-const router = require("express").Router();
-const User = require("../model/User");
-const Tweet = require("../model/Tweet");
-const { TwitterApi } = require("twitter-api-v2");
-const { makeThread } = require("../utils");
+import express, { Request, Response } from "express";
+
+import User from "../model/User";
+import Tweet from "../model/Tweet";
+import { TwitterApi } from "twitter-api-v2";
+import makeThread from "../utils/makeThread";
+
+const router = express.Router();
 
 // Get Tweets of the User by Sending Username
-router.post("/", async (req, res) => {
+router.post("/", async (req: Request, res: Response) => {
   const username = req.body.username;
   try {
     const threads = await Tweet.find({ username: username });
@@ -19,17 +22,17 @@ router.post("/", async (req, res) => {
 });
 
 // Post a Tweet or Thread by posting a list of tweets
-router.post("/thread", async (req, res) => {
+router.post("/thread", async (req: Request, res: Response) => {
   try {
     const { username, threadsList } = req.body;
     const user = await User.findOne({ username: username });
 
-    const client = new TwitterApi(user.accessToken);
+    const client = new TwitterApi(user?.accessToken as any);
     /* Make a Thread */
     await makeThread(client, threadsList);
 
-    await Tweet({
-      username: user.username,
+    await new Tweet({
+      username: user?.username,
       data: threadsList,
     }).save();
 
@@ -64,18 +67,18 @@ router.put("/edit", async (req, res) => {
     $set: { title, threads, scheduled, time },
   });
 
-  await thread.save();
+  await thread?.save();
   res.status(200).json("Updated");
 });
 
 // Schedule a Tweet or Thread
-router.post("/schedule", async (req, res) => {
+router.post("/schedule", async (req: Request, res: Response) => {
   try {
     const { username, title, threadsList, scheduled, time } = req.body;
     const user = await User.findOne({ username: username });
 
     if (user) {
-      await Tweet({
+      await new Tweet({
         username: user.username,
         title: title,
         threads: threadsList,
@@ -108,7 +111,7 @@ router.post("/schedule", async (req, res) => {
 });
 
 // Get the scheduled Tweets and Threads for the database
-router.get("/schedule", async (req, res) => {
+router.get("/schedule", async (req: Request, res: Response) => {
   try {
     const scheduledTweets = await Tweet.find({ scheduled: true });
 
@@ -123,4 +126,4 @@ router.get("/schedule", async (req, res) => {
   }
 });
 
-module.exports = router;
+export default router;

@@ -1,4 +1,4 @@
-const mongoose = require("mongoose");
+import mongoose from "mongoose";
 
 const templateSchema = new mongoose.Schema({
   title: {
@@ -16,4 +16,4 @@ const templateSchema = new mongoose.Schema({
   },
 });
 
-module.exports = mongoose.model("Template", templateSchema);
+export default mongoose.model("Template", templateSchema);
