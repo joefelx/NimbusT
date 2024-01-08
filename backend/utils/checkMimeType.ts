@@ -1,4 +1,4 @@
-function checkMimeType(type) {
+function checkMimeType(type:string) {
   const d = new Date();
   let time = d.getTime();
   switch (type) {
@@ -16,4 +16,4 @@ function checkMimeType(type) {
   }
 }
 
-module.exports = checkMimeType;
+export default checkMimeType;

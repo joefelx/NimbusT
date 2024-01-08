@@ -20,7 +20,11 @@ const User = () => {
       const result = await axios.get(
         `${process.env.NEXT_PUBLIC_REQUEST_URL}/user?username=${id}`
       );
-      window.localStorage.setItem("USER_ACCOUNT", JSON.stringify(result.data));
+
+      window.localStorage.setItem(
+        "USER_ACCOUNT",
+        JSON.stringify(result.data[0])
+      );
     } catch (error) {
       console.log(error);
     }

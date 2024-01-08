@@ -1,9 +1,11 @@
-const router = require("express").Router();
-const Template = require("../model/Template");
-const upload = require("../utils/Upload");
+import express, { Request, Response } from "express";
+import Template from "../model/Template";
+import upload from "../utils/Upload";
+
+const router = express.Router();
 
 // Get a Template
-router.get("/", async (req, res) => {
+router.get("/", async (req: Request, res: Response) => {
   try {
     const template = await Template.findById(req.query.id);
     if (!template) {
@@ -17,7 +19,7 @@ router.get("/", async (req, res) => {
 });
 
 // Get All Templates
-router.get("/all", async (req, res) => {
+router.get("/all", async (req: Request, res: Response) => {
   try {
     const templates = await Template.find();
     if (!templates) {
@@ -32,10 +34,10 @@ router.get("/all", async (req, res) => {
 // Post Templates
 router.post("/", upload.single("image"), async (req, res) => {
   const { title, template, tags } = req.body;
-  const filePath = req.file.path;
+  const filePath = req.file?.path;
 
   try {
-    const templateDB = await Template({
+    const templateDB = new Template({
       title,
       image: filePath,
       template,
@@ -48,4 +50,4 @@ router.post("/", upload.single("image"), async (req, res) => {
   }
 });
 
-module.exports = router;
+export default router;

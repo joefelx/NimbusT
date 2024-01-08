@@ -1,25 +1,21 @@
 require("dotenv").config();
-const { TwitterApi } = require("twitter-api-v2");
-const express = require("express");
-const session = require("express-session");
-const mongoose = require("mongoose");
-const morgan = require("morgan");
-const cors = require("cors");
-const path = require("path");
-const fs = require("fs");
-const { checkMimeType } = require("./utils");
-const upload = require("./utils/Upload");
+import express, { Express, Request, Response } from "express";
+import session from "express-session";
+import mongoose from "mongoose";
+import morgan from "morgan";
+import cors from "cors";
+import path from "path";
+import upload from "./utils/Upload";
 
-const {
-  authRouter,
-  userRouter,
-  tweetRouter,
-  templateRouter,
-} = require("./router");
-const User = require("./model/User");
+import authRouter from "./router/Auth";
+import userRouter from "./router/User";
+import tweetRouter from "./router/Tweet";
+import templateRouter from "./router/Template";
 
 // Express server Initialised
-const app = express();
+const app: Express = express();
+
+const PORT = process.env.DEVELOPMENT ? 5000 : process.env.PORT;
 
 // Middlewares
 app.use(
@@ -38,19 +34,19 @@ app.use(morgan("tiny"));
 app.use(cors());
 
 // Mongodb setup
-mongoose.connect(
-  process.env.MONGO_URL,
-  {
-    useNewUrlParser: true,
-    useUnifiedTopology: true,
-  },
-  () => {
-    console.log("Mongodb is connected");
+mongoose.connect(process.env.MONGO_URL!, () => {
+  console.log("Mongodb is connected");
+});
+
+declare module "express-session" {
+  interface SessionData {
+    codeVerifier: string;
+    state: string;
   }
-);
+}
 
 // Routes
-app.get("/", (req, res) => {
+app.get("/", (req: Request, res: Response) => {
   res.status(200).json({
     data: {
       status: "success",
@@ -70,6 +66,6 @@ app.post("/media", upload.single("image"), async (req, res) => {
   }
 });
 
-app.listen(5000, () => {
+app.listen(PORT, () => {
   console.log("Server started at PORT:5000");
 });
