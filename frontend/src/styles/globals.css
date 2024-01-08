@@ -1,0 +1,31 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@font-face {
+    font-family: "Amphora";
+    src: url(../fonts/Amphora-Regular.otf);
+    font-weight: 400;
+}
+
+
+/* width */
+::-webkit-scrollbar {
+    width: 5px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+    background: #fff;
+    border-radius: 25px;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+    background: #091128;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+    background: #555;
+}
