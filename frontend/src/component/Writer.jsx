@@ -74,7 +74,7 @@ function TextField({ className }) {
   );
 }
 
-function Editor() {
+function Writer() {
   const { threads } = useContext(FunctionContext);
 
   return (
@@ -93,5 +93,5 @@ function Editor() {
   );
 }
 
-export default Editor;
+export default Writer;
 export { TextField };

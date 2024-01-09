@@ -22,45 +22,48 @@ function Navigation() {
     <>
       {show && <LoginCard />}
       <div className="sticky top-0 z-[100] h-[5rem] px-12 flex justify-between items-center bg-black text-white backdrop-blur-sm ">
-        {/* left div */}
-        <div
-          className="flex-1 flex items-center"
-          onClick={() => router.push("/")}
-        >
-          <Logo />
-          <p className="text-2xl font-bold pl-5 cursor-pointer">NimbusT</p>
+        <div className="flex justify-between items-center h-full">
+          <div
+            className="h-full flex items-center"
+            onClick={() => router.push("/")}
+          >
+            <Logo />
+            <p className="text-2xl flex items-center font-bold pl-5 h-full cursor-pointer">
+              NimbusT
+            </p>
+          </div>
+
+          <div className="h-full flex items-center justify-between pl-10">
+            <span
+              className={linkStyling}
+              onClick={() => {
+                dispatchTool({ type: "OPEN_EDITOR" });
+                router.push("/editor");
+              }}
+            >
+              Editor
+            </span>
+            <span
+              className={linkStyling}
+              onClick={() => {
+                dispatchTool({ type: "OPEN_TEMPLATES" });
+                router.push("/editor");
+              }}
+            >
+              Templates
+            </span>
+            <a
+              href="https://github.com/joefelx/NimbusT"
+              className="text-md"
+              target="_blank"
+            >
+              <span className={linkStyling}>Contribute</span>
+            </a>
+          </div>
         </div>
 
-        <div className="flex-[2] flex items-center justify-between px-64">
-          <span
-            className={linkStyling}
-            onClick={() => {
-              dispatchTool({ type: "OPEN_EDITOR" });
-              router.push("/editor");
-            }}
-          >
-            Editor
-          </span>
-          <span
-            className={linkStyling}
-            onClick={() => {
-              dispatchTool({ type: "OPEN_TEMPLATES" });
-              router.push("/editor");
-            }}
-          >
-            Templates
-          </span>
-          <a
-            href="https://github.com/joefelx/NimbusT"
-            className="text-md"
-            target="_blank"
-          >
-            <span className={linkStyling}>Contribute</span>
-          </a>
-        </div>
-
         <div
-          className="flex-1 flex items-center justify-end cursor-pointer"
+          className="cursor-pointer h-full flex items-center"
           onClick={() => dispatch({ type: "SET_SHOW", payload: true })}
         >
           {user ? (

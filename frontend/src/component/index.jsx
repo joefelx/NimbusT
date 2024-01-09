@@ -1,4 +1,4 @@
-import Editor from "./Editor";
+import Writer from "./Writer";
 import Hero from "./Hero";
 import Navigation from "./Navigation";
 import LoginCard from "./LoginCard";
@@ -9,24 +9,27 @@ import EditorBox from "./EditorBox";
 import Features from "./Features";
 import Footer from "./Footer";
 import Tools from "./Tools";
-import { TextField } from "./Editor";
+import { TextField } from "./Writer";
 
 import { Gradient, CornerGradient, Loading, Tick, Logo } from "./Graphics";
 
 const Button = ({
-  buttonName,
+  buttonName = "Button",
+  width = 24,
+  height = 10,
+  paddingX = 0,
+  paddingY = 0,
+  textColor = "black",
+  textSize = "",
+  color = "white",
+  borderColor = "slate-500",
+  className = "",
   clickFun,
-  width,
-  height,
-  textColor,
-  background,
-  borderColor,
-  className,
-  disabled,
+  disabled = false,
 }) => {
   return (
     <button
-      className={`z-1 bg-${background} px-${width} py-${height} rounded-xl text-[14px] text-${textColor} shadow-2xl border-2 border-${borderColor} ${className}`}
+      className={`z-1 bg-${color} h-${height} w-${width} px-${paddingX} py-${paddingY} rounded-xl text-[${textSize}] text-${textColor} shadow-2xl border-2 border-${borderColor} cursor-pointer ${className}`}
       onClick={clickFun}
       disabled={disabled}
     >
@@ -36,7 +39,7 @@ const Button = ({
 };
 
 export {
-  Editor,
+  Writer,
   TextField,
   Hero,
   Navigation,

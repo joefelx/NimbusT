@@ -1,16 +1,17 @@
 import "../styles/globals.css";
 import { useRouter } from "next/router";
-import { Ubuntu } from "@next/font/google";
+import { Poppins } from "@next/font/google";
 
 import { FunctionContextProvider } from "../context/FunctionContext";
 import { AuthContextProvider } from "../context/AuthContext";
 import { ToolContextProvider } from "../context/ToolContext";
 
-const ubuntu = Ubuntu({ subsets: ["latin"], weight: "500", preload: true });
+const poppins = Poppins({ subsets: ["latin"], weight: "400", preload: true });
+
 export default function App({ Component, pageProps }) {
   const router = useRouter();
   return (
-    <div className={ubuntu.className}>
+    <div className={poppins.className}>
       <AuthContextProvider>
         <FunctionContextProvider>
           <ToolContextProvider>

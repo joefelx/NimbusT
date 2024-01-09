@@ -2,13 +2,10 @@ import Image from "next/image";
 import logoimage from "../assets/Logo-individual transparent.png";
 import Profile from "../assets/profile.jpg";
 import GradientPng from "../assets/Group1.png";
-import { useEffect } from "react";
-import { useContext } from "react";
-import { FunctionContext } from "../context/FunctionContext";
 
 export function Gradient() {
   return (
-    <div className="absolute">
+    <div className="absolute z-[-2]">
       {/* <Image /> */}
 
       {/* <Image src={Gradient1} /> */}
@@ -171,13 +168,8 @@ export function Tick() {
 }
 
 export function Logo() {
-
   return (
-    <Image
-      src={logoimage}
-      className="w-[20px] cursor-pointer"
-      alt="Logo"
-    />
+    <Image src={logoimage} className="w-[20px] cursor-pointer" alt="Logo" />
   );
 }
 
