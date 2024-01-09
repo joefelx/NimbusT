@@ -37,6 +37,7 @@ app.use(cors());
 mongoose.connect(process.env.MONGO_URL!, () => {
   console.log("Mongodb is connected");
 });
+mongoose.set("strictQuery", true);
 
 declare module "express-session" {
   interface SessionData {
