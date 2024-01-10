@@ -2,9 +2,9 @@ import { createContext, useReducer } from "react";
 import ToolReducer from "./reducer/ToolReducer";
 
 const INITIAL_STATE = {
-  editorOpen: true,
+  writerOpen: true,
   templatesOpen: false,
-  calendarOpen: false,
+  schedulerOpen: false,
   draftOpen: false,
 };
 
@@ -16,9 +16,9 @@ export const ToolContextProvider = ({ children }) => {
   return (
     <ToolContext.Provider
       value={{
-        editor: state.editorOpen,
+        writer: state.writerOpen,
         templates: state.templatesOpen,
-        calendar: state.calendarOpen,
+        scheduler: state.schedulerOpen,
         draft: state.draftOpen,
         dispatchTool: dispatch,
       }}

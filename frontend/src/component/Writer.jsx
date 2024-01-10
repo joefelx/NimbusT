@@ -67,7 +67,6 @@ function TextField({ className }) {
       className={`flex-1 text-white bg-slate-900 min-h-screen p-5 focus:outline-none placeholder:text-gray-600 resize-none whitespace-pre-wrap ${className}`}
       value={input}
       onChange={(e) => {
-        handleResize("#textField");
         dispatch({ type: "SET_INPUT", payload: e.target.value });
       }}
     ></textarea>

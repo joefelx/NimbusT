@@ -3,7 +3,7 @@ import Hero from "./Hero";
 import Navigation from "./Navigation";
 import LoginCard from "./LoginCard";
 import Templates from "./Templates";
-import Calendar from "./Calendar";
+import Scheduler from "./Scheduler";
 import Draft from "./Draft";
 import EditorBox from "./EditorBox";
 import Features from "./Features";
@@ -15,8 +15,8 @@ import { Gradient, CornerGradient, Loading, Tick, Logo } from "./Graphics";
 
 const Button = ({
   buttonName = "Button",
-  width = 24,
-  height = 10,
+  width = 1,
+  height = 2,
   paddingX = 0,
   paddingY = 0,
   textColor = "black",
@@ -29,7 +29,7 @@ const Button = ({
 }) => {
   return (
     <button
-      className={`z-1 bg-${color} h-${height} w-${width} px-${paddingX} py-${paddingY} rounded-xl text-[${textSize}] text-${textColor} shadow-2xl border-2 border-${borderColor} cursor-pointer ${className}`}
+      className={`z-1 bg-${color} px-${width} py-${height} rounded-xl text-[${textSize}] text-${textColor} shadow-2xl border-2 border-${borderColor} cursor-pointer ${className}`}
       onClick={clickFun}
       disabled={disabled}
     >
@@ -51,7 +51,7 @@ export {
   Loading,
   Tick,
   Logo,
-  Calendar,
+  Scheduler,
   Draft,
   EditorBox,
   Features,

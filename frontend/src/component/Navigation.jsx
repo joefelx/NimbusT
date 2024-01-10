@@ -37,7 +37,7 @@ function Navigation() {
             <span
               className={linkStyling}
               onClick={() => {
-                dispatchTool({ type: "OPEN_EDITOR" });
+                dispatchTool({ type: "OPEN_WRITER" });
                 router.push("/editor");
               }}
             >

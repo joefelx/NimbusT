@@ -14,7 +14,7 @@ function Tools() {
         <Button
           buttonName="Editor"
           className="border-none"
-          clickFun={() => dispatchTool({ type: "OPEN_EDITOR" })}
+          clickFun={() => dispatchTool({ type: "OPEN_WRITER" })}
         />
         <Button
           buttonName="Templates"
@@ -24,14 +24,14 @@ function Tools() {
         <Button
           buttonName="Scheduler"
           className="border-none"
-          clickFun={() => dispatchTool({ type: "OPEN_CALENDAR" })}
+          clickFun={() => dispatchTool({ type: "OPEN_SCHEDULER" })}
         />
       </div>
       {/* Publish */}
       <div className="flex justify-end">
         <Button
           buttonName="Publish"
-          textColor="white"
+          textColor="black"
           className="bg-blue-500 border-none"
           clickFun={PostThread}
         />

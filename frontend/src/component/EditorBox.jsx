@@ -1,16 +1,16 @@
 import { useContext } from "react";
 import { ToolContext } from "../context/ToolContext";
 
-import { Writer, Templates, Calendar, Draft } from "./index";
+import { Writer, Templates, Scheduler, Draft } from "./index";
 
 function EditorBox() {
-  const { editor, templates, calendar, draft } = useContext(ToolContext);
+  const { writer, templates, scheduler, draft } = useContext(ToolContext);
 
   return (
-    <div className="flex bg-slate-900 rounded-2xl border-2 border-slate-700 min-h-[90vh] h-auto overflow-hidden p-3 my-5">
-      {editor && <Writer />}
+    <div className="h-auto p-3 my-5 flex bg-black rounded-2xl border-2 border-slate-700 overflow-hidden">
+      {writer && <Writer />}
       {templates && <Templates />}
-      {calendar && <Calendar />}
+      {scheduler && <Scheduler />}
       {draft && <Draft />}
     </div>
   );

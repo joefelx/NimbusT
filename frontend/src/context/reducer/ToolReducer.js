@@ -1,33 +1,33 @@
 const ToolReducer = (state, action) => {
   switch (action.type) {
-    case "OPEN_EDITOR":
+    case "OPEN_WRITER":
       return {
-        editorOpen: true,
+        writerOpen: true,
         templatesOpen: false,
-        calendarOpen: false,
+        schedulerOpen: false,
         draftOpen: false,
       };
 
     case "OPEN_TEMPLATES":
       return {
-        editorOpen: false,
+        writerOpen: false,
         templatesOpen: true,
-        calendarOpen: false,
+        schedulerOpen: false,
         draftOpen: false,
       };
 
-    case "OPEN_CALENDAR":
+    case "OPEN_SCHEDULER":
       return {
-        editorOpen: false,
+        writerOpen: false,
         templatesOpen: false,
-        calendarOpen: true,
+        schedulerOpen: true,
         draftOpen: false,
       };
     case "OPEN_DRAFT":
       return {
-        editorOpen: false,
+        writerOpen: false,
         templatesOpen: false,
-        calendarOpen: false,
+        schedulerOpen: false,
         draftOpen: true,
       };
 
