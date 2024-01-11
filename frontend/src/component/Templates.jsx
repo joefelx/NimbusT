@@ -45,7 +45,7 @@ function Templates() {
           onClick={() => {
             toast.success("Template Loaded");
             dispatch({ type: "SET_INPUT", payload: temp.template });
-            dispatchTool({ type: "OPEN_EDITOR" });
+            dispatchTool({ type: "OPEN_WRITER" });
           }}
         />
       ))}
