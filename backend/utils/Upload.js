@@ -1,5 +1,5 @@
-import multer from "multer";
-import checkMimeType from "./checkMimeType";
+const multer = require("multer");
+const checkMimeType = require("./checkMimeType");
 
 // Storage Middleware
 const storage = multer.diskStorage({
@@ -8,10 +8,10 @@ const storage = multer.diskStorage({
   },
   filename: (req, file, cb) => {
     let filename = checkMimeType(file.mimetype);
-    cb(null, filename!);
+    cb(null, filename);
   },
 });
 
 const upload = multer({ storage: storage });
 
-export default upload;
+module.exports = upload;

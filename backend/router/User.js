@@ -1,11 +1,9 @@
-import express, { Request, Response } from "express";
-import { TwitterApi } from "twitter-api-v2";
-import User from "../model/User";
-
-const router = express.Router();
+const router = require("express").Router();
+const { TwitterApi } = require("twitter-api-v2");
+const User = require("../model/User");
 
 // Save the user in the database
-router.post("/", async (req: Request, res: Response) => {
+router.post("/", async (req, res) => {
   try {
     const userDB = await User.findOne({ username: req.body.username });
     res.status(200).json(userDB);
@@ -14,8 +12,8 @@ router.post("/", async (req: Request, res: Response) => {
   }
 });
 
-// Get the user from the database
-router.get("/", async (req: Request, res: Response) => {
+// Get the user = require( the database
+router.get("/", async (req, res) => {
   const username = req.query.username;
   try {
     const user = await User.find({ username: username })
@@ -35,11 +33,11 @@ router.get("/", async (req: Request, res: Response) => {
 });
 
 // Get user profile image
-router.post("/profileimg", async (req: Request, res: Response) => {
+router.post("/profileimg", async (req, res) => {
   try {
     const user = await User.findOne({ username: req.body.username });
 
-    const client = new TwitterApi(user?.accessToken as any);
+    const client = new TwitterApi(user.accessToken);
 
     const currentUser = await client.currentUser();
 
@@ -53,4 +51,4 @@ router.post("/profileimg", async (req: Request, res: Response) => {
   }
 });
 
-export default router;
+module.exports = router;

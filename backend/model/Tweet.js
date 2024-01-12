@@ -1,4 +1,4 @@
-import mongoose from "mongoose";
+const mongoose = require("mongoose");
 
 const tweetSchema = new mongoose.Schema({
   username: {
@@ -19,4 +19,4 @@ const tweetSchema = new mongoose.Schema({
   },
 });
 
-export default mongoose.model("Tweet", tweetSchema);
+module.exports = new mongoose.model("Tweet", tweetSchema);

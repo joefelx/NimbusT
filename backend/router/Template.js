@@ -1,11 +1,9 @@
-import express, { Request, Response } from "express";
-import Template from "../model/Template";
-import upload from "../utils/Upload";
-
-const router = express.Router();
+const router = require("express").Router();
+const Template = require("../model/Template");
+const upload = require("../utils/Upload");
 
 // Get a Template
-router.get("/", async (req: Request, res: Response) => {
+router.get("/", async (req, res) => {
   try {
     const template = await Template.findById(req.query.id);
     if (!template) {
@@ -19,7 +17,7 @@ router.get("/", async (req: Request, res: Response) => {
 });
 
 // Get All Templates
-router.get("/all", async (req: Request, res: Response) => {
+router.get("/all", async (req, res) => {
   try {
     const templates = await Template.find();
     if (!templates) {
@@ -50,4 +48,4 @@ router.post("/", upload.single("image"), async (req, res) => {
   }
 });
 
-export default router;
+module.exports = router;

@@ -1,13 +1,11 @@
-import express, { Request, Response } from "express";
-import { TwitterApi } from "twitter-api-v2";
-import User from "../model/User";
+const router = require("express").Router();
+const { TwitterApi } = require("twitter-api-v2");
+const User = require("../model/User");
 
-const router = express.Router();
-
-const CLIENT_ID = process.env.CLIENT_ID!;
-const CLIENT_SECRET = process.env.CLIENT_SECRET!;
-const CALLBACK_URL = process.env.CALLBACK_URL!;
-const CLIENT_URL = process.env.BASE_URL!;
+const CLIENT_ID = process.env.CLIENT_ID;
+const CLIENT_SECRET = process.env.CLIENT_SECRET;
+const CALLBACK_URL = process.env.CALLBACK_URL;
+const CLIENT_URL = process.env.BASE_URL;
 
 // Twitter Client Initialised
 const twitterClient = new TwitterApi({
@@ -16,13 +14,13 @@ const twitterClient = new TwitterApi({
 });
 
 // Twitter Authenication route which redirects to TwitterAPI Authenication Page
-router.get("/twitter", (req: Request, res: Response) => {
+router.get("/twitter", (req, res) => {
   const { url, codeVerifier, state } = twitterClient.generateOAuth2AuthLink(
     CALLBACK_URL,
     { scope: ["tweet.read", "tweet.write", "users.read", "offline.access"] }
   );
 
-  req.session.regenerate((err: any) => {
+  req.session.regenerate((err) => {
     if (err) {
       console.log(err);
     }
@@ -30,7 +28,7 @@ router.get("/twitter", (req: Request, res: Response) => {
     req.session.codeVerifier = codeVerifier;
     req.session.state = state;
 
-    req.session.save((err: any) => {
+    req.session.save((err) => {
       if (err) console.log(err);
       res.redirect(url);
     });
@@ -38,10 +36,10 @@ router.get("/twitter", (req: Request, res: Response) => {
 });
 
 // Redirects to the callback when authentication successfully
-router.get("/twitter/callback", (req: Request, res: Response) => {
+router.get("/twitter/callback", (req, res) => {
   // Extract state and code from query string
   const { state } = req.query;
-  const code = req.query.code as string;
+  const code = req.query.code;
 
   // Get the saved codeVerifier from session
   const { codeVerifier, state: sessionState } = req.session;
@@ -103,4 +101,4 @@ router.get("/twitter/callback", (req: Request, res: Response) => {
     .catch(() => res.status(403).send("Invalid verifier or access tokens!"));
 });
 
-export default router;
+module.exports = router;

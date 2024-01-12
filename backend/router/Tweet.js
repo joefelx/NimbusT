@@ -1,14 +1,12 @@
-import express, { Request, Response } from "express";
+const router = require("express").Router();
 
-import User from "../model/User";
-import Tweet from "../model/Tweet";
-import { TwitterApi } from "twitter-api-v2";
-import makeThread from "../utils/makeThread";
-
-const router = express.Router();
+const User = require("../model/User");
+const Tweet = require("../model/Tweet");
+const { TwitterApi } = require("twitter-api-v2");
+const makeThread = require("../utils/makeThread");
 
 // Get Tweets of the User by Sending Username
-router.post("/", async (req: Request, res: Response) => {
+router.post("/", async (req, res) => {
   const username = req.body.username;
   try {
     const threads = await Tweet.find({ username: username });
@@ -22,12 +20,12 @@ router.post("/", async (req: Request, res: Response) => {
 });
 
 // Post a Tweet or Thread by posting a list of tweets
-router.post("/thread", async (req: Request, res: Response) => {
+router.post("/thread", async (req, res) => {
   try {
     const { username, threadsList } = req.body;
     const user = await User.findOne({ username: username });
 
-    const client = new TwitterApi(user?.accessToken as any);
+    const client = new TwitterApi(user.accessToken);
     /* Make a Thread */
     await makeThread(client, threadsList);
 
@@ -72,7 +70,7 @@ router.put("/edit", async (req, res) => {
 });
 
 // Schedule a Tweet or Thread
-router.post("/schedule", async (req: Request, res: Response) => {
+router.post("/schedule", async (req, res) => {
   try {
     const { username, title, threadsList, scheduled, time } = req.body;
     const user = await User.findOne({ username: username });
@@ -111,7 +109,7 @@ router.post("/schedule", async (req: Request, res: Response) => {
 });
 
 // Get the scheduled Tweets and Threads for the database
-router.get("/schedule", async (req: Request, res: Response) => {
+router.get("/schedule", async (req, res) => {
   try {
     const scheduledTweets = await Tweet.find({ scheduled: true });
 
@@ -126,4 +124,4 @@ router.get("/schedule", async (req: Request, res: Response) => {
   }
 });
 
-export default router;
+module.exports = router;

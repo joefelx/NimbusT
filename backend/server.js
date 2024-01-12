@@ -1,19 +1,19 @@
 require("dotenv").config();
-import express, { Express, Request, Response } from "express";
-import session from "express-session";
-import mongoose from "mongoose";
-import morgan from "morgan";
-import cors from "cors";
-import path from "path";
-import upload from "./utils/Upload";
+const express = require("express");
+const session = require("express-session");
+const mongoose = require("mongoose");
+const morgan = require("morgan");
+const cors = require("cors");
+const path = require("path");
+const upload = require("./utils/Upload");
 
-import authRouter from "./router/Auth";
-import userRouter from "./router/User";
-import tweetRouter from "./router/Tweet";
-import templateRouter from "./router/Template";
+const authRouter = require("./router/Auth");
+const userRouter = require("./router/User");
+const tweetRouter = require("./router/Tweet");
+const templateRouter = require("./router/Template");
 
 // Express server Initialised
-const app: Express = express();
+const app = express();
 
 const PORT = process.env.DEVELOPMENT ? 5000 : process.env.PORT;
 
@@ -34,20 +34,13 @@ app.use(morgan("tiny"));
 app.use(cors());
 
 // Mongodb setup
-mongoose.connect(process.env.MONGO_URL!, () => {
+mongoose.connect(process.env.MONGO_URL, () => {
   console.log("Mongodb is connected");
 });
 mongoose.set("strictQuery", true);
 
-declare module "express-session" {
-  interface SessionData {
-    codeVerifier: string;
-    state: string;
-  }
-}
-
 // Routes
-app.get("/", (req: Request, res: Response) => {
+app.get("/", (req, res) => {
   res.status(200).json({
     data: {
       status: "success",
