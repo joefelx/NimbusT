@@ -14,8 +14,8 @@ const tweetSchema = new mongoose.Schema({
     type: Boolean,
     default: false,
   },
-  time: {
-    type: String,
+  date: {
+    type: Date,
   },
 });
 

@@ -72,7 +72,7 @@ router.put("/edit", async (req, res) => {
 // Schedule a Tweet or Thread
 router.post("/schedule", async (req, res) => {
   try {
-    const { username, title, threadsList, scheduled, time } = req.body;
+    const { username, title, threadsList, scheduled, date } = req.body;
     const user = await User.findOne({ username: username });
 
     if (user) {
@@ -81,7 +81,7 @@ router.post("/schedule", async (req, res) => {
         title: title,
         threads: threadsList,
         scheduled: scheduled,
-        time: time,
+        date: date,
       }).save();
 
       res.status(201).json({

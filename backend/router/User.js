@@ -2,7 +2,7 @@ const router = require("express").Router();
 const { TwitterApi } = require("twitter-api-v2");
 const User = require("../model/User");
 
-// Save the user in the database
+// Get the user in the database
 router.post("/", async (req, res) => {
   try {
     const userDB = await User.findOne({ username: req.body.username });
