@@ -50,6 +50,11 @@ const FunctionReducer = (state, action) => {
         ...state,
         show: action.payload,
       };
+    case "SET_SCHEDULE":
+      return {
+        ...state,
+        schedule: action.payload,
+      };
     case "SET_EXPAND":
       return {
         ...state,

@@ -16,6 +16,7 @@ const INITIAL_STATE = {
   loading: false,
   complete: false,
   show: false,
+  schedule: false,
   expand: false,
   templates: [
     {
@@ -122,6 +123,7 @@ export const FunctionContextProvider = ({ children }) => {
         loading: state.loading,
         complete: state.complete,
         show: state.show,
+        schedule: state.schedule,
         expand: state.expand,
         templates: state.templates,
         theme: state.theme,

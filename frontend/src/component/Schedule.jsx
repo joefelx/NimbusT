@@ -1,7 +1,9 @@
 import React, { useEffect, useState } from "react";
 import Calendar from "react-calendar";
+// import { Calendar, momentLocalizer } from "react-big-calendar";
+import moment from "moment";
 
-function Scheduler() {
+function Schedule() {
   const [value, onChange] = useState(new Date());
 
   const [scheduledPost, setScheduledPost] = useState([
@@ -37,6 +39,8 @@ function Scheduler() {
     },
   ]);
 
+  // const localizer = momentLocalizer(moment);
+
   const Post = ({ p }) => {
     return (
       <div className="w-full py-2 my-2 flex justify-between cursor-pointer border border-slate-700 rounded-lg hover:bg-slate-700">
@@ -52,15 +56,12 @@ function Scheduler() {
   };
 
   useEffect(() => {
-    // console.log(value);
+    console.log(value.toISOString());
   }, [value]);
 
   return (
     <div className="w-full min-h-16 h-auto flex items-center justify-between">
-      <div className=" w-3/12 p-3 flex flex-col items-center border-r-2 border-slate-700">
-        <Calendar onChange={onChange} value={value} />
-      </div>
-      <div className="w-9/12 h-full px-5">
+      <div className="w-full h-full px-5">
         <div className="w-full pb-5 flex justify-between text-slate-500">
           <h1 className="flex-1 flex items-center justify-center">Posts</h1>
           <span className="flex-1 flex items-center justify-center">Date</span>
@@ -76,4 +77,4 @@ function Scheduler() {
   );
 }
 
-export default Scheduler;
+export default Schedule;

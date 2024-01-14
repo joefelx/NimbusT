@@ -21,7 +21,7 @@ function Navigation() {
   return (
     <>
       {show && <LoginCard />}
-      <div className="sticky top-0 z-[100] h-[5rem] px-12 flex justify-between items-center bg-black text-white backdrop-blur-sm ">
+      <div className="sticky top-0 z-[100] h-[5rem] px-12 flex justify-between items-center bg-black text-white backdrop-blur-sm">
         <div className="flex justify-between items-center h-full">
           <div
             className="h-full flex items-center"

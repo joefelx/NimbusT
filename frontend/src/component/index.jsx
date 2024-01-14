@@ -3,7 +3,7 @@ import Hero from "./Hero";
 import Navigation from "./Navigation";
 import LoginCard from "./LoginCard";
 import Templates from "./Templates";
-import Scheduler from "./Scheduler";
+import Schedule from "./Schedule";
 import Draft from "./Draft";
 import EditorBox from "./EditorBox";
 import Features from "./Features";
@@ -51,7 +51,7 @@ export {
   Loading,
   Tick,
   Logo,
-  Scheduler,
+  Schedule,
   Draft,
   EditorBox,
   Features,

@@ -20,11 +20,8 @@ const LoginCard = () => {
         dispatch({ type: "SET_SHOW", payload: false });
       }}
     >
-      <div
-        className={` ${theme == "light" ? "bg-white text-black" : "bg-black text-white"
-          } w-[30rem] p-10 flex flex-col items-center justify-center border-2 border-slate-700 rounded-2xl`}
-      >
-        <div className="px-5 ">
+      <div className="bg-black text-white w-[30rem] p-10 flex flex-col items-center justify-center border-2 border-slate-700 rounded-2xl">
+        <div className="px-5">
           <div className="flex items-center justify-between ">
             <Image src={Logo} className="w-[60px] " alt="Logo" />
             <h1 className="text-4xl font-black">Nimbus Tweet</h1>
