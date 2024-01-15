@@ -16,6 +16,7 @@ const INITIAL_STATE = {
   loading: false,
   complete: false,
   show: false,
+  schedule: false,
   expand: false,
   templates: [
     {
@@ -78,15 +79,17 @@ export const FunctionContextProvider = ({ children }) => {
   const NEXT_PUBLIC_REQUEST_URL = process.env.NEXT_PUBLIC_REQUEST_URL;
 
   const PostThread = async () => {
-    const loading = toast.loading("Tweeting...");
-    const res = await axios.post(`${NEXT_PUBLIC_REQUEST_URL}/tweet/thread`, {
-      username: user.username,
-      threadsList: state.threads.filter(Boolean),
-    });
-    if (res) {
-      toast.dismiss(loading);
-      toast.success("Tweeted! Go and check the Twitter");
-    }
+    await toast.promise(
+      axios.post(`${NEXT_PUBLIC_REQUEST_URL}/tweet/thread`, {
+        username: user.username,
+        threadsList: state.threads.filter(Boolean),
+      }),
+      {
+        loading: "Posting the Thread...",
+        success: "Posted! Go and check the X platform",
+        error: "Couldn't post!",
+      }
+    );
   };
 
   const GetThread = async () => {
@@ -122,6 +125,7 @@ export const FunctionContextProvider = ({ children }) => {
         loading: state.loading,
         complete: state.complete,
         show: state.show,
+        schedule: state.schedule,
         expand: state.expand,
         templates: state.templates,
         theme: state.theme,

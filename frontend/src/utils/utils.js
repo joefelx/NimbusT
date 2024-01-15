@@ -23,3 +23,11 @@ export function handleResize(input) {
     inputName.style.height = `${scHeight}px`;
   });
 }
+
+export function formatDate(dateString) {
+  const date = new Date(dateString);
+  let day = date.getDate();
+  let month = date.getMonth() + 1;
+  let year = date.getFullYear();
+  return `${day}/${month}/${year}`;
+}
