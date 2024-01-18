@@ -7,7 +7,7 @@ import { FunctionContext } from "../context/FunctionContext";
 
 function editor() {
   const { user, checkUser } = useContext(AuthContext);
-  const { schedule } = useContext(FunctionContext);
+  const { schedule, ScheduleThread } = useContext(FunctionContext);
 
   const Scheduler = () => {
     const { threads, dispatch } = useContext(FunctionContext);
@@ -15,29 +15,6 @@ function editor() {
     const [date, setDate] = useState(new Date());
     const [title, setTitle] = useState(threads[0]);
 
-    const scheduleThread = async () => {
-      await toast.promise(
-        axios.post(`${process.env.NEXT_PUBLIC_REQUEST_URL}/tweet/schedule`, {
-          username: user.username,
-          title: title,
-          threads: threads,
-          scheduled: true,
-          date: date.toISOString(),
-        }),
-        {
-          loading: "Saving the Thread...",
-          success: "Saved the Thread. Check the Scheduled Section!",
-          error: "Couldn't Save the thread",
-        }
-      );
-
-      dispatch({ type: "SET_SCHEDULE", payload: false });
-    };
-
-    useEffect(() => {
-      console.log(date.toISOString());
-      console.log(date.getDate());
-    }, [date]);
     return (
       <div className="w-full h-full flex items-center justify-center bg-transparent backdrop-blur-md fixed z-[500]">
         <div className="bg-black text-white text-md w-[30rem] min-h-56 h-auto p-5 flex flex-col justify-between border-2 border-slate-700 rounded-2xl">
@@ -62,7 +39,7 @@ function editor() {
           <div className="flex flex-col justify-between items-center w-full">
             <button
               className="w-full border-2 border-slate-700 bg-indigo-600 hover:bg-indigo-500 rounded-xl p-2 my-1"
-              onClick={scheduleThread}
+              onClick={() => ScheduleThread(title, date)}
             >
               Submit
             </button>

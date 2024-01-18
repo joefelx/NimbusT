@@ -1,19 +1,18 @@
 const router = require("express").Router();
 const { TwitterApi } = require("twitter-api-v2");
 const User = require("../model/User");
+const jwt = require("jsonwebtoken");
 
 const CLIENT_ID = process.env.CLIENT_ID;
 const CLIENT_SECRET = process.env.CLIENT_SECRET;
 const CALLBACK_URL = process.env.CALLBACK_URL;
 const CLIENT_URL = process.env.BASE_URL;
 
-// Twitter Client Initialised
 const twitterClient = new TwitterApi({
   clientId: CLIENT_ID,
   clientSecret: CLIENT_SECRET,
 });
 
-// Twitter Authenication route which redirects to TwitterAPI Authenication Page
 router.get("/twitter", (req, res) => {
   const { url, codeVerifier, state } = twitterClient.generateOAuth2AuthLink(
     CALLBACK_URL,
@@ -35,13 +34,10 @@ router.get("/twitter", (req, res) => {
   });
 });
 
-// Redirects to the callback when authentication successfully
 router.get("/twitter/callback", (req, res) => {
-  // Extract state and code from query string
   const { state } = req.query;
   const code = req.query.code;
 
-  // Get the saved codeVerifier from session
   const { codeVerifier, state: sessionState } = req.session;
 
   if (!codeVerifier || !state || !sessionState || !code) {
@@ -51,7 +47,6 @@ router.get("/twitter/callback", (req, res) => {
     return res.status(400).send("Stored tokens didnt match!");
   }
 
-  // Obtain access token
   const client = new TwitterApi({
     clientId: CLIENT_ID,
     clientSecret: CLIENT_SECRET,
@@ -78,6 +73,18 @@ router.get("/twitter/callback", (req, res) => {
               $set: { accessToken, refreshToken, expiresIn },
             });
 
+            const userData = {
+              username: user.username,
+              accessToken: user.accessToken,
+              name: user.name,
+            };
+
+            const token = jwt.sign(userData, process.env.TOKEN_SECRET, {
+              expiresIn: "1d",
+            });
+
+            res.cookie("nimbus_token", token);
+
             res.redirect(`${CLIENT_URL}/${user?.username}`);
           } else {
             const user = new User({
@@ -90,6 +97,18 @@ router.get("/twitter/callback", (req, res) => {
             });
 
             const savedUser = await user.save();
+
+            const userData = {
+              username: savedUser.username,
+              accessToken: savedUser.accessToken,
+              name: savedUser.name,
+            };
+
+            const token = jwt.sign(userData, process.env.TOKEN_SECRET, {
+              expiresIn: "1d",
+            });
+
+            res.cookie("nimbus_token", token);
 
             res.redirect(`${CLIENT_URL}/${savedUser.username}`);
           }

@@ -8,6 +8,7 @@ const path = require("path");
 const cron = require("node-cron");
 const axios = require("axios");
 const upload = require("./utils/Upload");
+const mongoConnection = require("./config/dbConfig");
 
 const authRouter = require("./router/Auth");
 const userRouter = require("./router/User");
@@ -36,11 +37,8 @@ app.use(
 app.use(morgan("tiny"));
 app.use(cors());
 
-// Mongodb setup
-mongoose.connect(process.env.MONGO_URL, () => {
-  console.log("Mongodb is connected");
-});
-mongoose.set("strictQuery", true);
+// MongoDB connection
+mongoConnection();
 
 // Routes
 app.get("/", (req, res) => {

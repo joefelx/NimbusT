@@ -3,30 +3,34 @@ import axios from "axios";
 import { AuthContext } from "../context/AuthContext";
 import { formatDate } from "../utils/utils";
 
+const Post = ({ p }) => {
+  return (
+    <div className="w-full py-2 my-2 flex justify-between cursor-pointer border border-slate-700 rounded-lg hover:bg-slate-700">
+      <h1 className="flex-1 flex items-center justify-center">{p.title}</h1>
+      <span className="flex-1 flex items-center justify-center">
+        {formatDate(p.date)}
+      </span>
+      <span className="flex-1 flex items-center justify-center">
+        {p.scheduled ? "Scheduled" : "Posted"}
+      </span>
+    </div>
+  );
+};
+
 function Schedule() {
   const [scheduledPost, setScheduledPost] = useState([]);
   const { user } = useContext(AuthContext);
 
-  const Post = ({ p }) => {
-    return (
-      <div className="w-full py-2 my-2 flex justify-between cursor-pointer border border-slate-700 rounded-lg hover:bg-slate-700">
-        <h1 className="flex-1 flex items-center justify-center">{p.title}</h1>
-        <span className="flex-1 flex items-center justify-center">
-          {formatDate(p.date)}
-        </span>
-        <span className="flex-1 flex items-center justify-center">
-          {p.scheduled ? "Scheduled" : "Posted"}
-        </span>
-      </div>
-    );
-  };
-
   const getThreads = async () => {
-    await axios
-      .post(`${process.env.NEXT_PUBLIC_REQUEST_URL}/tweet/get/schedule`, {
-        username: user.username,
-      })
-      .then((res) => setScheduledPost(res.data.data.scheduled));
+    try {
+      await axios
+        .post(`${process.env.NEXT_PUBLIC_REQUEST_URL}/tweet/get/schedule`, {
+          username: user.username,
+        })
+        .then((res) => setScheduledPost(res.data.data.scheduled));
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   useEffect(() => {
@@ -43,9 +47,11 @@ function Schedule() {
             Status
           </span>
         </div>
-        {scheduledPost.map((p) => (
-          <Post p={p} />
-        ))}
+        {scheduledPost ? (
+          scheduledPost.map((p) => <Post p={p} />)
+        ) : (
+          <p>No Posts</p>
+        )}
       </div>
     </div>
   );

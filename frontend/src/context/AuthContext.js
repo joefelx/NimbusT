@@ -1,5 +1,6 @@
 import { createContext, useReducer } from "react";
 import AuthReducer from "./reducer/AuthReducer";
+import { getTokenData } from "@/utils/getTokenData";
 
 const INITIAL_STATE = {
   user: null,
@@ -12,12 +13,12 @@ export const AuthContextProvider = ({ children }) => {
   const [state, dispatch] = useReducer(AuthReducer, INITIAL_STATE);
 
   function checkUser() {
-    const storedUser = window.localStorage.getItem("USER_ACCOUNT");
+    const storedUser = getTokenData();
     try {
       storedUser
         ? dispatch({
             type: "AUTH_LOGGEDIN",
-            payload: JSON.parse(storedUser),
+            payload: storedUser,
           })
         : dispatch({
             type: "AUTH_LOGGEDIN",

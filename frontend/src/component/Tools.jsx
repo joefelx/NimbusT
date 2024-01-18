@@ -9,7 +9,7 @@ function Tools() {
   const { PostThread, UpdateThread } = useContext(FunctionContext);
 
   return (
-    <div className="px-5 py-3 bg-slate-900 border-2 border-slate-700 text-white flex justify-between rounded-2xl">
+    <div className="px-5 py-3 bg-slate-900 text-white flex justify-between rounded-2xl">
       <div className="flex justify-between w-3/12">
         <Button
           buttonName="Editor"

@@ -8,7 +8,8 @@ const tweetSchema = new mongoose.Schema({
     type: String,
   },
   threads: {
-    type: [],
+    type: [String],
+    default: [],
   },
   scheduled: {
     type: Boolean,

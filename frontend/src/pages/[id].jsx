@@ -1,52 +1,18 @@
-import { useRouter } from "next/router";
 import { useContext, useEffect, useState } from "react";
-import axios from "axios";
-import { FunctionContext } from "../context/FunctionContext";
 import Image from "next/image";
+
 import { AuthContext } from "../context/AuthContext";
 
 import ProfileImg from "../assets/profile.jpg";
 import Navigation from "../component/Navigation";
 
 const User = () => {
-  const router = useRouter();
-  const { id } = router.query;
-  const { theme, dispatch } = useContext(FunctionContext);
   const { user, checkUser } = useContext(AuthContext);
   const [tweets, setTweets] = useState([]);
 
-  const auth = async () => {
-    try {
-      const result = await axios.get(
-        `${process.env.NEXT_PUBLIC_REQUEST_URL}/user?username=${id}`
-      );
-
-      window.localStorage.setItem(
-        "USER_ACCOUNT",
-        JSON.stringify(result.data[0])
-      );
-    } catch (error) {
-      console.log(error);
-    }
-    checkUser();
-  };
-
-  const getTweets = async () => {
-    const result = await axios.post(
-      `${process.env.NEXT_PUBLIC_REQUEST_URL}/tweet`,
-      { username: id }
-    );
-
-    setTweets(result.data);
-  };
-
   useEffect(() => {
-    const func = () => {
-      auth();
-      // await getTweets();
-    };
-    func();
-  }, [id]);
+    checkUser();
+  }, []);
 
   return (
     <div className="bg-black text-white min-h-screen h-full w-full">

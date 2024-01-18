@@ -16,7 +16,7 @@ const INITIAL_STATE = {
   loading: false,
   complete: false,
   show: false,
-  schedule: false,
+  schedule: true,
   expand: false,
   templates: [
     {
@@ -92,6 +92,25 @@ export const FunctionContextProvider = ({ children }) => {
     );
   };
 
+  const ScheduleThread = async (title, date) => {
+    await toast.promise(
+      axios.post(`${process.env.NEXT_PUBLIC_REQUEST_URL}/tweet/schedule`, {
+        username: user.username,
+        title: title,
+        threads: state.threads,
+        scheduled: true,
+        date: date.toISOString(),
+      }),
+      {
+        loading: "Saving the Thread...",
+        success: "Saved the Thread. Check the Scheduled Section!",
+        error: "Couldn't Save the thread",
+      }
+    );
+
+    dispatch({ type: "SET_SCHEDULE", payload: false });
+  };
+
   const GetThread = async () => {
     const receivedThreads = await axios.post(
       `${NEXT_PUBLIC_REQUEST_URL}/tweet`,
@@ -100,19 +119,6 @@ export const FunctionContextProvider = ({ children }) => {
       }
     );
     dispatch({ type: "SET_DRAFT_THREAD", payload: receivedThreads.data });
-  };
-
-  const UpdateThread = async () => {
-    const receivedThreads = await axios.put(
-      `${NEXT_PUBLIC_REQUEST_URL}/tweet/edit`,
-      {
-        threadId: state.currentThread._id,
-        title: state.currentThread.title,
-        threads: state.threads,
-        scheduled: state.currentThread.scheduled,
-        time: state.currentThread.time,
-      }
-    );
   };
 
   return (
@@ -131,7 +137,7 @@ export const FunctionContextProvider = ({ children }) => {
         theme: state.theme,
         PostThread,
         GetThread,
-        UpdateThread,
+        ScheduleThread,
         dispatch,
       }}
     >
