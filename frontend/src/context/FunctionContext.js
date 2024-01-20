@@ -16,7 +16,7 @@ const INITIAL_STATE = {
   loading: false,
   complete: false,
   show: false,
-  schedule: true,
+  schedule: false,
   expand: false,
   templates: [
     {

@@ -1,40 +1,51 @@
 import { ToolContext } from "../context/ToolContext";
 import { FunctionContext } from "../context/FunctionContext";
 
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import { Button } from "./index";
 
 function Tools() {
-  const { dispatchTool } = useContext(ToolContext);
-  const { PostThread, UpdateThread } = useContext(FunctionContext);
+  const [active, setActive] = useState("writer");
+  const { writer, templates, scheduler, dispatchTool } =
+    useContext(ToolContext);
+  const { dispatch, PostThread } = useContext(FunctionContext);
 
   return (
-    <div className="px-5 py-3 bg-slate-900 text-white flex justify-between rounded-2xl">
-      <div className="flex justify-between w-3/12">
-        <Button
-          buttonName="Editor"
-          className="border-none"
-          clickFun={() => dispatchTool({ type: "OPEN_WRITER" })}
-        />
-        <Button
-          buttonName="Templates"
-          className="border-none"
-          clickFun={() => dispatchTool({ type: "OPEN_TEMPLATES" })}
-        />
-        <Button
-          buttonName="Scheduler"
-          className="border-none"
-          clickFun={() => dispatchTool({ type: "OPEN_SCHEDULER" })}
-        />
+    <div className="px-1 py-1 my-5 bg-slate-900 text-white flex justify-between border-2 border-slate-700 rounded-2xl">
+      <div className="flex justify-between w-2/12">
+        <button
+          className={`${writer && "bg-slate-800"}  py-2 px-3 rounded-xl`}
+          onClick={() => dispatchTool({ type: "OPEN_WRITER" })}
+        >
+          Writer
+        </button>
+        <button
+          className={`${templates && "bg-slate-800"} py-2 px-3 rounded-xl`}
+          onClick={() => dispatchTool({ type: "OPEN_TEMPLATES" })}
+        >
+          Templates
+        </button>
+        <button
+          className={`${scheduler && "bg-slate-800"} py-2 px-3 rounded-xl `}
+          onClick={() => dispatchTool({ type: "OPEN_SCHEDULER" })}
+        >
+          Schedules
+        </button>
       </div>
       {/* Publish */}
-      <div className="flex justify-end">
-        <Button
-          buttonName="Publish"
-          textColor="black"
-          className="bg-blue-500 border-none"
-          clickFun={PostThread}
-        />
+      <div className="flex justify-end bg-slate-800 rounded-xl">
+        <button
+          className="py-2 px-3 rounded-xl"
+          onClick={() => dispatch({ type: "SET_SCHEDULE", payload: true })}
+        >
+          Schedule
+        </button>
+        <button
+          className="py-2 px-3 bg-indigo-600 rounded-xl"
+          onClick={PostThread}
+        >
+          Publish
+        </button>
       </div>
     </div>
   );

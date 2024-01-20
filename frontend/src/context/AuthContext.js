@@ -1,6 +1,6 @@
 import { createContext, useReducer } from "react";
 import AuthReducer from "./reducer/AuthReducer";
-import { getTokenData } from "@/utils/getTokenData";
+import { getTokenData } from "../utils/getTokenData";
 
 const INITIAL_STATE = {
   user: null,
@@ -11,23 +11,6 @@ export const AuthContext = createContext(INITIAL_STATE);
 
 export const AuthContextProvider = ({ children }) => {
   const [state, dispatch] = useReducer(AuthReducer, INITIAL_STATE);
-
-  function checkUser() {
-    const storedUser = getTokenData();
-    try {
-      storedUser
-        ? dispatch({
-            type: "AUTH_LOGGEDIN",
-            payload: storedUser,
-          })
-        : dispatch({
-            type: "AUTH_LOGGEDIN",
-            payload: null,
-          });
-    } catch (error) {
-      dispatch({ type: "AUTH_FAILURE" });
-    }
-  }
 
   function logout() {
     try {
@@ -43,7 +26,7 @@ export const AuthContextProvider = ({ children }) => {
     <AuthContext.Provider
       value={{
         user: state.user,
-        checkUser,
+        dispatch,
         logout,
       }}
     >

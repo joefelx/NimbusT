@@ -1,22 +1,17 @@
-import { useContext, useEffect } from "react";
-import { useRouter } from "next/router";
+import { useEffect } from "react";
 
 import { Hero, Navigation, Footer, Features } from "../component";
 
-import { AuthContext } from "../context/AuthContext";
+import useAuth from "../hook/useAuth";
 
 export default function Home() {
-  const { user, checkUser } = useContext(AuthContext);
-  const router = useRouter();
+  const [user, checkUser] = useAuth();
 
   useEffect(() => {
-    // Check for the user logged or not and call a function CheckUser
-    checkUser();
+    if (user === null) {
+      checkUser();
+    }
   }, []);
-
-  useEffect(() => {
-    router.push("/");
-  }, [user]);
 
   return (
     <div>

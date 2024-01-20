@@ -43,6 +43,7 @@ router.get("/twitter/callback", (req, res) => {
   if (!codeVerifier || !state || !sessionState || !code) {
     return res.status(400).send("You denied the app or your session expired!");
   }
+
   if (state !== sessionState) {
     return res.status(400).send("Stored tokens didnt match!");
   }
@@ -75,7 +76,6 @@ router.get("/twitter/callback", (req, res) => {
 
             const userData = {
               username: user.username,
-              accessToken: user.accessToken,
               name: user.name,
             };
 
@@ -84,7 +84,6 @@ router.get("/twitter/callback", (req, res) => {
             });
 
             res.cookie("nimbus_token", token);
-
             res.redirect(`${CLIENT_URL}/${user?.username}`);
           } else {
             const user = new User({
@@ -100,7 +99,6 @@ router.get("/twitter/callback", (req, res) => {
 
             const userData = {
               username: savedUser.username,
-              accessToken: savedUser.accessToken,
               name: savedUser.name,
             };
 
@@ -109,7 +107,6 @@ router.get("/twitter/callback", (req, res) => {
             });
 
             res.cookie("nimbus_token", token);
-
             res.redirect(`${CLIENT_URL}/${savedUser.username}`);
           }
         } catch (err) {

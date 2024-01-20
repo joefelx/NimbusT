@@ -5,13 +5,16 @@ import { AuthContext } from "../context/AuthContext";
 
 import ProfileImg from "../assets/profile.jpg";
 import Navigation from "../component/Navigation";
+import useAuth from "../hook/useAuth";
 
 const User = () => {
-  const { user, checkUser } = useContext(AuthContext);
+  const [user, checkUser] = useAuth();
   const [tweets, setTweets] = useState([]);
 
   useEffect(() => {
-    checkUser();
+    if (user === null) {
+      checkUser();
+    }
   }, []);
 
   return (

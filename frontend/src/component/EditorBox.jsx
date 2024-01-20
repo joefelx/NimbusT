@@ -7,12 +7,12 @@ function EditorBox() {
   const { writer, templates, scheduler, draft } = useContext(ToolContext);
 
   return (
-    <div className="h-auto flex bg-black rounded-2xl  overflow-hidden">
+    <>
       {writer && <Writer />}
       {templates && <Templates />}
       {scheduler && <Scheduler />}
       {draft && <Draft />}
-    </div>
+    </>
   );
 }
 

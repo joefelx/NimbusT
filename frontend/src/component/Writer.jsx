@@ -77,7 +77,7 @@ function Writer() {
   const { threads } = useContext(FunctionContext);
 
   return (
-    <>
+    <div className="flex h-auto">
       <TextField />
       <div className="flex flex-col flex-1 items-end bg-slate-900 px-5">
         {/* thread detail */}
@@ -88,7 +88,7 @@ function Writer() {
           return <ThreadBox thread={t} imageURL="" />;
         })}
       </div>
-    </>
+    </div>
   );
 }
 

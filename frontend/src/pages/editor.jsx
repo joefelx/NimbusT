@@ -4,10 +4,11 @@ import { Toaster, toast } from "react-hot-toast";
 import { Navigation, Tools, EditorBox, Footer, LoginCard } from "../component";
 import { AuthContext } from "../context/AuthContext";
 import { FunctionContext } from "../context/FunctionContext";
+import useAuth from "../hook/useAuth";
 
 function editor() {
-  const { user, checkUser } = useContext(AuthContext);
   const { schedule, ScheduleThread } = useContext(FunctionContext);
+  const [user, checkUser] = useAuth();
 
   const Scheduler = () => {
     const { threads, dispatch } = useContext(FunctionContext);
@@ -55,7 +56,11 @@ function editor() {
     );
   };
 
-  useEffect(() => checkUser(), []);
+  useEffect(() => {
+    if (user === null) {
+      checkUser();
+    }
+  }, []);
 
   return (
     <div className="bg-black text-white">
@@ -64,18 +69,8 @@ function editor() {
       <Toaster />
       <Navigation />
       <div className="px-12">
-        <div className="h-auto py-10 text-center">
-          <h1 className="text-4xl font-bold">
-            Craft captivating Threads effortlessly with our user-friendly
-            Editor!
-          </h1>
-          <p className="text-indigo-600 text-xl italic mt-5">
-            Use ^ to make new thread
-          </p>
-        </div>
-        {/* <Editor /> */}
+        <Tools />
         <div className="rounded-2xl border-2 border-slate-700 overflow-hidden">
-          <Tools />
           <EditorBox />
         </div>
         <Footer />
