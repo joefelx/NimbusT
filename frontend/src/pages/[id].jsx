@@ -1,7 +1,5 @@
-import { useContext, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import Image from "next/image";
-
-import { AuthContext } from "../context/AuthContext";
 
 import ProfileImg from "../assets/profile.jpg";
 import Navigation from "../component/Navigation";

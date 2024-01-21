@@ -1,4 +1,4 @@
-import { useContext, useEffect, useState } from "react";
+import { useContext, useEffect } from "react";
 import { FunctionContext } from "../context/FunctionContext";
 import { handleResize, splitText } from "../utils/utils";
 
