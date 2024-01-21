@@ -12,7 +12,7 @@ function Footer() {
   const router = useRouter();
 
   return (
-    <footer className=" container py-10">
+    <footer className="py-10">
       <div className="flex items-center space-x-6">
         <div>
           <Image src={Logo} className="w-10" />
@@ -59,7 +59,7 @@ function Footer() {
         </ul>
       </div>
       <p className="text-sm text-gray-500 dark:text-gray-400 mt-6">
-        Nimbus Tweet By{" "}
+        Developed By{" "}
         <a href="https://github.com/joefelx" target="_blank">
           Joe Felix
         </a>

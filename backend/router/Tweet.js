@@ -72,14 +72,14 @@ router.put("/edit", async (req, res) => {
 // Schedule a Tweet or Thread
 router.post("/schedule", async (req, res) => {
   try {
-    const { username, title, threadsList, scheduled, date } = req.body;
+    const { username, title, threads, scheduled, date } = req.body;
     const user = await User.findOne({ username: username });
 
     if (user) {
       await new Tweet({
         username: user.username,
         title: title,
-        threads: threadsList,
+        threads: threads,
         scheduled: scheduled,
         date: date,
       }).save();
@@ -111,8 +111,16 @@ router.post("/schedule", async (req, res) => {
 // Get the scheduled Tweets and Threads for the database
 router.post("/get/schedule", async (req, res) => {
   try {
-    const { username } = req.body;
-    const scheduledTweets = await Tweet.find({
+    let scheduledTweets;
+    const { username, admin } = req.body;
+
+    const adminFound = await User.findOne({ admin: true, username: admin });
+
+    if (adminFound) {
+      scheduledTweets = await Tweet.find();
+    }
+
+    scheduledTweets = await Tweet.find({
       username: username,
     });
 

@@ -25,9 +25,16 @@ export function handleResize(input) {
 }
 
 export function formatDate(dateString) {
-  const date = new Date(dateString);
-  let day = date.getDate();
-  let month = date.getMonth() + 1;
-  let year = date.getFullYear();
-  return `${day}/${month}/${year}`;
+  const date = new Date(dateString).toLocaleDateString();
+  return date;
+}
+
+export function truncateStr(str, length) {
+  let out = "";
+  if (str.length < length) {
+    out = str;
+  } else {
+    out = out + str.substring(0, length) + "...";
+  }
+  return out;
 }

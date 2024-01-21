@@ -1,6 +1,5 @@
 import { createContext, useReducer } from "react";
 import AuthReducer from "./reducer/AuthReducer";
-import { getTokenData } from "../utils/getTokenData";
 
 const INITIAL_STATE = {
   user: null,

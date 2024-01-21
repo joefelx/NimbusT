@@ -1,11 +1,9 @@
 import { ToolContext } from "../context/ToolContext";
 import { FunctionContext } from "../context/FunctionContext";
 
-import { useContext, useState } from "react";
-import { Button } from "./index";
+import { useContext } from "react";
 
 function Tools() {
-  const [active, setActive] = useState("writer");
   const { writer, templates, scheduler, dispatchTool } =
     useContext(ToolContext);
   const { dispatch, PostThread } = useContext(FunctionContext);

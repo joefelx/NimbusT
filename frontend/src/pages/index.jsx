@@ -14,9 +14,9 @@ export default function Home() {
   }, []);
 
   return (
-    <div>
+    <div className="px-12 bg-black">
       <Navigation />
-      <div className="h-auto min-h-screen w-full bg-black overflow-hidden relative px-12">
+      <div className="h-auto min-h-screen w-full overflow-hidden relative">
         <Hero />
         <Footer />
       </div>

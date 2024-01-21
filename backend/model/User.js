@@ -7,6 +7,9 @@ const userSchema = new mongoose.Schema({
   username: {
     type: String,
   },
+  admin: {
+    type: Boolean,
+  },
   name: {
     type: String,
   },

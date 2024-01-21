@@ -1,13 +1,13 @@
 import { useContext, useEffect, useState } from "react";
-import axios from "axios";
-import { Toaster, toast } from "react-hot-toast";
-import { Navigation, Tools, EditorBox, Footer, LoginCard } from "../component";
-import { AuthContext } from "../context/AuthContext";
+import { Toaster } from "react-hot-toast";
+
 import { FunctionContext } from "../context/FunctionContext";
+import { Navigation, Tools, EditorBox, Footer, LoginCard } from "../component";
+import ThreadBox from "../component/ThreadBox";
 import useAuth from "../hook/useAuth";
 
 function editor() {
-  const { schedule, ScheduleThread } = useContext(FunctionContext);
+  const { threads, schedule, ScheduleThread } = useContext(FunctionContext);
   const [user, checkUser] = useAuth();
 
   const Scheduler = () => {
@@ -63,18 +63,28 @@ function editor() {
   }, []);
 
   return (
-    <div className="bg-black text-white">
+    <div className="bg-black text-white px-12">
       {!user && <LoginCard />}
       {schedule && <Scheduler />}
       <Toaster />
       <Navigation />
-      <div className="px-12">
-        <Tools />
-        <div className="rounded-2xl border-2 border-slate-700 overflow-hidden">
+      <div className="w-full flex justify-between h-screen">
+        <div className="w-1/2 flex flex-col">
+          <Tools />
           <EditorBox />
         </div>
-        <Footer />
+
+        <div className="w-1/2 flex flex-col flex-1 items-center px-5 overflow-scroll">
+          {/* thread detail */}
+          {threads.map((t) => {
+            if (t === "") {
+              return "";
+            }
+            return <ThreadBox user={user} thread={t} imageURL="" />;
+          })}
+        </div>
       </div>
+      <Footer />
     </div>
   );
 }
