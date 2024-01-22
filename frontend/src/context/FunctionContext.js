@@ -1,4 +1,5 @@
 import axios from "axios";
+import Cookies from "js-cookie";
 
 import { createContext, useContext, useReducer } from "react";
 import FunctionReducer from "./reducer/FunctionReducer";
@@ -6,6 +7,7 @@ import { AuthContext } from "./AuthContext";
 
 import threadtemplate1 from "../assets/threadtemplate1.png";
 import toast from "react-hot-toast";
+import useAuth from "../hook/useAuth";
 
 const INITIAL_STATE = {
   theme: "",
@@ -74,16 +76,24 @@ export const FunctionContext = createContext();
 
 export const FunctionContextProvider = ({ children }) => {
   const [state, dispatch] = useReducer(FunctionReducer, INITIAL_STATE);
-  const { user } = useContext(AuthContext);
+  const [user] = useAuth();
 
   const NEXT_PUBLIC_REQUEST_URL = process.env.NEXT_PUBLIC_REQUEST_URL;
 
   const PostThread = async () => {
     await toast.promise(
-      axios.post(`${NEXT_PUBLIC_REQUEST_URL}/tweet/thread`, {
-        username: user.username,
-        threadsList: state.threads.filter(Boolean),
-      }),
+      axios.post(
+        `${NEXT_PUBLIC_REQUEST_URL}/tweet/thread`,
+        {
+          username: user.username,
+          threadsList: state.threads.filter(Boolean),
+        },
+        {
+          headers: {
+            Authorization: `Bearer ${user.token}`,
+          },
+        }
+      ),
       {
         loading: "Posting the Thread...",
         success: "Posted! Go and check the X platform",
@@ -94,13 +104,21 @@ export const FunctionContextProvider = ({ children }) => {
 
   const ScheduleThread = async (title, date) => {
     await toast.promise(
-      axios.post(`${process.env.NEXT_PUBLIC_REQUEST_URL}/tweet/schedule`, {
-        username: user.username,
-        title: title,
-        threads: state.threads,
-        scheduled: true,
-        date: date.toISOString(),
-      }),
+      axios.post(
+        `${process.env.NEXT_PUBLIC_REQUEST_URL}/tweet/schedule`,
+        {
+          username: user.username,
+          title: title,
+          threads: state.threads,
+          scheduled: true,
+          date: date.toISOString(),
+        },
+        {
+          headers: {
+            Authorization: `Bearer ${user.token}`,
+          },
+        }
+      ),
       {
         loading: "Saving the Thread...",
         success: "Saved the Thread. Check the Scheduled Section!",
@@ -116,6 +134,11 @@ export const FunctionContextProvider = ({ children }) => {
       `${NEXT_PUBLIC_REQUEST_URL}/tweet`,
       {
         username: user.username,
+      },
+      {
+        headers: {
+          Authorization: `Bearer ${user.token}`,
+        },
       }
     );
     dispatch({ type: "SET_DRAFT_THREAD", payload: receivedThreads.data });

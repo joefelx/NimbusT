@@ -13,6 +13,7 @@ const userRouter = require("./router/User");
 const tweetRouter = require("./router/Tweet");
 const templateRouter = require("./router/Template");
 const cronJob = require("./utils/cronJob");
+const isAuthenticated = require("./middleware/isAuthenticated");
 
 // Express server Initialised
 const app = express();
@@ -49,7 +50,7 @@ app.get("/", (req, res) => {
 });
 app.use("/auth", authRouter);
 app.use("/user", userRouter);
-app.use("/tweet", tweetRouter);
+app.use("/tweet", isAuthenticated, tweetRouter);
 app.use("/template", templateRouter);
 
 app.post("/media", upload.single("image"), async (req, res) => {

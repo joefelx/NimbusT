@@ -15,7 +15,6 @@ export const AuthContextProvider = ({ children }) => {
     try {
       window.localStorage.removeItem("USER_ACCOUNT");
       dispatch({ type: "AUTH_LOGGEDOUT" });
-      checkUser();
     } catch (error) {
       dispatch({ type: "AUTH_FAILURE" });
     }

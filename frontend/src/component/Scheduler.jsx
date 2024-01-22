@@ -1,5 +1,7 @@
 import { useContext, useEffect, useState } from "react";
 import axios from "axios";
+import Cookies from "js-cookie";
+
 import { formatDate, truncateStr, mergeText } from "../utils/utils";
 import useAuth from "../hook/useAuth";
 import { FunctionContext } from "../context/FunctionContext";
@@ -42,12 +44,21 @@ function Schedule() {
   const [user] = useAuth();
 
   const getThreads = async () => {
+    console.log(user.token);
     try {
       await axios
-        .post(`${process.env.NEXT_PUBLIC_REQUEST_URL}/tweet/get/schedule`, {
-          username: user.username,
-        })
-        .then((res) => setScheduledPost(res.data.data.scheduled));
+        .post(
+          `${process.env.NEXT_PUBLIC_REQUEST_URL}/tweet/get/schedule`,
+          {
+            username: user.username,
+          },
+          {
+            headers: {
+              Authorization: `Bearer ${user.token}`,
+            },
+          }
+        )
+        .then((res) => setScheduledPost(res.data.data));
     } catch (error) {
       console.log(error);
     }

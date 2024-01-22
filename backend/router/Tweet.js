@@ -125,10 +125,8 @@ router.post("/get/schedule", async (req, res) => {
     });
 
     res.status(200).json({
-      data: {
-        status: "success",
-        scheduled: scheduledTweets,
-      },
+      status: "success",
+      data: scheduledTweets,
     });
   } catch (error) {
     console.log(error);

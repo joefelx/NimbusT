@@ -57,9 +57,7 @@ function editor() {
   };
 
   useEffect(() => {
-    if (user === null) {
-      checkUser();
-    }
+    checkUser();
   }, []);
 
   return (
