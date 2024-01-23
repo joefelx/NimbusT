@@ -9,11 +9,13 @@ const upload = require("./utils/Upload");
 const mongoConnection = require("./config/dbConfig");
 
 const authRouter = require("./router/Auth");
+const adminRouter = require("./router/Admin");
 const userRouter = require("./router/User");
 const tweetRouter = require("./router/Tweet");
 const templateRouter = require("./router/Template");
 const cronJob = require("./utils/cronJob");
 const isAuthenticated = require("./middleware/isAuthenticated");
+const isAdmin = require("./middleware/isAdmin");
 
 // Express server Initialised
 const app = express();
@@ -52,6 +54,7 @@ app.use("/auth", authRouter);
 app.use("/user", userRouter);
 app.use("/tweet", isAuthenticated, tweetRouter);
 app.use("/template", templateRouter);
+app.use("/admin", isAdmin, adminRouter);
 
 app.post("/media", upload.single("image"), async (req, res) => {
   try {

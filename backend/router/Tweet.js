@@ -111,16 +111,9 @@ router.post("/schedule", async (req, res) => {
 // Get the scheduled Tweets and Threads for the database
 router.post("/get/schedule", async (req, res) => {
   try {
-    let scheduledTweets;
-    const { username, admin } = req.body;
+    const { username } = req.body;
 
-    const adminFound = await User.findOne({ admin: true, username: admin });
-
-    if (adminFound) {
-      scheduledTweets = await Tweet.find();
-    }
-
-    scheduledTweets = await Tweet.find({
+    const scheduledTweets = await Tweet.find({
       username: username,
     });
 
