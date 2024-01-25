@@ -7,19 +7,23 @@ const isAdmin = async (req, res, next) => {
     return;
   } else {
     const token = req.headers.authorization.split(" ")[1];
-    const decodedAdmin = jwt.verify(token, process.env.TOKEN_SECRET);
-    console.log(token);
-
-    if (decodedAdmin) {
-      const admin = await Admin.findOne({ username: decodedAdmin.username });
-      console.log(admin.token);
-      if (admin.token === token) {
-        next();
-      } else {
-        res.status(404).json("Not Authorized Admin");
+    jwt.verify(token, process.env.TOKEN_SECRET, async (err, decodedAdmin) => {
+      if (err) {
+        res.status(401).json("Invalid Token");
         return;
+      } else {
+        const admin = await Admin.findOne({
+          username: decodedAdmin.username,
+        });
+        if (admin.accessToken === token) {
+          req.admin = admin;
+          next();
+        } else {
+          res.status(401).json("Not Authorized Admin");
+          return;
+        }
       }
-    }
+    });
   }
 };
 

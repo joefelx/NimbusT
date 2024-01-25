@@ -1,6 +1,6 @@
 const mongoose = require("mongoose");
 
-const tweetSchema = new mongoose.Schema({
+const postSchema = new mongoose.Schema({
   username: {
     type: String,
   },
@@ -20,4 +20,4 @@ const tweetSchema = new mongoose.Schema({
   },
 });
 
-module.exports = new mongoose.model("Tweet", tweetSchema);
+module.exports = new mongoose.model("Post", postSchema);
