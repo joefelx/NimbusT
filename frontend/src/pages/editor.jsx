@@ -8,7 +8,7 @@ import useAuth from "../hook/useAuth";
 
 function editor() {
   const { threads, schedule, ScheduleThread } = useContext(FunctionContext);
-  const [user, checkUser] = useAuth();
+  const { user, checkUser } = useAuth();
 
   const Scheduler = () => {
     const { threads, dispatch } = useContext(FunctionContext);

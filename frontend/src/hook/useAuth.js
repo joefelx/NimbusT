@@ -2,22 +2,19 @@
 import { useContext } from "react";
 import { AuthContext } from "../context/AuthContext";
 import { getTokenData } from "../utils/getTokenData";
+import Cookies from "js-cookie";
 
 const useAuth = () => {
   const { user, dispatch } = useContext(AuthContext);
 
   function checkUser() {
     try {
-      const userData = getTokenData();
-      if (userData) {
+      const { tokenFound, data } = getTokenData();
+      if (tokenFound) {
         dispatch({
           type: "AUTH_LOGGEDIN",
-          payload: userData,
+          payload: data,
         });
-
-        if (!userData) {
-          console.log("No token available");
-        }
       } else {
         dispatch({
           type: "AUTH_LOGGEDIN",
@@ -29,7 +26,12 @@ const useAuth = () => {
     }
   }
 
-  return [user, checkUser];
+  function logoutUser() {
+    Cookies.remove("nimbus_token");
+    checkUser();
+  }
+
+  return { user, checkUser, logoutUser };
 };
 
 export default useAuth;

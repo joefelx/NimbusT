@@ -41,14 +41,13 @@ const Post = ({ p }) => {
 
 function Schedule() {
   const [scheduledPost, setScheduledPost] = useState([]);
-  const [user] = useAuth();
+  const { user } = useAuth();
 
   const getThreads = async () => {
-    console.log(user.token);
     try {
       await axios
         .post(
-          `${process.env.NEXT_PUBLIC_REQUEST_URL}/tweet/get/schedule`,
+          `${process.env.NEXT_PUBLIC_REQUEST_URL}/post`,
           {
             username: user.username,
           },

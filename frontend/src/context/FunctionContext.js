@@ -76,17 +76,18 @@ export const FunctionContext = createContext();
 
 export const FunctionContextProvider = ({ children }) => {
   const [state, dispatch] = useReducer(FunctionReducer, INITIAL_STATE);
-  const [user] = useAuth();
+  const { user } = useAuth();
 
   const NEXT_PUBLIC_REQUEST_URL = process.env.NEXT_PUBLIC_REQUEST_URL;
 
   const PostThread = async () => {
     await toast.promise(
       axios.post(
-        `${NEXT_PUBLIC_REQUEST_URL}/tweet/thread`,
+        `${NEXT_PUBLIC_REQUEST_URL}/post/thread`,
         {
           username: user.username,
-          threadsList: state.threads.filter(Boolean),
+          title: state.threads[0],
+          threads: state.threads.filter(Boolean),
         },
         {
           headers: {
@@ -105,7 +106,7 @@ export const FunctionContextProvider = ({ children }) => {
   const ScheduleThread = async (title, date) => {
     await toast.promise(
       axios.post(
-        `${process.env.NEXT_PUBLIC_REQUEST_URL}/tweet/schedule`,
+        `${process.env.NEXT_PUBLIC_REQUEST_URL}/post/schedule`,
         {
           username: user.username,
           title: title,
@@ -131,7 +132,7 @@ export const FunctionContextProvider = ({ children }) => {
 
   const GetThread = async () => {
     const receivedThreads = await axios.post(
-      `${NEXT_PUBLIC_REQUEST_URL}/tweet`,
+      `${NEXT_PUBLIC_REQUEST_URL}/post`,
       {
         username: user.username,
       },

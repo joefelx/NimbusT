@@ -1,36 +1,49 @@
-const Tweet = require("../model/Tweet");
+const Post = require("../model/Post");
 const Admin = require("../model/Admin");
 const router = require("express").Router();
-const jwt = require("jsonwebtoken");
+const generateToken = require("../utils/generateToken");
 
 router.post("/", async (req, res) => {
-  const { username, name } = req.body;
+  try {
+    if (process.env.ADMIN) {
+      let foundAdmin = await Admin.findOne({ username: process.env.ADMIN });
 
-  const userData = {
-    username,
-    name,
-  };
+      if (foundAdmin) {
+        res.status(201).json({ message: "Admin found", foundAdmin });
+      } else {
+        const { username, name } = req.body;
+        const adminData = {
+          username,
+          name,
+        };
 
-  const token = jwt.sign(userData, process.env.TOKEN_SECRET, {
-    expiresIn: "1d",
-  });
+        const accessToken = generateToken(adminData, "7d");
+        const refreshToken = generateToken(adminData, "30d");
 
-  const admin = await new Admin({
-    username,
-    token,
-  });
+        const admin = await new Admin({
+          username,
+          accessToken,
+          refreshToken,
+        });
 
-  const savedAdmin = await admin.save();
+        const savedAdmin = await admin.save();
 
-  res.status(201).json({ message: "Admin Saved", savedAdmin });
+        res.status(201).json({ message: "Admin Saved", savedAdmin });
+      }
+    }
+  } catch (error) {
+    console.log("error");
+  }
 });
 
-router.get("/get-scheduled-post", async (req, res) => {
+// Get the scheduled Post and Threads for the database
+router.get("/schedule", async (req, res) => {
   try {
-    const post = await Tweet.find({ scheduled: true });
+    const scheduledPost = await Post.find();
+
     res.status(200).json({
       status: "success",
-      post,
+      data: scheduledPost,
     });
   } catch (error) {
     console.log(error);

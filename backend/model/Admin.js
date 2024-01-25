@@ -5,7 +5,10 @@ const adminSchema = new mongoose.Schema({
     type: String,
     unique: true,
   },
-  token: {
+  accessToken: {
+    type: String,
+  },
+  refreshToken: {
     type: String,
   },
 });
