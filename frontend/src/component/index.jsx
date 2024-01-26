@@ -4,12 +4,10 @@ import Navigation from "./Navigation";
 import LoginCard from "./LoginCard";
 import Templates from "./Templates";
 import Scheduler from "./Scheduler";
-import Draft from "./Draft";
 import EditorBox from "./EditorBox";
 import Features from "./Features";
 import Footer from "./Footer";
 import Tools from "./Tools";
-import { TextField } from "./Writer";
 
 import { Gradient, CornerGradient, Loading, Tick, Logo } from "./Graphics";
 
@@ -40,7 +38,6 @@ const Button = ({
 
 export {
   Writer,
-  TextField,
   Hero,
   Navigation,
   LoginCard,
@@ -52,7 +49,6 @@ export {
   Tick,
   Logo,
   Scheduler,
-  Draft,
   EditorBox,
   Features,
   Footer,

@@ -1,14 +1,12 @@
 import Image from "next/image";
 import { useRouter } from "next/router";
-import { useContext } from "react";
-
-import { ToolContext } from "../context/ToolContext";
 
 import { BsTwitter, BsGithub } from "react-icons/bs";
 import Logo from "../assets/transparentlogo2.png";
+import useTool from "../hook/useTool";
 
 function Footer() {
-  const { dispatchTool } = useContext(ToolContext);
+  const { DispatchWriter, DispatchTemplate } = useTool();
   const router = useRouter();
 
   return (
@@ -41,7 +39,7 @@ function Footer() {
           <li
             className=" cursor-pointer"
             onClick={() => {
-              dispatchTool({ type: "OPEN_EDITOR" });
+              DispatchWriter();
               router.push("/editor");
             }}
           >
@@ -50,7 +48,7 @@ function Footer() {
           <li
             className=" cursor-pointer"
             onClick={() => {
-              dispatchTool({ type: "OPEN_TEMPLATES" });
+              DispatchTemplate();
               router.push("/editor");
             }}
           >

@@ -5,7 +5,6 @@ const ToolReducer = (state, action) => {
         writerOpen: true,
         templatesOpen: false,
         schedulerOpen: false,
-        draftOpen: false,
       };
 
     case "OPEN_TEMPLATES":
@@ -13,7 +12,6 @@ const ToolReducer = (state, action) => {
         writerOpen: false,
         templatesOpen: true,
         schedulerOpen: false,
-        draftOpen: false,
       };
 
     case "OPEN_SCHEDULER":
@@ -21,14 +19,6 @@ const ToolReducer = (state, action) => {
         writerOpen: false,
         templatesOpen: false,
         schedulerOpen: true,
-        draftOpen: false,
-      };
-    case "OPEN_DRAFT":
-      return {
-        writerOpen: false,
-        templatesOpen: false,
-        schedulerOpen: false,
-        draftOpen: true,
       };
 
     default:

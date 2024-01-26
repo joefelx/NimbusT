@@ -78,6 +78,7 @@ app.get("/update-access-token/admin", async (req, res) => {
   try {
     const adminUsername = process.env.ADMIN;
     let adminFound = await Admin.findOne({ username: adminUsername });
+
     if (isTokenExpired(adminFound.accessToken)) {
       const userData = {
         username: adminFound.username,
