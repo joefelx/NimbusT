@@ -84,7 +84,7 @@ router.get("/twitter/callback", (req, res) => {
             });
 
             res.cookie("nimbus_token", token);
-            res.redirect(`${CLIENT_URL}`);
+            res.redirect(`${CLIENT_URL}/auth/success?nimbus_token=${token}`);
           } else {
             const user = new User({
               clientId: userObject.id,
@@ -107,7 +107,7 @@ router.get("/twitter/callback", (req, res) => {
             });
 
             res.cookie("nimbus_token", token);
-            res.redirect(`${CLIENT_URL}`);
+            res.redirect(`${CLIENT_URL}/auth/success?nimbus_token=${token}`);
           }
         } catch (err) {
           console.log(err);

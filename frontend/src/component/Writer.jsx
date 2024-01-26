@@ -1,12 +1,12 @@
-import { useContext, useEffect } from "react";
-import { FunctionContext } from "../context/FunctionContext";
+import { useEffect } from "react";
 import { handleResize, splitText } from "../utils/utils";
+import usePost from "../hook/usePost";
 
 function TextField({ className }) {
-  const { input, dispatch } = useContext(FunctionContext);
+  const { input, postDispatch } = usePost();
 
   useEffect(() => {
-    dispatch({ type: "SET_THREAD", payload: splitText(input) });
+    postDispatch({ type: "SET_THREAD", payload: splitText(input) });
     handleResize("#textField");
   }, [input]);
 
@@ -17,7 +17,7 @@ function TextField({ className }) {
       className={`flex w-full h-full text-white bg-slate-900 p-5 focus:outline-none placeholder:text-gray-600 resize-none whitespace-pre-wrap ${className}`}
       value={input}
       onChange={(e) => {
-        dispatch({ type: "SET_INPUT", payload: e.target.value });
+        postDispatch({ type: "SET_INPUT", payload: e.target.value });
       }}
     ></textarea>
   );
@@ -32,4 +32,3 @@ function Writer() {
 }
 
 export default Writer;
-export { TextField };

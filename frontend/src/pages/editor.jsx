@@ -1,18 +1,18 @@
 import { useContext, useEffect, useState } from "react";
 import { Toaster } from "react-hot-toast";
 
-import { FunctionContext } from "../context/FunctionContext";
 import { Navigation, Tools, EditorBox, Footer, LoginCard } from "../component";
 import ThreadBox from "../component/ThreadBox";
 import useAuth from "../hook/useAuth";
+import usePost from "../hook/usePost";
+import { FunctionContext } from "../context/FunctionContext";
 
 function editor() {
-  const { threads, schedule, ScheduleThread } = useContext(FunctionContext);
+  const { threads, schedule, postDispatch, ScheduleThread } = usePost();
   const { user, checkUser } = useAuth();
+  const { show } = useContext(FunctionContext);
 
-  const Scheduler = () => {
-    const { threads, dispatch } = useContext(FunctionContext);
-
+  const Scheduler = ({ threads, postDispatch }) => {
     const [date, setDate] = useState(new Date());
     const [title, setTitle] = useState(threads[0]);
 
@@ -46,7 +46,9 @@ function editor() {
             </button>
             <button
               className="w-full border-2 border-slate-700 bg-black hover:bg-slate-900 rounded-xl p-2 my-1"
-              onClick={() => dispatch({ type: "SET_SCHEDULE", payload: false })}
+              onClick={() =>
+                postDispatch({ type: "SET_SCHEDULE", payload: false })
+              }
             >
               Cancel
             </button>
@@ -61,29 +63,33 @@ function editor() {
   }, []);
 
   return (
-    <div className="bg-black text-white px-12">
+    <>
       {!user && <LoginCard />}
-      {schedule && <Scheduler />}
-      <Toaster />
-      <Navigation />
-      <div className="w-full flex justify-between h-screen">
-        <div className="w-1/2 flex flex-col">
-          <Tools />
-          <EditorBox />
+      {show && <LoginCard />}
+      {schedule && <Scheduler threads={threads} postDispatch={postDispatch} />}
+      <div className="bg-black text-white px-12">
+        <Toaster />
+        <Navigation />
+        <div className="w-full flex justify-between h-screen">
+          {/* Tools and Editor Box */}
+          <div className="w-1/2 flex flex-col">
+            <Tools />
+            <EditorBox />
+          </div>
+          {/* Threads Preview Box */}
+          <div className="w-1/2 flex flex-col flex-1 items-center px-5 overflow-scroll">
+            {/* thread detail */}
+            {threads.map((t) => {
+              if (t === "") {
+                return "";
+              }
+              return <ThreadBox user={user} thread={t} imageURL="" />;
+            })}
+          </div>
         </div>
-
-        <div className="w-1/2 flex flex-col flex-1 items-center px-5 overflow-scroll">
-          {/* thread detail */}
-          {threads.map((t) => {
-            if (t === "") {
-              return "";
-            }
-            return <ThreadBox user={user} thread={t} imageURL="" />;
-          })}
-        </div>
+        <Footer />
       </div>
-      <Footer />
-    </div>
+    </>
   );
 }
 

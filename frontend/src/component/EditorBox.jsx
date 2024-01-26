@@ -1,17 +1,14 @@
-import { useContext } from "react";
-import { ToolContext } from "../context/ToolContext";
-
-import { Writer, Templates, Scheduler, Draft } from "./index";
+import { Writer, Templates, Scheduler } from "./index";
+import useTool from "../hook/useTool";
 
 function EditorBox() {
-  const { writer, templates, scheduler, draft } = useContext(ToolContext);
+  const { writer, template, scheduler } = useTool();
 
   return (
     <div className="h-full rounded-2xl border-2 border-slate-700 overflow-hidden">
       {writer && <Writer />}
-      {templates && <Templates />}
+      {template && <Templates />}
       {scheduler && <Scheduler />}
-      {draft && <Draft />}
     </div>
   );
 }

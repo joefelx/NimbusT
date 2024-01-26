@@ -17,7 +17,7 @@ router.post("/", async (req, res) => {
 
       res.status(200).json({
         status: "success",
-        data: allPosts,
+        allPosts,
       });
     } else {
       res.status(404).json({
@@ -35,21 +35,32 @@ router.post("/", async (req, res) => {
 // Post a Tweet or Thread by posting a list of tweets
 router.post("/thread", async (req, res) => {
   try {
-    const { username, title, threads } = req.body;
+    const { username, title, threads, scheduled, date } = req.body;
 
     if (username === req.user.username) {
       const user = await User.findOne({ username: req.user.username });
 
       const client = new TwitterApi(user.accessToken);
 
-      /* Make a Thread */
-      await makeThread(client, threads);
+      const postfound = await Post.findOne({ title: title, scheduled: true });
 
-      await new Post({
-        username: username,
-        title: title,
-        threads: threads,
-      }).save();
+      if (postfound) {
+        /* Make a Thread */
+        await makeThread(client, threads);
+        postfound.scheduled = false;
+        await postfound.save();
+      } else {
+        await new Post({
+          username: username,
+          title: title,
+          threads: threads,
+          scheduled: scheduled,
+          date: date,
+        }).save();
+
+        /* Make a Thread */
+        await makeThread(client, threads);
+      }
 
       res.status(201).json({
         data: {

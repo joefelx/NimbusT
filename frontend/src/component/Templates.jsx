@@ -1,8 +1,8 @@
-import React, { useContext } from "react";
-
-import { FunctionContext } from "../context/FunctionContext";
-import { ToolContext } from "../context/ToolContext";
+import React from "react";
 import toast from "react-hot-toast";
+
+import usePost from "../hook/usePost";
+import useTool from "../hook/useTool";
 
 const TemplateBox = ({ item, onClick }) => {
   return (
@@ -34,8 +34,8 @@ const TemplateBox = ({ item, onClick }) => {
 };
 
 function Templates() {
-  const { templates, dispatch } = useContext(FunctionContext);
-  const { dispatchTool } = useContext(ToolContext);
+  const { templates, postDispatch } = usePost();
+  const { DispatchWriter } = useTool();
 
   return (
     <div className="p-10 grid grid-cols-1 sm:grid-cols-1 md:grid-cols-3 lg:grid-cols-3 xl:grid-cols-3 gap-5">
@@ -44,8 +44,8 @@ function Templates() {
           item={temp}
           onClick={() => {
             toast.success("Template Loaded");
-            dispatch({ type: "SET_INPUT", payload: temp.template });
-            dispatchTool({ type: "OPEN_WRITER" });
+            postDispatch({ type: "SET_INPUT", payload: temp.template });
+            DispatchWriter();
           }}
         />
       ))}

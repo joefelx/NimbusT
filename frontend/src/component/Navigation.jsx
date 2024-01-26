@@ -2,27 +2,28 @@ import Image from "next/image";
 import { useRouter } from "next/router";
 import { useContext } from "react";
 
-import { LoginCard, Logo } from "./index";
-import { FunctionContext } from "../context/FunctionContext";
-import { AuthContext } from "../context/AuthContext";
-import { ToolContext } from "../context/ToolContext";
+import { Logo } from "./index";
 
 import ProfileImg from "../assets/profile.jpg";
+import { FunctionContext } from "../context/FunctionContext";
+import useAuth from "../hook/useAuth";
+import useTool from "../hook/useTool";
 
 function Navigation() {
-  const { show, dispatch } = useContext(FunctionContext);
-  const { user } = useContext(AuthContext);
-  const { dispatchTool } = useContext(ToolContext);
   const router = useRouter();
+
+  const { user } = useAuth();
+  const { DispatchWriter, DispatchTemplate } = useTool();
+  const { functionDispatch } = useContext(FunctionContext);
 
   const linkStyling =
     "px-3 text-md font-medium cursor-pointer hover:text-slate-300";
 
   return (
     <>
-      {show && <LoginCard />}
       <div className="sticky top-0 z-[100] h-[5rem] flex justify-between items-center bg-black text-white backdrop-blur-sm ">
         <div className="flex justify-between items-center h-full">
+          {/* Logo */}
           <div
             className="h-full flex items-center"
             onClick={() => router.push("/")}
@@ -33,11 +34,12 @@ function Navigation() {
             </p>
           </div>
 
+          {/* Links */}
           <div className="h-full flex items-center justify-between pl-10">
             <span
               className={linkStyling}
               onClick={() => {
-                dispatchTool({ type: "OPEN_WRITER" });
+                DispatchWriter();
                 router.push("/editor");
               }}
             >
@@ -46,7 +48,7 @@ function Navigation() {
             <span
               className={linkStyling}
               onClick={() => {
-                dispatchTool({ type: "OPEN_TEMPLATES" });
+                DispatchTemplate();
                 router.push("/editor");
               }}
             >
@@ -61,10 +63,10 @@ function Navigation() {
             </a>
           </div>
         </div>
-
+        {/* Profile */}
         <div
           className="cursor-pointer h-full flex items-center"
-          onClick={() => dispatch({ type: "SET_SHOW", payload: true })}
+          onClick={() => functionDispatch({ type: "SET_SHOW", payload: true })}
         >
           {user ? (
             <div className="flex items-center">
@@ -80,7 +82,9 @@ function Navigation() {
           ) : (
             <button
               className="bg-white px-4 py-1 rounded-xl text-black text-[14px] border-2 border-[#CECECE] cursor-pointer"
-              onClick={() => dispatch({ type: "SET_SHOW", payload: true })}
+              onClick={() =>
+                functionDispatch({ type: "SET_SHOW", payload: true })
+              }
             >
               Login
             </button>
