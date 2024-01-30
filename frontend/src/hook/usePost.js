@@ -13,11 +13,11 @@ const usePost = () => {
   const NEXT_PUBLIC_REQUEST_URL = process.env.NEXT_PUBLIC_REQUEST_URL;
 
   const PostThread = async () => {
-    console.log(date.toISOString());
     await toast.promise(
       axios.post(
         `${NEXT_PUBLIC_REQUEST_URL}/post/thread`,
         {
+          userId: user.id,
           username: user.username,
           title: threads.filter(Boolean)[0],
           threads: threads.filter(Boolean),
@@ -43,6 +43,7 @@ const usePost = () => {
       axios.post(
         `${process.env.NEXT_PUBLIC_REQUEST_URL}/post/schedule`,
         {
+          userId: user.id,
           username: user.username,
           title: title,
           threads: threads.filter(Boolean),
@@ -69,7 +70,7 @@ const usePost = () => {
     const receivedThreads = await axios.post(
       `${NEXT_PUBLIC_REQUEST_URL}/post`,
       {
-        username: user.username,
+        userId: user.id,
       },
       {
         headers: {
@@ -83,6 +84,8 @@ const usePost = () => {
       payload: receivedThreads.data.allPosts,
     });
   };
+
+  const DeleteThread = async () => {};
 
   return {
     input,

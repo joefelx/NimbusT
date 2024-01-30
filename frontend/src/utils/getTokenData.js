@@ -10,10 +10,11 @@ export function getTokenData() {
     };
     return response;
   } else {
-    const { username, name } = jwt.verify(token, "hello world");
+    const { id, username, name } = jwt.verify(token, "hello world");
     const response = {
       tokenFound: true,
       data: {
+        id,
         username,
         name,
         token,
