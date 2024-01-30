@@ -75,6 +75,7 @@ router.get("/twitter/callback", (req, res) => {
             });
 
             const userData = {
+              id: user.id,
               username: user.username,
               name: user.name,
             };
@@ -98,6 +99,7 @@ router.get("/twitter/callback", (req, res) => {
             const savedUser = await user.save();
 
             const userData = {
+              id: savedUser.id,
               username: savedUser.username,
               name: savedUser.name,
             };

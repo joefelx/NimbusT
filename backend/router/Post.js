@@ -8,12 +8,10 @@ const makeThread = require("../utils/makeThread");
 // Get Tweets of the User by Sending Username
 router.post("/", async (req, res) => {
   try {
-    const { username } = req.body;
+    const { userId } = req.body;
 
-    if (req.user.username === username) {
-      const allPosts = await Post.find({
-        username: username,
-      });
+    if (req.user.id === userId) {
+      const allPosts = await Post.find({ userId: userId });
 
       res.status(200).json({
         status: "success",
@@ -35,10 +33,10 @@ router.post("/", async (req, res) => {
 // Post a Tweet or Thread by posting a list of tweets
 router.post("/thread", async (req, res) => {
   try {
-    const { username, title, threads, scheduled, date } = req.body;
+    const { userId, username, title, threads, scheduled, date } = req.body;
 
-    if (username === req.user.username) {
-      const user = await User.findOne({ username: req.user.username });
+    if (req.user.id === userId) {
+      const user = await User.findOne({ id: req.user.id });
 
       const client = new TwitterApi(user.accessToken);
 
@@ -46,7 +44,8 @@ router.post("/thread", async (req, res) => {
 
       if (postfound) {
         /* Make a Thread */
-        await makeThread(client, threads);
+        const postedThread = await makeThread(client, threads);
+        console.log(postedThread);
         postfound.scheduled = false;
         await postfound.save();
       } else {
@@ -59,7 +58,8 @@ router.post("/thread", async (req, res) => {
         }).save();
 
         /* Make a Thread */
-        await makeThread(client, threads);
+        const postedThread = await makeThread(client, threads);
+        console.log(postedThread);
       }
 
       res.status(201).json({
@@ -100,10 +100,10 @@ router.put("/edit", async (req, res) => {
 // Schedule a Tweet or Thread
 router.post("/schedule", async (req, res) => {
   try {
-    const { username, title, threads, scheduled, date } = req.body;
+    const { userId, username, title, threads, scheduled, date } = req.body;
 
-    if (req.user.username === username) {
-      const user = await User.findOne({ username: username });
+    if (req.user.id === userId) {
+      const user = await User.findOne({ id: userId });
 
       if (user) {
         await new Post({
@@ -137,6 +137,10 @@ router.post("/schedule", async (req, res) => {
   } catch (error) {
     console.log(error);
   }
+});
+
+router.delete("/", async (req, res) => {
+  // const {userId, }
 });
 
 module.exports = router;
