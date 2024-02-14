@@ -59,7 +59,7 @@ router.post("/thread", async (req, res) => {
 
         /* Make a Thread */
         const postedThread = await makeThread(client, threads);
-        console.log(postedThread);
+        // console.log(postedThread);
       }
 
       res.status(201).json({

@@ -1,9 +1,19 @@
 const PostReducer = (state, action) => {
   switch (action.type) {
+    case "SET_INITIAL":
+      return {
+        ...state,
+        initial: false,
+      };
     case "SET_INPUT":
       return {
         ...state,
         input: action.payload,
+      };
+    case "SET_MERGED_INPUT":
+      return {
+        ...state,
+        mergedInput: action.payload,
       };
     case "SET_THREAD":
       return {

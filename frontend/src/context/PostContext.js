@@ -5,7 +5,9 @@ import threadtemplate1 from "../assets/threadtemplate1.png";
 import PostReducer from "./reducer/PostReducer";
 
 const INITIAL_STATE = {
+  initial: true,
   input: "",
+  mergedInput: "",
   threads: [],
   draftThreads: [],
   currentThread: {},
@@ -70,7 +72,9 @@ export const PostContextProvider = ({ children }) => {
   return (
     <PostContext.Provider
       value={{
+        initial: state.initial,
         input: state.input,
+        mergedInput: state.mergedInput,
         threads: state.threads,
         draftThreads: state.draftThreads,
         currentThread: state.currentThread,

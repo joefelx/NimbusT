@@ -69,24 +69,8 @@ router.get("/twitter/callback", (req, res) => {
             username: userObject.username,
           });
 
-          if (foundUser) {
-            const user = await User.findByIdAndUpdate(foundUser.id, {
-              $set: { accessToken, refreshToken, expiresIn },
-            });
+          if (!foundUser) {
 
-            const userData = {
-              id: user.id,
-              username: user.username,
-              name: user.name,
-            };
-
-            const token = jwt.sign(userData, process.env.TOKEN_SECRET, {
-              expiresIn: "1d",
-            });
-
-            res.cookie("nimbus_token", token);
-            res.redirect(`${CLIENT_URL}/auth/success?nimbus_token=${token}`);
-          } else {
             const user = new User({
               clientId: userObject.id,
               username: userObject.username,
@@ -102,6 +86,23 @@ router.get("/twitter/callback", (req, res) => {
               id: savedUser.id,
               username: savedUser.username,
               name: savedUser.name,
+            };
+
+            const token = jwt.sign(userData, process.env.TOKEN_SECRET, {
+              expiresIn: "1d",
+            });
+
+            res.cookie("nimbus_token", token);
+            res.redirect(`${CLIENT_URL}/auth/success?nimbus_token=${token}`);
+          } else {
+            const user = await User.findByIdAndUpdate(foundUser.id, {
+              $set: { accessToken, refreshToken, expiresIn },
+            });
+
+            const userData = {
+              id: user.id,
+              username: user.username,
+              name: user.name,
             };
 
             const token = jwt.sign(userData, process.env.TOKEN_SECRET, {

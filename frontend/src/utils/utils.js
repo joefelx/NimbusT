@@ -1,13 +1,17 @@
 export function splitText(paragraph) {
-  let word = paragraph.split("^");
-  return word;
+  return paragraph.split("^");
 }
 
-export function mergeText(textList) {
+export function mergeText(input) {
   let thread = "";
-  textList.forEach((text) => {
-    thread += `^${text}\n`;
-  });
+  const THREAD_LIMIT = 280;
+
+  if (input.length > THREAD_LIMIT) {
+    thread += `^${input.substring(0, 280)}`
+    return thread.concat(mergeText(input.slice(280)))
+  } else {
+    thread += `^${input}`
+  }
 
   return thread;
 }
