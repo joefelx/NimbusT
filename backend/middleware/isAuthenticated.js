@@ -12,7 +12,6 @@ const isAuthenticated = async (req, res, next) => {
         res.status(401).json({ error: "Invalid token" });
       } else {
         req.user = decoded;
-        console.log(req.user);
         next();
       }
     });

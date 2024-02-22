@@ -2,8 +2,11 @@ const router = require("express").Router();
 
 const User = require("../model/User");
 const Post = require("../model/Post");
+
 const { TwitterApi } = require("twitter-api-v2");
 const makeThread = require("../utils/makeThread");
+
+const upload = require("../utils/Upload");
 
 // Get Tweets of the User by Sending Username
 router.post("/", async (req, res) => {
@@ -134,6 +137,23 @@ router.post("/schedule", async (req, res) => {
         },
       });
     }
+  } catch (error) {
+    console.log(error);
+  }
+});
+
+// Post with images
+router.post("/thread/media", upload.single("image"), async (req, res) => {
+  try {
+    const file = req.file;
+
+    const user = await User.findOne({ username: req.user.username });
+
+    const client = new TwitterApi(user.accessToken);
+
+    const mediaId = await client.v1.uploadMedia(file.path);
+
+    res.json("files");
   } catch (error) {
     console.log(error);
   }

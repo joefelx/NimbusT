@@ -4,7 +4,7 @@ const checkMimeType = require("./checkMimeType");
 // Storage Middleware
 const storage = multer.diskStorage({
   destination: (req, file, cb) => {
-    cb(null, "public/images");
+    cb(null, "../backend/public/images");
   },
   filename: (req, file, cb) => {
     let filename = checkMimeType(file.mimetype);

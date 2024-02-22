@@ -24,6 +24,8 @@
     "twitter-api-v2": "^1.14.0"
   },
   "devDependencies": {
+    "@types/express": "^4.17.21",
+    "@types/multer": "^1.4.11",
     "nodemon": "^3.0.2"
   }
 }
