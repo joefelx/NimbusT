@@ -12,7 +12,7 @@ const TemplateBox = ({ item, onClick }) => {
     >
       <img
         className="w-full h-4/5"
-        src={`${process.env.NEXT_PUBLIC_REQUEST_URL}/` + item.image}
+        src={item.image.src}
         alt="Mountain"
         onClick={onClick}
       />
@@ -37,8 +37,10 @@ function Templates() {
   const { templates, postDispatch } = usePost();
   const { DispatchWriter } = useTool();
 
+  console.log(templates);
+
   return (
-    <div className="p-10 grid grid-cols-1 sm:grid-cols-1 md:grid-cols-3 lg:grid-cols-3 xl:grid-cols-3 gap-5">
+    <div className="p-10 overflow-y-scroll grid grid-cols-1 sm:grid-cols-1 md:grid-cols-3 lg:grid-cols-3 xl:grid-cols-3 gap-5">
       {templates.map((temp) => (
         <TemplateBox
           item={temp}

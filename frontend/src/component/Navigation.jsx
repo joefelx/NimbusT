@@ -69,15 +69,15 @@ function Navigation() {
           onClick={() => functionDispatch({ type: "SET_SHOW", payload: true })}
         >
           {user ? (
-            <div className="flex items-center">
-              <div className="w-[30px] h-[30px] rounded-full overflow-hidden">
-                <Image
+            <div className="flex items-center bg-slate-800 py-2 px-3 rounded-lg">
+              {/* <div className="w-[30px] h-[30px] rounded-full overflow-hidden">
+                {/* <Image
                   src={ProfileImg}
                   className="object-cover"
                   alt="profile"
-                />
-              </div>
-              <p className="pl-3">{user?.username}</p>
+                /> */}
+              {/* </div> */}
+              <p className="text-indigo-600">{user?.username}</p>
             </div>
           ) : (
             <button
