@@ -22,6 +22,9 @@ const app = express();
 
 const PORT = process.env.DEVELOPMENT ? 5000 : process.env.PORT;
 const BASE_SERVER_URL = process.env.BASE_SERVER_URL;
+const CLIENT_URL = process.env.CLIENT_URL;
+const CLIENT_LOCAL_URL = process.env.CLIENT_LOCAL_URL;
+const DEVELOPMENT = process.env.DEVELOPMENT;
 
 // Middlewares
 app.use(
@@ -37,7 +40,11 @@ app.use(
   })
 );
 app.use(morgan("tiny"));
-app.use(cors());
+app.use(
+  cors({
+    origin: DEVELOPMENT ? CLIENT_LOCAL_URL : CLIENT_URL,
+  })
+);
 
 // MongoDB connection
 mongoConnection();
