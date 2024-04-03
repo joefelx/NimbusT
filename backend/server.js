@@ -42,7 +42,8 @@ app.use(
 app.use(morgan("tiny"));
 app.use(
   cors({
-    origin: DEVELOPMENT ? CLIENT_LOCAL_URL : CLIENT_URL,
+    origin: CLIENT_URL,
+    methods: ["GET", "POST"],
   })
 );
 
