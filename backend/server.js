@@ -43,7 +43,7 @@ app.use(morgan("tiny"));
 app.use(
   cors({
     origin: CLIENT_URL,
-    methods: ["GET", "POST"],
+    methods: "GET,HEAD,POST",
   })
 );
 
