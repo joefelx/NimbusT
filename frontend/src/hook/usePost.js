@@ -6,11 +6,18 @@ import axios from "axios";
 import { mergeText, splitText } from "@/utils/utils";
 
 const usePost = () => {
-  const { initial, input, mergedInput, threads, draftThreads, schedule, templates, postDispatch } =
-    useContext(PostContext);
+  const {
+    initial,
+    input,
+    mergedInput,
+    threads,
+    draftThreads,
+    schedule,
+    templates,
+    postDispatch,
+  } = useContext(PostContext);
   const { user } = useAuth();
   const date = new Date();
-
 
   const NEXT_PUBLIC_REQUEST_URL = process.env.NEXT_PUBLIC_REQUEST_URL;
 
@@ -72,7 +79,7 @@ const usePost = () => {
     const receivedThreads = await axios.post(
       `${NEXT_PUBLIC_REQUEST_URL}/post`,
       {
-        userId: user.id,
+        username: user.username,
       },
       {
         headers: {
@@ -81,28 +88,32 @@ const usePost = () => {
       }
     );
 
+    console.log(receivedThreads);
+
     postDispatch({
       type: "SET_DRAFT_THREAD",
       payload: receivedThreads.data.allPosts,
     });
   };
 
-  const DeleteThread = async () => { };
+  const DeleteThread = async () => {};
 
   const FormatInput = (input) => {
-    const splittedTextArray = splitText(input)
+    const splittedTextArray = splitText(input);
     let mergedText = "";
 
-    splittedTextArray.forEach(w => {
-      mergedText += mergeText(w)
-    })
+    splittedTextArray.forEach((w) => {
+      mergedText += mergeText(w);
+    });
 
-    const mergedTextArray = splitText(mergedText)
+    const mergedTextArray = splitText(mergedText);
 
     postDispatch({ type: "SET_MERGED_INPUT", payload: mergedText });
-    postDispatch({ type: "SET_THREAD", payload: mergedTextArray.filter(Boolean) });
-
-  }
+    postDispatch({
+      type: "SET_THREAD",
+      payload: mergedTextArray.filter(Boolean),
+    });
+  };
 
   return {
     input,

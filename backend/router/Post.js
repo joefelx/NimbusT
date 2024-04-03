@@ -11,10 +11,10 @@ const upload = require("../utils/Upload");
 // Get Tweets of the User by Sending Username
 router.post("/", async (req, res) => {
   try {
-    const { userId } = req.body;
+    const { username } = req.body;
 
-    if (req.user.id === userId) {
-      const allPosts = await Post.find({ userId: userId });
+    if (req.user.username === username) {
+      const allPosts = await Post.find({ username: username });
 
       res.status(200).json({
         status: "success",
@@ -39,7 +39,7 @@ router.post("/thread", async (req, res) => {
     const { userId, username, title, threads, scheduled, date } = req.body;
 
     if (req.user.id === userId) {
-      const user = await User.findOne({ id: req.user.id });
+      const user = await User.findOne({ username: req.user.username });
 
       const client = new TwitterApi(user.accessToken);
 
@@ -48,9 +48,6 @@ router.post("/thread", async (req, res) => {
       if (postfound) {
         /* Make a Thread */
         const postedThread = await makeThread(client, threads);
-        console.log(postedThread);
-        postfound.scheduled = false;
-        await postfound.save();
       } else {
         await new Post({
           username: username,
@@ -62,7 +59,7 @@ router.post("/thread", async (req, res) => {
 
         /* Make a Thread */
         const postedThread = await makeThread(client, threads);
-        // console.log(postedThread);
+        console.log(postedThread);
       }
 
       res.status(201).json({
@@ -106,7 +103,7 @@ router.post("/schedule", async (req, res) => {
     const { userId, username, title, threads, scheduled, date } = req.body;
 
     if (req.user.id === userId) {
-      const user = await User.findOne({ id: userId });
+      const user = await User.findOne({ username: username });
 
       if (user) {
         await new Post({

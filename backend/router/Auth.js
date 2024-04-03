@@ -35,8 +35,8 @@ router.get("/twitter", (req, res) => {
 });
 
 router.get("/twitter/callback", (req, res) => {
-  const { state } = req.query;
-  const code = req.query.code;
+  const { state, code } = req.query;
+  // const code = req.query.code;
 
   const { codeVerifier, state: sessionState } = req.session;
 
@@ -70,7 +70,6 @@ router.get("/twitter/callback", (req, res) => {
           });
 
           if (!foundUser) {
-
             const user = new User({
               clientId: userObject.id,
               username: userObject.username,

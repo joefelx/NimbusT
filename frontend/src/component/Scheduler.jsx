@@ -55,7 +55,7 @@ const Post = ({ p }) => {
 
 const RenderPost = ({ draftThreads }) => {
   return (
-    <div className="h-full overflow-scroll">
+    <div className=" ">
       {draftThreads.map((p, index) => (
         <Post key={index} p={p} />
       ))}
@@ -71,23 +71,21 @@ function Schedule() {
   }, []);
 
   return (
-    <div className="w-full min-h-16 py-2 px-5 h-full flex items-center justify-between">
-      <div className="w-full h-full">
-        <div className="w-full py-2 flex justify-between text-slate-500">
-          <span className="flex-1 flex items-center justify-center">Posts</span>
-          <span className="flex-1 flex items-center justify-center">Date</span>
-          <span className="flex-1 flex items-center justify-center">
-            Status
-          </span>
-          <span className="flex-1 flex items-center justify-center">
-            Delete
-          </span>
+    <div className="w-full min-h-16 py-2 px-5 h-full flex flex-col items-center justify-between">
+      <div className="w-full py-2 flex-1 flex justify-between text-slate-500">
+        <span className="flex-1 flex items-center justify-center">Posts</span>
+        <span className="flex-1 flex items-center justify-center">Date</span>
+        <span className="flex-1 flex items-center justify-center">Status</span>
+        <span className="flex-1 flex items-center justify-center">Delete</span>
+      </div>
+      <div className="w-full h-full overflow-scroll">
+        <div className="flex-1">
+          {draftThreads ? (
+            <RenderPost draftThreads={draftThreads} />
+          ) : (
+            <p>No Posts</p>
+          )}
         </div>
-        {draftThreads ? (
-          <RenderPost draftThreads={draftThreads} />
-        ) : (
-          <p>No Posts</p>
-        )}
       </div>
     </div>
   );

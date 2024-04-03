@@ -65,7 +65,7 @@ app.use("/admin", isAdmin, adminRouter);
 app.use("/template", templateRouter);
 app.use("/token", tokenRouter);
 
-// cronJob();
+cronJob();
 
 app.listen(PORT, () => {
   console.log("Server started at PORT:5000");

@@ -17,13 +17,11 @@ router.post("/", async (req, res) => {
           name,
         };
 
-        const accessToken = generateToken(adminData, "7d");
-        const refreshToken = generateToken(adminData, "30d");
+        const accessToken = generateToken(adminData, "30d");
 
         const admin = await new Admin({
           username,
           accessToken,
-          refreshToken,
         });
 
         const savedAdmin = await admin.save();
@@ -39,7 +37,7 @@ router.post("/", async (req, res) => {
 // Get the scheduled Post and Threads for the database
 router.get("/schedule", async (req, res) => {
   try {
-    const scheduledPost = await Post.find();
+    const scheduledPost = await Post.find({ scheduled: true });
 
     res.status(200).json({
       status: "success",
