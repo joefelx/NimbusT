@@ -5,6 +5,7 @@ import LoginCard from "./LoginCard";
 import Templates from "./Templates";
 import Scheduler from "./Scheduler";
 import EditorBox from "./EditorBox";
+import HelperBox from "./HelperBox";
 import Features from "./Features";
 import Footer from "./Footer";
 import Tools from "./Tools";
@@ -50,6 +51,7 @@ export {
   Logo,
   Scheduler,
   EditorBox,
+  HelperBox,
   Features,
   Footer,
   Tools,

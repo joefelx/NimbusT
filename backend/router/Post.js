@@ -47,7 +47,7 @@ router.post("/thread", async (req, res) => {
 
       if (postfound) {
         /* Make a Thread */
-        const postedThread = await makeThread(client, threads);
+        await makeThread(client, threads);
       } else {
         await new Post({
           username: username,
@@ -58,8 +58,7 @@ router.post("/thread", async (req, res) => {
         }).save();
 
         /* Make a Thread */
-        const postedThread = await makeThread(client, threads);
-        console.log(postedThread);
+        await makeThread(client, threads);
       }
 
       res.status(201).json({

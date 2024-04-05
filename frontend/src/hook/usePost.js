@@ -16,6 +16,7 @@ const usePost = () => {
     templates,
     postDispatch,
   } = useContext(PostContext);
+
   const { user } = useAuth();
   const date = new Date();
 

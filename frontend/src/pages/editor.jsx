@@ -1,7 +1,14 @@
 import { useContext, useEffect, useState } from "react";
 import { Toaster } from "react-hot-toast";
 
-import { Navigation, Tools, EditorBox, Footer, LoginCard } from "../component";
+import {
+  Navigation,
+  Tools,
+  EditorBox,
+  HelperBox,
+  Footer,
+  LoginCard,
+} from "../component";
 import ThreadBox from "../component/ThreadBox";
 import useAuth from "../hook/useAuth";
 import usePost from "../hook/usePost";
@@ -73,6 +80,7 @@ function editor() {
         <div className="w-full flex justify-between h-screen">
           {/* Tools and Editor Box */}
           <div className="w-1/2 flex flex-col">
+            <HelperBox />
             <Tools />
             <EditorBox />
           </div>
